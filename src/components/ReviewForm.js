@@ -5,8 +5,6 @@ import {
   Typography,
   Box,
   Paper,
-  Divider,
-  Chip,
 } from '@mui/material';
 
 export default function ReviewForm() {
@@ -43,7 +41,7 @@ export default function ReviewForm() {
   );
 
   const chiefComplaintFields = [
-    { key: 'chiefComplaint', label: 'Chief Complaint' },
+    // Chief complaint removed
     { key: 'kneeSide', label: 'Knee Side' },
     { key: 'patientName', label: 'Patient Name' },
     { key: 'worseSide', label: 'Worse Side' },

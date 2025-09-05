@@ -8,7 +8,6 @@ import {
   Stepper,
   Step,
   StepLabel,
-  Typography,
   Alert,
   Snackbar,
 } from '@mui/material';
@@ -19,8 +18,7 @@ import ReviewForm from './ReviewForm';
 const steps = ['Chief Complaint', 'Medical History', 'Review & Submit'];
 
 const schema = yup.object({
-  // Chief Complaint fields
-  chiefComplaint: yup.string().required('Chief complaint is required'),
+  // Chief Complaint fields removed
   kneeSide: yup.string().required('Please select knee side'),
   patientName: yup.string().required('Patient name is required'),
   worseSide: yup.string().when('kneeSide', {
@@ -142,7 +140,7 @@ export default function PatientIntakeForm() {
   const methods = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      chiefComplaint: '',
+      // Chief complaint removed
       kneeSide: '',
       patientName: '',
       worseSide: '',
@@ -192,7 +190,7 @@ export default function PatientIntakeForm() {
     },
   });
 
-  const { handleSubmit, trigger, formState: { errors } } = methods;
+  const { handleSubmit, trigger } = methods;
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);
@@ -217,7 +215,8 @@ export default function PatientIntakeForm() {
     switch (step) {
       case 0:
         return [
-          'chiefComplaint', 'kneeSide', 'patientName', 'worseSide', 'painLocation',
+          // Chief complaint removed
+          'kneeSide', 'patientName', 'worseSide', 'painLocation',
           'recentInjury', 'previousSurgeries', 'painDuration', 'painProgression',
           'worstPainLevel', 'bestPainLevel', 'painDescription', 'aggravatingFactors',
           'alleviatingFactors', 'associatedSymptoms', 'attemptedTreatments',

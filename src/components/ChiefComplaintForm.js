@@ -23,18 +23,8 @@ export default function ChiefComplaintForm() {
       </Typography>
       
       <Grid container spacing={3}>
-        {/* Chief Complaint */}
-        <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Chief Complaint"
-            {...register('chiefComplaint')}
-            error={!!errors.chiefComplaint}
-            helperText={errors.chiefComplaint?.message}
-            placeholder="e.g., Bad knee"
-          />
-        </Grid>
-
+        {/* Chief Complaint field removed */}
+        
         {/* Knee Side */}
         <Grid item xs={12} sm={6}>
           <FormControl fullWidth error={!!errors.kneeSide}>
