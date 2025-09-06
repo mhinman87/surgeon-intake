@@ -22,16 +22,48 @@ export default function ChiefComplaintForm() {
         Chief Complaint & Pain Assessment
       </Typography>
       
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ '& .MuiGrid-item': { width: '100%', maxWidth: '100%' } }}>
         {/* Chief Complaint field removed */}
         
         {/* Knee Side */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>
-            <InputLabel>Knee Side</InputLabel>
+            <InputLabel id="knee-side-label" shrink={true}>Knee Side</InputLabel>
             <Select
               {...register('kneeSide')}
+              labelId="knee-side-label"
               label="Knee Side"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select knee side</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="right">Right</MenuItem>
               <MenuItem value="left">Left</MenuItem>
@@ -45,26 +77,27 @@ export default function ChiefComplaintForm() {
           )}
         </Grid>
 
-        {/* Patient Name */}
-        <Grid item xs={12} sm={6}>
-          <TextField
-            fullWidth
-            label="Patient Name"
-            {...register('patientName')}
-            error={!!errors.patientName}
-            helperText={errors.patientName?.message}
-          />
-        </Grid>
+        {/* Patient Name field removed */}
 
         {/* Worse Side - only show if bilateral */}
         {kneeSide === 'bilateral' && (
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <FormControl fullWidth error={!!errors.worseSide}>
-              <InputLabel>Which side is worse?</InputLabel>
+              <InputLabel id="worse-side-label">Which side is worse?</InputLabel>
               <Select
                 {...register('worseSide')}
+                labelId="worse-side-label"
                 label="Which side is worse?"
+                displayEmpty
+                sx={{ 
+                  '& .MuiSelect-select': {
+                    padding: '12px 14px',
+                  }
+                }}
               >
+                <MenuItem value="">
+                  <em>Select worse side</em>
+                </MenuItem>
                 <MenuItem value="right">Right</MenuItem>
                 <MenuItem value="left">Left</MenuItem>
               </Select>
@@ -78,7 +111,7 @@ export default function ChiefComplaintForm() {
         )}
 
         {/* Pain Location */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Pain Location"
@@ -86,16 +119,49 @@ export default function ChiefComplaintForm() {
             error={!!errors.painLocation}
             helperText={errors.painLocation?.message}
             placeholder="e.g., medial aspect of the knee"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Recent Injury */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.recentInjury}>
-            <InputLabel>Recent Injury History</InputLabel>
+            <InputLabel id="recent-injury-label" shrink={true}>Recent Injury History</InputLabel>
             <Select
               {...register('recentInjury')}
+              labelId="recent-injury-label"
               label="Recent Injury History"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select injury history</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="negative">Negative</MenuItem>
               <MenuItem value="positive">Positive</MenuItem>
@@ -109,7 +175,7 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Previous Surgeries */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Previous Knee Surgeries"
@@ -117,16 +183,49 @@ export default function ChiefComplaintForm() {
             error={!!errors.previousSurgeries}
             helperText={errors.previousSurgeries?.message}
             placeholder="e.g., None, ACL reconstruction 2019"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Pain Duration */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.painDuration}>
-            <InputLabel>Pain Duration</InputLabel>
+            <InputLabel id="pain-duration-label" shrink={true}>Pain Duration</InputLabel>
             <Select
               {...register('painDuration')}
+              labelId="pain-duration-label"
               label="Pain Duration"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select duration</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="days">Days</MenuItem>
               <MenuItem value="weeks">Weeks</MenuItem>
@@ -142,12 +241,44 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Pain Progression */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.painProgression}>
-            <InputLabel>Pain Progression</InputLabel>
+            <InputLabel id="pain-progression-label" shrink={true}>Pain Progression</InputLabel>
             <Select
               {...register('painProgression')}
+              labelId="pain-progression-label"
               label="Pain Progression"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select progression</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="worsening">Worsening</MenuItem>
               <MenuItem value="improving">Improving</MenuItem>
@@ -162,7 +293,7 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Pain Level Sliders */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <Typography gutterBottom>Worst Pain Level (0-10)</Typography>
           <Slider
             {...register('worstPainLevel')}
@@ -180,7 +311,7 @@ export default function ChiefComplaintForm() {
           )}
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <Typography gutterBottom>Best Pain Level (0-10)</Typography>
           <Slider
             {...register('bestPainLevel')}
@@ -199,82 +330,119 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Pain Description */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             multiline
-            rows={3}
+            rows={6}
             label="Pain Description"
             {...register('painDescription')}
             error={!!errors.painDescription}
             helperText={errors.painDescription?.message}
             placeholder="Describe the pain in detail"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Aggravating Factors */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             multiline
-            rows={2}
+            rows={4}
             label="Aggravating Factors"
             {...register('aggravatingFactors')}
             error={!!errors.aggravatingFactors}
             helperText={errors.aggravatingFactors?.message}
             placeholder="What makes the pain worse?"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Alleviating Factors */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             multiline
-            rows={2}
+            rows={4}
             label="Alleviating Factors"
             {...register('alleviatingFactors')}
             error={!!errors.alleviatingFactors}
             helperText={errors.alleviatingFactors?.message}
             placeholder="What helps relieve the pain?"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Associated Symptoms */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             multiline
-            rows={2}
+            rows={4}
             label="Associated Symptoms"
             {...register('associatedSymptoms')}
             error={!!errors.associatedSymptoms}
             helperText={errors.associatedSymptoms?.message}
             placeholder="e.g., swelling, stiffness, clicking"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Attempted Treatments */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             multiline
-            rows={2}
+            rows={4}
             label="Attempted Treatments"
             {...register('attemptedTreatments')}
             error={!!errors.attemptedTreatments}
             helperText={errors.attemptedTreatments?.message}
             placeholder="What treatments have been tried?"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Treatment Success */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.treatmentSuccess}>
-            <InputLabel>Treatment Success</InputLabel>
+            <InputLabel id="treatment-success-label" shrink={true}>Treatment Success</InputLabel>
             <Select
               {...register('treatmentSuccess')}
+              labelId="treatment-success-label"
               label="Treatment Success"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select success level</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="excellent">Excellent</MenuItem>
               <MenuItem value="good">Good</MenuItem>
@@ -291,12 +459,44 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Imaging Studies */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.imagingStudies}>
-            <InputLabel>Imaging Studies</InputLabel>
+            <InputLabel id="imaging-studies-label" shrink={true}>Imaging Studies</InputLabel>
             <Select
               {...register('imagingStudies')}
+              labelId="imaging-studies-label"
               label="Imaging Studies"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select imaging studies</em>;
+                }
+                return selected.toUpperCase();
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#1976d2',
+                  }
+                }
+              }}
             >
               <MenuItem value="none">None</MenuItem>
               <MenuItem value="xray">X-ray</MenuItem>
@@ -313,7 +513,7 @@ export default function ChiefComplaintForm() {
         </Grid>
 
         {/* Living Situation */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Living Situation"
@@ -321,11 +521,12 @@ export default function ChiefComplaintForm() {
             error={!!errors.livingSituation}
             helperText={errors.livingSituation?.message}
             placeholder="e.g., house, apartment"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Living Details */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Living Details"
@@ -333,11 +534,12 @@ export default function ChiefComplaintForm() {
             error={!!errors.livingDetails}
             helperText={errors.livingDetails?.message}
             placeholder="e.g., stairs, single level"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Ambulation */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Ambulation"
@@ -345,39 +547,43 @@ export default function ChiefComplaintForm() {
             error={!!errors.ambulation}
             helperText={errors.ambulation?.message}
             placeholder="e.g., independent, with assistance"
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Occupation */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Occupation"
             {...register('occupation')}
             error={!!errors.occupation}
             helperText={errors.occupation?.message}
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* PCP */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Primary Care Physician"
             {...register('pcp')}
             error={!!errors.pcp}
             helperText={errors.pcp?.message}
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
 
         {/* Referred By */}
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Referred By"
             {...register('referredBy')}
             error={!!errors.referredBy}
             helperText={errors.referredBy?.message}
+            sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
           />
         </Grid>
       </Grid>

@@ -19,18 +19,18 @@ const steps = ['Chief Complaint', 'Medical History', 'Review & Submit'];
 
 const schema = yup.object({
   // Chief Complaint fields removed
-  kneeSide: yup.string().required('Please select knee side'),
-  patientName: yup.string().required('Patient name is required'),
+  kneeSide: yup.string().required('Please select knee side').notOneOf([''], 'Please select knee side'),
+  // Patient name field removed
   worseSide: yup.string().when('kneeSide', {
     is: 'bilateral',
     then: (schema) => schema.required('Please specify which side is worse'),
     otherwise: (schema) => schema.notRequired(),
   }),
   painLocation: yup.string().required('Pain location is required'),
-  recentInjury: yup.string().required('Recent injury history is required'),
+  recentInjury: yup.string().required('Recent injury history is required').notOneOf([''], 'Please select injury history'),
   previousSurgeries: yup.string().required('Previous surgeries field is required'),
-  painDuration: yup.string().required('Pain duration is required'),
-  painProgression: yup.string().required('Pain progression is required'),
+  painDuration: yup.string().required('Pain duration is required').notOneOf([''], 'Please select duration'),
+  painProgression: yup.string().required('Pain progression is required').notOneOf([''], 'Please select progression'),
   worstPainLevel: yup.number().min(0).max(10).required('Worst pain level is required'),
   bestPainLevel: yup.number().min(0).max(10).required('Best pain level is required'),
   painDescription: yup.string().required('Pain description is required'),
@@ -38,8 +38,8 @@ const schema = yup.object({
   alleviatingFactors: yup.string().required('Alleviating factors are required'),
   associatedSymptoms: yup.string().required('Associated symptoms are required'),
   attemptedTreatments: yup.string().required('Attempted treatments are required'),
-  treatmentSuccess: yup.string().required('Treatment success level is required'),
-  imagingStudies: yup.string().required('Imaging studies are required'),
+  treatmentSuccess: yup.string().required('Treatment success level is required').notOneOf([''], 'Please select success level'),
+  imagingStudies: yup.string().required('Imaging studies are required').notOneOf([''], 'Please select imaging studies'),
   livingSituation: yup.string().required('Living situation is required'),
   livingDetails: yup.string().required('Living details are required'),
   ambulation: yup.string().required('Ambulation details are required'),
@@ -48,7 +48,7 @@ const schema = yup.object({
   referredBy: yup.string().required('Referred by is required'),
   
   // Medical History fields
-  dm2: yup.string().required('DM2 status is required'),
+  dm2: yup.string().required('DM2 status is required').notOneOf([''], 'Please select DM2 status'),
   dm2A1c: yup.string().when('dm2', {
     is: 'yes',
     then: (schema) => schema.required('A1C is required when DM2 is yes'),
@@ -59,7 +59,7 @@ const schema = yup.object({
     then: (schema) => schema.required('DM2 medications are required when DM2 is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  cardiacHistory: yup.string().required('Cardiac history is required'),
+  cardiacHistory: yup.string().required('Cardiac history is required').notOneOf([''], 'Please select cardiac history'),
   cardiacDiagnosis: yup.string().when('cardiacHistory', {
     is: 'yes',
     then: (schema) => schema.required('Cardiac diagnosis is required when cardiac history is yes'),
@@ -75,7 +75,7 @@ const schema = yup.object({
     then: (schema) => schema.required('Cardiologist is required when cardiac history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  dvtHistory: yup.string().required('DVT history is required'),
+  dvtHistory: yup.string().required('DVT history is required').notOneOf([''], 'Please select DVT history'),
   dvtLocation: yup.string().when('dvtHistory', {
     is: 'yes',
     then: (schema) => schema.required('DVT location is required when DVT history is yes'),
@@ -86,7 +86,7 @@ const schema = yup.object({
     then: (schema) => schema.required('DVT date is required when DVT history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  mrsaSsi: yup.string().required('MRSA/SSI history is required'),
+  mrsaSsi: yup.string().required('MRSA/SSI history is required').notOneOf([''], 'Please select MRSA/SSI history'),
   mrsaSsiLocation: yup.string().when('mrsaSsi', {
     is: 'yes',
     then: (schema) => schema.required('MRSA/SSI location is required when MRSA/SSI history is yes'),
@@ -97,13 +97,13 @@ const schema = yup.object({
     then: (schema) => schema.required('MRSA/SSI date is required when MRSA/SSI history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  bloodThinners: yup.string().required('Blood thinners status is required'),
+  bloodThinners: yup.string().required('Blood thinners status is required').notOneOf([''], 'Please select blood thinners status'),
   bloodThinnerMedications: yup.string().when('bloodThinners', {
     is: 'yes',
     then: (schema) => schema.required('Blood thinner medications are required when blood thinners is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  immunosuppression: yup.string().required('Immunosuppression status is required'),
+  immunosuppression: yup.string().required('Immunosuppression status is required').notOneOf([''], 'Please select immunosuppression status'),
   immunosuppressionMedications: yup.string().when('immunosuppression', {
     is: 'yes',
     then: (schema) => schema.required('Immunosuppression medications are required when immunosuppression is yes'),
@@ -114,13 +114,13 @@ const schema = yup.object({
     then: (schema) => schema.required('Immunosuppression diagnosis is required when immunosuppression is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  opioidUse: yup.string().required('Opioid use status is required'),
+  opioidUse: yup.string().required('Opioid use status is required').notOneOf([''], 'Please select opioid use status'),
   opioidMedications: yup.string().when('opioidUse', {
     is: 'yes',
     then: (schema) => schema.required('Opioid medications are required when opioid use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  tobaccoUse: yup.string().required('Tobacco use status is required'),
+  tobaccoUse: yup.string().required('Tobacco use status is required').notOneOf([''], 'Please select tobacco use status'),
   tobaccoType: yup.string().when('tobaccoUse', {
     is: 'yes',
     then: (schema) => schema.required('Tobacco type is required when tobacco use is yes'),
@@ -142,7 +142,6 @@ export default function PatientIntakeForm() {
     defaultValues: {
       // Chief complaint removed
       kneeSide: '',
-      patientName: '',
       worseSide: '',
       painLocation: '',
       recentInjury: '',
@@ -216,7 +215,7 @@ export default function PatientIntakeForm() {
       case 0:
         return [
           // Chief complaint removed
-          'kneeSide', 'patientName', 'worseSide', 'painLocation',
+          'kneeSide', 'worseSide', 'painLocation',
           'recentInjury', 'previousSurgeries', 'painDuration', 'painProgression',
           'worstPainLevel', 'bestPainLevel', 'painDescription', 'aggravatingFactors',
           'alleviatingFactors', 'associatedSymptoms', 'attemptedTreatments',
@@ -273,7 +272,28 @@ export default function PatientIntakeForm() {
           >
             Back
           </Button>
-          <Box>
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {/* Development shortcuts */}
+            {activeStep === 0 && (
+              <Button 
+                variant="outlined" 
+                color="secondary"
+                onClick={() => setActiveStep(1)}
+                sx={{ mr: 1 }}
+              >
+                Skip to Step 2 (Dev)
+              </Button>
+            )}
+            {activeStep === 1 && (
+              <Button 
+                variant="outlined" 
+                color="secondary"
+                onClick={() => setActiveStep(2)}
+                sx={{ mr: 1 }}
+              >
+                Skip to Step 3 (Dev)
+              </Button>
+            )}
             {activeStep === steps.length - 1 ? (
               <Button variant="contained" onClick={handleSubmit(onSubmit)}>
                 Submit
