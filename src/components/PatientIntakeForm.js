@@ -14,6 +14,7 @@ import {
 import ChiefComplaintForm from './ChiefComplaintForm';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import ReviewForm from './ReviewForm';
+import { generatePatientReportPDF } from '../utils/pdfGenerator';
 
 const steps = ['Chief Complaint', 'Medical History', 'Review & Submit'];
 
@@ -206,6 +207,20 @@ export default function PatientIntakeForm() {
 
   const onSubmit = (data) => {
     console.log('Form submitted:', data);
+    console.log('About to generate PDF...');
+    
+    // Also show an alert for immediate feedback
+    alert('Form submitted! PDF is being generated. Check your downloads folder or look for a new tab/window.');
+    
+    try {
+      // Generate and open PDF
+      generatePatientReportPDF(data);
+      console.log('PDF generation completed');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF: ' + error.message);
+    }
+    
     setShowSuccess(true);
     // Here you would typically send the data to your backend
   };
@@ -312,7 +327,7 @@ export default function PatientIntakeForm() {
           onClose={() => setShowSuccess(false)}
         >
           <Alert onClose={() => setShowSuccess(false)} severity="success">
-            Patient intake form submitted successfully!
+            Patient intake form submitted successfully! PDF report generated.
           </Alert>
         </Snackbar>
       </Box>
