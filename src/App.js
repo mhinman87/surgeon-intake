@@ -9,6 +9,7 @@ import LandingPage from './components/LandingPage';
 import PatientIntakeForm from './components/PatientIntakeForm';
 import HipIntakeForm from './components/HipIntakeForm';
 import TKAIntakeForm from './components/TKAIntakeForm';
+import THAIntakeForm from './components/THAIntakeForm';
 
 const theme = createTheme({
   palette: {
@@ -139,6 +140,19 @@ function App() {
                   Comprehensive Orthopedic Surgery Patient Assessment
                 </Typography>
                 <TKAIntakeForm />
+              </Paper>
+            </Container>
+          } />
+          <Route path="/revision-hip-intake" element={
+            <Container maxWidth="md" sx={{ py: 4 }}>
+              <Paper elevation={3} sx={{ p: 4 }}>
+                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
+                  New Evaluate Painful THA - Patient Intake Form
+                </Typography>
+                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
+                  Comprehensive Orthopedic Surgery Patient Assessment
+                </Typography>
+                <THAIntakeForm />
               </Paper>
             </Container>
           } />

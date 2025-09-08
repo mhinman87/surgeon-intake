@@ -42,7 +42,7 @@ const LandingPage = () => {
       description: 'Revision hip arthroplasty intake form for hip revision surgery',
       icon: '🔧',
       route: '/revision-hip-intake',
-      available: false,
+      available: true,
     },
     {
       title: 'Shoulder Arthroscopy',
@@ -196,7 +196,7 @@ const LandingPage = () => {
         >
           <Typography variant="body2" color="text.secondary">
             <strong>Note:</strong> Additional surgical intake forms are currently in development. 
-            The New Native Knee, New Native Hip, and Revision Knee intake forms are fully functional and ready for use.
+            The New Native Knee, New Native Hip, Revision Knee, and Revision Hip intake forms are fully functional and ready for use.
           </Typography>
         </Paper>
       </Container>
