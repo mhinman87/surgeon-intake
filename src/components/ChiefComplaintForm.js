@@ -15,6 +15,7 @@ import {
 export default function ChiefComplaintForm() {
   const { register, watch, formState: { errors } } = useFormContext();
   const kneeSide = watch('kneeSide');
+  const recentInjury = watch('recentInjury');
 
   return (
     <Box>
@@ -100,6 +101,7 @@ export default function ChiefComplaintForm() {
                 </MenuItem>
                 <MenuItem value="right">Right</MenuItem>
                 <MenuItem value="left">Left</MenuItem>
+                <MenuItem value="equally">Right and left are equally painful</MenuItem>
               </Select>
             </FormControl>
             {errors.worseSide && (
@@ -173,6 +175,24 @@ export default function ChiefComplaintForm() {
             </Typography>
           )}
         </Grid>
+
+        {/* Injury Description - Conditional */}
+        {recentInjury === 'positive' && (
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+            <TextField
+              fullWidth
+              label="Injury Description"
+              {...register('injuryDescription')}
+              error={!!errors.injuryDescription}
+              helperText={errors.injuryDescription?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
 
         {/* Previous Surgeries */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>

@@ -31,6 +31,11 @@ const schema = yup.object({
   }),
   painLocation: yup.string().required('Pain location is required'),
   recentInjury: yup.string().required('Recent injury history is required').notOneOf([''], 'Please select injury history'),
+  injuryDescription: yup.string().when('recentInjury', {
+    is: 'positive',
+    then: (schema) => schema.required('Injury description is required when injury history is positive'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
   previousSurgeries: yup.string().required('Previous surgeries field is required'),
   painDuration: yup.string().required('Pain duration is required').notOneOf([''], 'Please select duration'),
   painProgression: yup.string().required('Pain progression is required').notOneOf([''], 'Please select progression'),
@@ -232,6 +237,7 @@ export default function PatientIntakeForm() {
       worseSide: '',
       painLocation: '',
       recentInjury: '',
+      injuryDescription: '',
       previousSurgeries: '',
       painDuration: '',
       painProgression: '',
@@ -334,7 +340,7 @@ export default function PatientIntakeForm() {
       case 0:
         return [
           'kneeSide', 'worseSide', 'painLocation',
-          'recentInjury', 'previousSurgeries', 'painDuration', 'painProgression',
+          'recentInjury', 'injuryDescription', 'previousSurgeries', 'painDuration', 'painProgression',
           'worstPainLevel', 'bestPainLevel', 'painDescription', 'aggravatingFactors',
           'alleviatingFactors', 'associatedSymptoms', 'attemptedTreatments',
           'treatmentSuccess', 'imagingStudies', 'livingSituation', 'livingDetails',

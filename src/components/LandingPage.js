@@ -151,9 +151,18 @@ const LandingPage = () => {
         </Paper>
 
         {/* Surgical Options Grid */}
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2%' }}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: { xs: '0', sm: '2%' },
+          justifyContent: { xs: 'center', sm: 'flex-start' }
+        }}>
           {surgicalOptions.map((option, index) => (
-            <Box key={index} sx={{ width: '48%', mb: 3 }}>
+            <Box key={index} sx={{ 
+              width: { xs: '100%', sm: '48%' }, 
+              mb: 3,
+              maxWidth: { xs: '400px', sm: 'none' }
+            }}>
               <Card
                 sx={{
                   height: '350px',

@@ -62,6 +62,7 @@ export default function ReviewForm() {
     const worseSide = formData.kneeSide === 'bilateral' ? formatValue(formData.worseSide) : '';
     const painLocation = formatValue(formData.painLocation);
     const recentInjury = formatInjuryHistory(formData.recentInjury);
+    const injuryDescription = formatValue(formData.injuryDescription);
     const previousSurgeries = formatValue(formData.previousSurgeries);
     const painDuration = formatValue(formData.painDuration);
     const painProgression = formatValue(formData.painProgression);
@@ -74,18 +75,24 @@ export default function ReviewForm() {
     const attemptedTreatments = formatValue(formData.attemptedTreatments);
     const treatmentSuccess = formatSuccess(formData.treatmentSuccess);
     const imagingStudies = formatImaging(formData.imagingStudies);
-    const livingSituation = formatValue(formData.livingSituation);
-    const livingDetails = formatValue(formData.livingDetails);
-    const ambulation = formatValue(formData.ambulation);
-    const occupation = formatValue(formData.occupation);
 
-    let narrative = `The patient presents for ${kneeSide} knee pain.`;
+    let narrative = `presents for ${kneeSide} knee pain.`;
     
-    if (formData.kneeSide === 'bilateral' && worseSide) {
-      narrative += ` The ${worseSide} is worse.`;
+    if (formData.kneeSide === 'bilateral' && worseSide && worseSide !== 'not specified') {
+      if (worseSide === 'equally') {
+        narrative += ` Right and left are equally painful.`;
+      } else {
+        narrative += ` The ${worseSide} is worse.`;
+      }
     }
     
-    narrative += ` The pain is located at the ${painLocation} aspect of the knee(s). There is ${recentInjury} history of recent injury. Previous knee surgeries consist of ${previousSurgeries}. The pain has been present for ${painDuration}. The patient's pain has been ${painProgression}. At worst the pain is rated as a ${worstPain} out of 10. At best, the pain is rated as a ${bestPain} out of 10. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. Previous imaging studies consist of ${imagingStudies}. They live in a ${livingSituation} with ${livingDetails} and ambulate ${ambulation}. The patient's occupation is ${occupation}.`;
+    narrative += ` The pain is located at the ${painLocation} aspect of the knee(s). There is a ${recentInjury} history of injury.`;
+    
+    if (formData.recentInjury === 'positive' && injuryDescription && injuryDescription !== 'not specified') {
+      narrative += ` The injury was ${injuryDescription}.`;
+    }
+    
+    narrative += ` Previous knee surgeries consist of ${previousSurgeries}. The symptoms have been present for ${painDuration}. The patient's symptoms have been ${painProgression}. At worst the pain is rated as a ${worstPain} out of 10. At best, the pain is rated as a ${bestPain} out of 10. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. Previous imaging studies consist of ${imagingStudies}.`;
 
     return narrative;
   };
