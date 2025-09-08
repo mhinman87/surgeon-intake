@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -135,6 +136,7 @@ const schema = yup.object({
 });
 
 export default function PatientIntakeForm() {
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = React.useState(0);
   const [showSuccess, setShowSuccess] = React.useState(false);
 
@@ -274,6 +276,17 @@ export default function PatientIntakeForm() {
             </Step>
           ))}
         </Stepper>
+
+        {/* Back to Home Button */}
+        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'flex-start' }}>
+          <Button
+            variant="outlined"
+            onClick={() => navigate('/')}
+            sx={{ mb: 2 }}
+          >
+            ← Back to Surgical Options
+          </Button>
+        </Box>
 
         <Box sx={{ mb: 4 }}>
           {renderStepContent(activeStep)}
