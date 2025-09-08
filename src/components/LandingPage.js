@@ -31,15 +31,15 @@ const LandingPage = () => {
       available: true,
     },
     {
-      title: 'Revision Knee',
-      description: 'Revision knee arthroplasty intake form for knee revision surgery',
+      title: 'TKA Evaluation',
+      description: 'Evaluation intake form for painful total knee arthroplasty',
       icon: '🔧',
       route: '/revision-knee-intake',
       available: true,
     },
     {
-      title: 'Revision Hip',
-      description: 'Revision hip arthroplasty intake form for hip revision surgery',
+      title: 'THA Evaluation',
+      description: 'Evaluation intake form for painful total hip arthroplasty',
       icon: '🔧',
       route: '/revision-hip-intake',
       available: true,
@@ -196,7 +196,7 @@ const LandingPage = () => {
         >
           <Typography variant="body2" color="text.secondary">
             <strong>Note:</strong> Additional surgical intake forms are currently in development. 
-            The New Native Knee, New Native Hip, Revision Knee, and Revision Hip intake forms are fully functional and ready for use.
+            The New Native Knee, New Native Hip, TKA Evaluation, and THA Evaluation intake forms are fully functional and ready for use.
           </Typography>
         </Paper>
       </Container>
