@@ -45,18 +45,74 @@ const LandingPage = () => {
       available: true,
     },
     {
-      title: 'Shoulder Arthroscopy',
-      description: 'Shoulder arthroscopy intake form for shoulder procedures',
-      icon: '🤲',
-      route: '/shoulder-intake',
-      available: false,
+      title: 'Follow-up Native Knee',
+      description: 'Follow-up intake form for native knee patients',
+      icon: '🔄',
+      route: '/followup-knee-intake',
+      available: true,
     },
     {
-      title: 'Spine Surgery',
-      description: 'Spine surgery intake form for spinal procedures',
-      icon: '🦴',
-      route: '/spine-intake',
-      available: false,
+      title: 'Follow-up Native Hip',
+      description: 'Follow-up intake form for native hip patients',
+      icon: '🔄',
+      route: '/followup-hip-intake',
+      available: true,
+    },
+    {
+      title: 'Follow-up Painful TKA',
+      description: 'Follow-up intake form for painful TKA patients',
+      icon: '🔄',
+      route: '/followup-painful-tka-intake',
+      available: true,
+    },
+    {
+      title: 'Follow-up Painful THA',
+      description: 'Follow-up intake form for painful THA patients',
+      icon: '🔄',
+      route: '/followup-painful-tha-intake',
+      available: true,
+    },
+    {
+      title: 'Post-op TKA',
+      description: 'Post-operative follow-up form for TKA patients',
+      icon: '📋',
+      route: '/postop-tka-intake',
+      available: true,
+    },
+    {
+      title: 'Post-op THA',
+      description: 'Post-operative follow-up form for THA patients',
+      icon: '📋',
+      route: '/postop-tha-intake',
+      available: true,
+    },
+    {
+      title: 'Unplanned <1-year post-op THA',
+      description: 'Unplanned early return form for THA patients',
+      icon: '⚠️',
+      route: '/unplanned-tha-intake',
+      available: true,
+    },
+    {
+      title: 'Unplanned <1-year post-op TKA',
+      description: 'Unplanned early return form for TKA patients',
+      icon: '⚠️',
+      route: '/unplanned-tka-intake',
+      available: true,
+    },
+    {
+      title: '1-year THA / routine long term recheck THA',
+      description: '1-year follow-up form for THA patients',
+      icon: '📅',
+      route: '/one-year-tha-intake',
+      available: true,
+    },
+    {
+      title: '1-year TKA / routine long term recheck TKA',
+      description: '1-year follow-up form for TKA patients',
+      icon: '📅',
+      route: '/one-year-tka-intake',
+      available: true,
     },
   ];
 
@@ -95,13 +151,12 @@ const LandingPage = () => {
         </Paper>
 
         {/* Surgical Options Grid */}
-        <Grid container spacing={3}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '2%' }}>
           {surgicalOptions.map((option, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Box key={index} sx={{ width: '48%', mb: 3 }}>
               <Card
                 sx={{
-                  height: '100%',
-                  minHeight: '320px',
+                  height: '350px',
                   display: 'flex',
                   flexDirection: 'column',
                   transition: 'all 0.3s ease-in-out',
@@ -124,12 +179,12 @@ const LandingPage = () => {
                   }}
                 >
                   <CardContent sx={{ 
-                    flexGrow: 1, 
+                    height: '100%',
                     textAlign: 'center', 
                     p: 3,
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
                   }}>
                     <Box>
                       {/* Icon */}
@@ -163,7 +218,6 @@ const LandingPage = () => {
                         variant="body1"
                         color="text.secondary"
                         sx={{
-                          mb: 3,
                           lineHeight: 1.6,
                         }}
                       >
@@ -182,6 +236,7 @@ const LandingPage = () => {
                         py: 1.5,
                         fontSize: '1.1rem',
                         fontWeight: 600,
+                        mt: 2,
                       }}
                     >
                       {option.available ? 'Start Intake' : 'Coming Soon'}
@@ -189,26 +244,10 @@ const LandingPage = () => {
                   </CardContent>
                 </CardActionArea>
               </Card>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
 
-        {/* Footer Info */}
-        <Paper
-          elevation={1}
-          sx={{
-            p: 3,
-            mt: 4,
-            textAlign: 'center',
-            backgroundColor: 'rgba(25, 118, 210, 0.05)',
-            border: '1px solid rgba(25, 118, 210, 0.1)',
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            <strong>Note:</strong> Additional surgical intake forms are currently in development. 
-            The New Native Knee, New Native Hip, TKA Evaluation, and THA Evaluation intake forms are fully functional and ready for use.
-          </Typography>
-        </Paper>
       </Container>
     </Box>
   );

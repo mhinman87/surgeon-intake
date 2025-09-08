@@ -9,7 +9,6 @@ import {
   MenuItem,
   Typography,
   Box,
-  Divider,
 } from '@mui/material';
 
 export default function MedicalHistoryForm() {
@@ -23,621 +22,724 @@ export default function MedicalHistoryForm() {
   const immunosuppression = watch('immunosuppression');
   const opioidUse = watch('opioidUse');
   const tobaccoUse = watch('tobaccoUse');
+  const hasStairs = watch('hasStairs');
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary">
-        Medical History
+      <Typography variant="h5" component="h2" gutterBottom sx={{ mb: 3, color: 'primary.main' }}>
+        Medical, Social & Referral History
       </Typography>
-      
-      <Grid container spacing={3} sx={{ '& .MuiGrid-item': { width: '100%', maxWidth: '100%' } }}>
-        {/* DM2 Section */}
 
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+      <Grid container spacing={3}>
+        {/* Preferred Name */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Preferred Name"
+            {...register('preferredName')}
+            error={!!errors.preferredName}
+            helperText={errors.preferredName?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* PCP */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="PCP"
+            {...register('pcp')}
+            error={!!errors.pcp}
+            helperText={errors.pcp?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* Referred By */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Referred By"
+            {...register('referredBy')}
+            error={!!errors.referredBy}
+            helperText={errors.referredBy?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* DM2 */}
+        <Grid item xs={12}>
           <FormControl fullWidth error={!!errors.dm2}>
-            <InputLabel id="dm2-label" shrink>DM2</InputLabel>
+            <InputLabel id="dm2-label" shrink notched>
+              DM2
+            </InputLabel>
             <Select
-              {...register('dm2')}
               labelId="dm2-label"
-              label="DM2"
+              id="dm2"
+              {...register('dm2')}
               displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select DM2 status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
+              renderValue={(value) => value || 'Select DM2 status'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.dm2 && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.dm2.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.dm2 && (
-            <Typography variant="caption" color="error">
-              {errors.dm2.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* DM2 A1C - Conditional */}
         {dm2 === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="A1C"
-                {...register('dm2A1c')}
-                error={!!errors.dm2A1c}
-                helperText={errors.dm2A1c?.message}
-                placeholder="e.g., 7.2%"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="DM2 Medications"
-                {...register('dm2Medications')}
-                error={!!errors.dm2Medications}
-                helperText={errors.dm2Medications?.message}
-                placeholder="e.g., Metformin 500mg BID"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="A1C"
+              {...register('dm2A1c')}
+              error={!!errors.dm2A1c}
+              helperText={errors.dm2A1c?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
 
-        {/* Cardiac History Section */}
+        {/* DM2 Medications - Conditional */}
+        {dm2 === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="DM2 Medications"
+              {...register('dm2Medications')}
+              error={!!errors.dm2Medications}
+              helperText={errors.dm2Medications?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
 
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+        {/* Cardiac History */}
+        <Grid item xs={12}>
           <FormControl fullWidth error={!!errors.cardiacHistory}>
-            <InputLabel id="cardiac-history-label" shrink>Cardiac History</InputLabel>
+            <InputLabel id="cardiac-history-label" shrink notched>
+              Cardiac History
+            </InputLabel>
             <Select
-              {...register('cardiacHistory')}
               labelId="cardiac-history-label"
-              label="Cardiac History"
+              id="cardiacHistory"
+              {...register('cardiacHistory')}
               displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select cardiac history</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
+              renderValue={(value) => value || 'Select cardiac history'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.cardiacHistory && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.cardiacHistory.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.cardiacHistory && (
-            <Typography variant="caption" color="error">
-              {errors.cardiacHistory.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* Cardiac Diagnosis - Conditional */}
         {cardiacHistory === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Cardiac Diagnosis"
-                {...register('cardiacDiagnosis')}
-                error={!!errors.cardiacDiagnosis}
-                helperText={errors.cardiacDiagnosis?.message}
-                placeholder="e.g., CAD, CHF"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Cardiac Procedures"
-                {...register('cardiacProcedures')}
-                error={!!errors.cardiacProcedures}
-                helperText={errors.cardiacProcedures?.message}
-                placeholder="e.g., CABG, stent"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Cardiologist"
-                {...register('cardiologist')}
-                error={!!errors.cardiologist}
-                helperText={errors.cardiologist?.message}
-                placeholder="Dr. Smith"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Cardiac Diagnosis"
+              {...register('cardiacDiagnosis')}
+              error={!!errors.cardiacDiagnosis}
+              helperText={errors.cardiacDiagnosis?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
 
-        {/* DVT History Section */}
+        {/* Cardiac Procedures - Conditional */}
+        {cardiacHistory === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Cardiac Procedures"
+              {...register('cardiacProcedures')}
+              error={!!errors.cardiacProcedures}
+              helperText={errors.cardiacProcedures?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
 
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+        {/* Cardiologist - Conditional */}
+        {cardiacHistory === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Cardiologist"
+              {...register('cardiologist')}
+              error={!!errors.cardiologist}
+              helperText={errors.cardiologist?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
+
+        {/* DVT History */}
+        <Grid item xs={12}>
           <FormControl fullWidth error={!!errors.dvtHistory}>
-            <InputLabel id="dvt-history-label" shrink>DVT History</InputLabel>
+            <InputLabel id="dvt-history-label" shrink notched>
+              DVT History
+            </InputLabel>
             <Select
-              {...register('dvtHistory')}
               labelId="dvt-history-label"
-              label="DVT History"
+              id="dvtHistory"
+              {...register('dvtHistory')}
               displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select DVT history</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
+              renderValue={(value) => value || 'Select DVT history'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.dvtHistory && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.dvtHistory.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.dvtHistory && (
-            <Typography variant="caption" color="error">
-              {errors.dvtHistory.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* DVT Location - Conditional */}
         {dvtHistory === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="DVT Location"
-                {...register('dvtLocation')}
-                error={!!errors.dvtLocation}
-                helperText={errors.dvtLocation?.message}
-                placeholder="e.g., left leg"
-                sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="DVT Date"
-                {...register('dvtDate')}
-                error={!!errors.dvtDate}
-                helperText={errors.dvtDate?.message}
-                placeholder="MM/YYYY"
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="DVT Location"
+              {...register('dvtLocation')}
+              error={!!errors.dvtLocation}
+              helperText={errors.dvtLocation?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
 
-        {/* MRSA/SSI Section */}
+        {/* DVT Date - Conditional */}
+        {dvtHistory === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="DVT Date"
+              {...register('dvtDate')}
+              error={!!errors.dvtDate}
+              helperText={errors.dvtDate?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
 
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+        {/* MRSA/SSI */}
+        <Grid item xs={12}>
           <FormControl fullWidth error={!!errors.mrsaSsi}>
-            <InputLabel id="mrsa-ssi-label" shrink>MRSA/SSI</InputLabel>
+            <InputLabel id="mrsa-ssi-label" shrink notched>
+              MRSA/SSI
+            </InputLabel>
             <Select
-              {...register('mrsaSsi')}
               labelId="mrsa-ssi-label"
-              label="MRSA/SSI"
+              id="mrsaSsi"
+              {...register('mrsaSsi')}
               displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select MRSA/SSI history</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
+              renderValue={(value) => value || 'Select MRSA/SSI history'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.mrsaSsi && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.mrsaSsi.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.mrsaSsi && (
-            <Typography variant="caption" color="error">
-              {errors.mrsaSsi.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* MRSA/SSI Location - Conditional */}
         {mrsaSsi === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="MRSA/SSI Location"
-                {...register('mrsaSsiLocation')}
-                error={!!errors.mrsaSsiLocation}
-                helperText={errors.mrsaSsiLocation?.message}
-                placeholder="e.g., surgical site"
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="MRSA/SSI Date"
-                {...register('mrsaSsiDate')}
-                error={!!errors.mrsaSsiDate}
-                helperText={errors.mrsaSsiDate?.message}
-                placeholder="MM/YYYY"
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="MRSA/SSI Location"
+              {...register('mrsaSsiLocation')}
+              error={!!errors.mrsaSsiLocation}
+              helperText={errors.mrsaSsiLocation?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
 
-        {/* Blood Thinners Section */}
-
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-          <FormControl fullWidth error={!!errors.bloodThinners}>
-            <InputLabel id="blood-thinners-label" shrink>Blood Thinners</InputLabel>
-            <Select
-              {...register('bloodThinners')}
-              labelId="blood-thinners-label"
-              label="Blood Thinners"
-              displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select blood thinners status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
+        {/* MRSA/SSI Date - Conditional */}
+        {mrsaSsi === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="MRSA/SSI Date"
+              {...register('mrsaSsiDate')}
+              error={!!errors.mrsaSsiDate}
+              helperText={errors.mrsaSsiDate?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
               }}
-              sx={{ 
+            />
+          </Grid>
+        )}
+
+        {/* Blood Thinners */}
+        <Grid item xs={12}>
+          <FormControl fullWidth error={!!errors.bloodThinners}>
+            <InputLabel id="blood-thinners-label" shrink notched>
+              Blood Thinners
+            </InputLabel>
+            <Select
+              labelId="blood-thinners-label"
+              id="bloodThinners"
+              {...register('bloodThinners')}
+              displayEmpty
+              renderValue={(value) => value || 'Select blood thinners status'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.bloodThinners && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.bloodThinners.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.bloodThinners && (
-            <Typography variant="caption" color="error">
-              {errors.bloodThinners.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* Blood Thinner Medications - Conditional */}
         {bloodThinners === 'yes' && (
-          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+          <Grid item xs={12}>
             <TextField
               fullWidth
               label="Blood Thinner Medications"
               {...register('bloodThinnerMedications')}
               error={!!errors.bloodThinnerMedications}
               helperText={errors.bloodThinnerMedications?.message}
-              placeholder="e.g., Warfarin 5mg daily"
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
             />
           </Grid>
         )}
 
-        {/* Immunosuppression Section */}
-
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+        {/* Immunosuppression */}
+        <Grid item xs={12}>
           <FormControl fullWidth error={!!errors.immunosuppression}>
-            <InputLabel id="immunosuppression-label" shrink>Immunosuppression</InputLabel>
+            <InputLabel id="immunosuppression-label" shrink notched>
+              Immunosuppression
+            </InputLabel>
             <Select
-              {...register('immunosuppression')}
               labelId="immunosuppression-label"
-              label="Immunosuppression"
+              id="immunosuppression"
+              {...register('immunosuppression')}
               displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select immunosuppression status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
+              renderValue={(value) => value || 'Select immunosuppression status'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.immunosuppression && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.immunosuppression.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.immunosuppression && (
-            <Typography variant="caption" color="error">
-              {errors.immunosuppression.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* Immunosuppression Medications - Conditional */}
         {immunosuppression === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Immunosuppression Medications"
-                {...register('immunosuppressionMedications')}
-                error={!!errors.immunosuppressionMedications}
-                helperText={errors.immunosuppressionMedications?.message}
-                placeholder="e.g., Prednisone, Methotrexate"
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Immunosuppression Diagnosis"
-                {...register('immunosuppressionDiagnosis')}
-                error={!!errors.immunosuppressionDiagnosis}
-                helperText={errors.immunosuppressionDiagnosis?.message}
-                placeholder="e.g., Rheumatoid Arthritis"
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Immunosuppression Medications"
+              {...register('immunosuppressionMedications')}
+              error={!!errors.immunosuppressionMedications}
+              helperText={errors.immunosuppressionMedications?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
 
-        {/* Opioid Use Section */}
-
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-          <FormControl fullWidth error={!!errors.opioidUse}>
-            <InputLabel id="opioid-use-label" shrink>Opioid Use</InputLabel>
-            <Select
-              {...register('opioidUse')}
-              labelId="opioid-use-label"
-              label="Opioid Use"
-              displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select opioid use status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
+        {/* Immunosuppression Diagnosis - Conditional */}
+        {immunosuppression === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Immunosuppression Diagnosis"
+              {...register('immunosuppressionDiagnosis')}
+              error={!!errors.immunosuppressionDiagnosis}
+              helperText={errors.immunosuppressionDiagnosis?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
               }}
-              sx={{ 
+            />
+          </Grid>
+        )}
+
+        {/* Opioid Use */}
+        <Grid item xs={12}>
+          <FormControl fullWidth error={!!errors.opioidUse}>
+            <InputLabel id="opioid-use-label" shrink notched>
+              Opioid Use
+            </InputLabel>
+            <Select
+              labelId="opioid-use-label"
+              id="opioidUse"
+              {...register('opioidUse')}
+              displayEmpty
+              renderValue={(value) => value || 'Select opioid use status'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.opioidUse && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.opioidUse.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.opioidUse && (
-            <Typography variant="caption" color="error">
-              {errors.opioidUse.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* Opioid Medications - Conditional */}
         {opioidUse === 'yes' && (
-          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+          <Grid item xs={12}>
             <TextField
               fullWidth
               label="Opioid Medications"
               {...register('opioidMedications')}
               error={!!errors.opioidMedications}
               helperText={errors.opioidMedications?.message}
-              placeholder="e.g., Oxycodone 10mg TID"
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
             />
           </Grid>
         )}
 
-        {/* Tobacco Use Section */}
+        {/* Following with Pain Management - Conditional */}
+        {opioidUse === 'yes' && (
+          <Grid item xs={12}>
+            <FormControl fullWidth error={!!errors.painManagement}>
+              <InputLabel id="pain-management-label" shrink notched>
+                Following with Pain Management?
+              </InputLabel>
+              <Select
+                labelId="pain-management-label"
+                id="painManagement"
+                {...register('painManagement')}
+                displayEmpty
+                renderValue={(value) => value || 'Select pain management status'}
+                sx={{
+                  '& .MuiSelect-select': {
+                    padding: '16.5px 14px',
+                  },
+                }}
+              >
+                <MenuItem value="yes">Yes</MenuItem>
+                <MenuItem value="no">No</MenuItem>
+              </Select>
+              {errors.painManagement && (
+                <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                  {errors.painManagement.message}
+                </Typography>
+              )}
+            </FormControl>
+          </Grid>
+        )}
 
-        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-          <FormControl fullWidth error={!!errors.tobaccoUse}>
-            <InputLabel id="tobacco-use-label" shrink>Tobacco Use</InputLabel>
-            <Select
-              {...register('tobaccoUse')}
-              labelId="tobacco-use-label"
-              label="Tobacco Use"
-              displayEmpty
-              notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select tobacco use status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
+        {/* Pain Management Provider - Conditional */}
+        {opioidUse === 'yes' && watch('painManagement') === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Pain Management Provider"
+              {...register('painManagementProvider')}
+              error={!!errors.painManagementProvider}
+              helperText={errors.painManagementProvider?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
               }}
-              sx={{ 
+            />
+          </Grid>
+        )}
+
+        {/* Tobacco Use */}
+        <Grid item xs={12}>
+          <FormControl fullWidth error={!!errors.tobaccoUse}>
+            <InputLabel id="tobacco-use-label" shrink notched>
+              Tobacco Use
+            </InputLabel>
+            <Select
+              labelId="tobacco-use-label"
+              id="tobaccoUse"
+              {...register('tobaccoUse')}
+              displayEmpty
+              renderValue={(value) => value || 'Select tobacco use status'}
+              sx={{
                 '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
+                  padding: '16.5px 14px',
                 },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>
               <MenuItem value="no">No</MenuItem>
             </Select>
+            {errors.tobaccoUse && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.tobaccoUse.message}
+              </Typography>
+            )}
           </FormControl>
-          {errors.tobaccoUse && (
-            <Typography variant="caption" color="error">
-              {errors.tobaccoUse.message}
-            </Typography>
-          )}
         </Grid>
 
+        {/* Tobacco Type - Conditional */}
         {tobaccoUse === 'yes' && (
-          <>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Tobacco Type"
-                {...register('tobaccoType')}
-                error={!!errors.tobaccoType}
-                helperText={errors.tobaccoType?.message}
-                placeholder="e.g., cigarettes, cigars"
-              />
-            </Grid>
-            <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
-              <TextField
-                fullWidth
-                label="Tobacco Frequency"
-                {...register('tobaccoFrequency')}
-                error={!!errors.tobaccoFrequency}
-                helperText={errors.tobaccoFrequency?.message}
-                placeholder="e.g., 1 pack/day"
-              />
-            </Grid>
-          </>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Tobacco Type"
+              {...register('tobaccoType')}
+              error={!!errors.tobaccoType}
+              helperText={errors.tobaccoType?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
         )}
+
+        {/* Tobacco Frequency - Conditional */}
+        {tobaccoUse === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Tobacco Frequency"
+              {...register('tobaccoFrequency')}
+              error={!!errors.tobaccoFrequency}
+              helperText={errors.tobaccoFrequency?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
+
+        {/* Residence */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Residence"
+            {...register('residence')}
+            error={!!errors.residence}
+            helperText={errors.residence?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* Has Stairs */}
+        <Grid item xs={12}>
+          <FormControl fullWidth error={!!errors.hasStairs}>
+            <InputLabel id="has-stairs-label" shrink notched>
+              Has Stairs
+            </InputLabel>
+            <Select
+              labelId="has-stairs-label"
+              id="hasStairs"
+              {...register('hasStairs')}
+              displayEmpty
+              renderValue={(value) => value || 'Select stairs status'}
+              sx={{
+                '& .MuiSelect-select': {
+                  padding: '16.5px 14px',
+                },
+              }}
+            >
+              <MenuItem value="yes">Yes</MenuItem>
+              <MenuItem value="no">No</MenuItem>
+            </Select>
+            {errors.hasStairs && (
+              <Typography variant="caption" color="error" sx={{ mt: 1, display: 'block' }}>
+                {errors.hasStairs.message}
+              </Typography>
+            )}
+          </FormControl>
+        </Grid>
+
+        {/* Stair Count - Conditional */}
+        {hasStairs === 'yes' && (
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Stair Count"
+              {...register('stairCount')}
+              error={!!errors.stairCount}
+              helperText={errors.stairCount?.message}
+              sx={{
+                '& .MuiInputBase-input': {
+                  fontSize: '1rem',
+                },
+              }}
+            />
+          </Grid>
+        )}
+
+        {/* Support */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Support"
+            {...register('support')}
+            error={!!errors.support}
+            helperText={errors.support?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* Ambulatory Capacity */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Ambulatory Capacity"
+            {...register('ambulatoryCapacity')}
+            error={!!errors.ambulatoryCapacity}
+            helperText={errors.ambulatoryCapacity?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
+
+        {/* Occupation */}
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Occupation"
+            {...register('occupation')}
+            error={!!errors.occupation}
+            helperText={errors.occupation?.message}
+            sx={{
+              '& .MuiInputBase-input': {
+                fontSize: '1rem',
+              },
+            }}
+          />
+        </Grid>
       </Grid>
     </Box>
   );

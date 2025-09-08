@@ -53,7 +53,8 @@ const schema = yup.object({
   }),
   imagingStudies: yup.string().required('Please select imaging studies').notOneOf([''], 'Please select imaging studies'),
   
-  // Medical History fields (same as knee form)
+  // Medical History fields
+  preferredName: yup.string().required('Preferred name is required'),
   pcp: yup.string().required('PCP information is required'),
   dm2: yup.string().required('Please select DM2 status').notOneOf([''], 'Please select DM2 status'),
   dm2A1c: yup.string().when('dm2', {
@@ -127,6 +128,16 @@ const schema = yup.object({
     then: (schema) => schema.required('Opioid medications are required when opioid use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
+  painManagement: yup.string().when('opioidUse', {
+    is: 'yes',
+    then: (schema) => schema.required('Pain management status is required when opioid use is yes'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  painManagementProvider: yup.string().when(['opioidUse', 'painManagement'], {
+    is: (opioidUse, painManagement) => opioidUse === 'yes' && painManagement === 'yes',
+    then: (schema) => schema.required('Pain management provider is required when following with pain management'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
   tobaccoUse: yup.string().required('Please select tobacco use status').notOneOf([''], 'Please select tobacco use status'),
   tobaccoType: yup.string().when('tobaccoUse', {
     is: 'yes',
@@ -138,6 +149,16 @@ const schema = yup.object({
     then: (schema) => schema.required('Tobacco frequency is required when tobacco use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
+  residence: yup.string().required('Residence is required'),
+  hasStairs: yup.string().required('Stairs status is required').notOneOf([''], 'Please select stairs status'),
+  stairCount: yup.string().when('hasStairs', {
+    is: 'yes',
+    then: (schema) => schema.required('Stair count is required when stairs are present'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  support: yup.string().required('Support is required'),
+  ambulatoryCapacity: yup.string().required('Ambulatory capacity is required'),
+  occupation: yup.string().required('Occupation is required'),
   referredBy: yup.string().required('Referred by information is required'),
 });
 
@@ -171,6 +192,7 @@ export default function HipIntakeForm() {
       imagingStudies: '',
       
       // Medical History fields
+      preferredName: '',
       pcp: '',
       dm2: '',
       dm2A1c: '',
@@ -192,9 +214,17 @@ export default function HipIntakeForm() {
       immunosuppressionDiagnosis: '',
       opioidUse: '',
       opioidMedications: '',
+      painManagement: '',
+      painManagementProvider: '',
       tobaccoUse: '',
       tobaccoType: '',
       tobaccoFrequency: '',
+      residence: '',
+      hasStairs: '',
+      stairCount: '',
+      support: '',
+      ambulatoryCapacity: '',
+      occupation: '',
       referredBy: '',
     },
   });
