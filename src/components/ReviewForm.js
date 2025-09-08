@@ -12,7 +12,7 @@ export default function ReviewForm() {
 
   const formatValue = (value) => {
     if (value === '' || value === null || value === undefined) {
-      return 'not specified';
+      return '[not specified]';
     }
     return value;
   };
@@ -22,7 +22,7 @@ export default function ReviewForm() {
       case 'right': return 'right';
       case 'left': return 'left';
       case 'bilateral': return 'bilateral';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -30,7 +30,7 @@ export default function ReviewForm() {
     switch (injury) {
       case 'positive': return 'positive';
       case 'negative': return 'negative';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -41,7 +41,7 @@ export default function ReviewForm() {
       case 'mri': return 'MRI';
       case 'ct': return 'CT';
       case 'other': return 'other';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -52,7 +52,7 @@ export default function ReviewForm() {
       case 'fair': return 'fair';
       case 'poor': return 'poor';
       case 'none': return 'no';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -78,7 +78,7 @@ export default function ReviewForm() {
 
     let narrative = `presents for ${kneeSide} knee pain.`;
     
-    if (formData.kneeSide === 'bilateral' && worseSide && worseSide !== 'not specified') {
+    if (formData.kneeSide === 'bilateral' && worseSide && worseSide !== '[not specified]') {
       if (worseSide === 'equally') {
         narrative += ` Right and left are equally painful.`;
       } else {
@@ -88,7 +88,7 @@ export default function ReviewForm() {
     
     narrative += ` The pain is located at the ${painLocation} aspect of the knee(s). There is a ${recentInjury} history of injury.`;
     
-    if (formData.recentInjury === 'positive' && injuryDescription && injuryDescription !== 'not specified') {
+    if (formData.recentInjury === 'positive' && injuryDescription && injuryDescription !== '[not specified]') {
       narrative += ` The injury was ${injuryDescription}.`;
     }
     
@@ -128,7 +128,7 @@ export default function ReviewForm() {
           {/* DM2 */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              DM2: <span style={{ fontWeight: 'normal' }}>{formData.dm2 === 'yes' ? 'Yes' : formData.dm2 === 'no' ? 'No' : 'not specified'}</span>
+              DM2: <span style={{ fontWeight: 'normal' }}>{formData.dm2 === 'yes' ? 'Yes' : formData.dm2 === 'no' ? 'No' : '[not specified]'}</span>
               {formData.dm2 === 'yes' && (
                 <span>
                   , A1C <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dm2A1c)}</span>, 
@@ -141,7 +141,7 @@ export default function ReviewForm() {
           {/* Cardiac History */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              Cardiac history: <span style={{ fontWeight: 'normal' }}>{formData.cardiacHistory === 'yes' ? 'Yes' : formData.cardiacHistory === 'no' ? 'No' : 'not specified'}</span>
+              Cardiac history: <span style={{ fontWeight: 'normal' }}>{formData.cardiacHistory === 'yes' ? 'Yes' : formData.cardiacHistory === 'no' ? 'No' : '[not specified]'}</span>
               {formData.cardiacHistory === 'yes' && (
                 <span>
                   , diagnosis - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.cardiacDiagnosis)}</span>, 
@@ -155,7 +155,7 @@ export default function ReviewForm() {
           {/* DVT History */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              DVT history: <span style={{ fontWeight: 'normal' }}>{formData.dvtHistory === 'yes' ? 'Yes' : formData.dvtHistory === 'no' ? 'No' : 'not specified'}</span>
+              DVT history: <span style={{ fontWeight: 'normal' }}>{formData.dvtHistory === 'yes' ? 'Yes' : formData.dvtHistory === 'no' ? 'No' : '[not specified]'}</span>
               {formData.dvtHistory === 'yes' && (
                 <span>
                   , location - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dvtLocation)}</span>, 
@@ -168,7 +168,7 @@ export default function ReviewForm() {
           {/* MRSA/SSI */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              MRSA/SSI: <span style={{ fontWeight: 'normal' }}>{formData.mrsaSsi === 'yes' ? 'Yes' : formData.mrsaSsi === 'no' ? 'No' : 'not specified'}</span>
+              MRSA/SSI: <span style={{ fontWeight: 'normal' }}>{formData.mrsaSsi === 'yes' ? 'Yes' : formData.mrsaSsi === 'no' ? 'No' : '[not specified]'}</span>
               {formData.mrsaSsi === 'yes' && (
                 <span>
                   , location - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.mrsaSsiLocation)}</span>, 
@@ -181,7 +181,7 @@ export default function ReviewForm() {
           {/* Blood Thinners */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              Blood thinners: <span style={{ fontWeight: 'normal' }}>{formData.bloodThinners === 'yes' ? 'Yes' : formData.bloodThinners === 'no' ? 'No' : 'not specified'}</span>
+              Blood thinners: <span style={{ fontWeight: 'normal' }}>{formData.bloodThinners === 'yes' ? 'Yes' : formData.bloodThinners === 'no' ? 'No' : '[not specified]'}</span>
               {formData.bloodThinners === 'yes' && (
                 <span>
                   , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.bloodThinnerMedications)}</span>
@@ -193,7 +193,7 @@ export default function ReviewForm() {
           {/* Immunosuppression */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              Immunosuppression: <span style={{ fontWeight: 'normal' }}>{formData.immunosuppression === 'yes' ? 'Yes' : formData.immunosuppression === 'no' ? 'No' : 'not specified'}</span>
+              Immunosuppression: <span style={{ fontWeight: 'normal' }}>{formData.immunosuppression === 'yes' ? 'Yes' : formData.immunosuppression === 'no' ? 'No' : '[not specified]'}</span>
               {formData.immunosuppression === 'yes' && (
                 <span>
                   , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.immunosuppressionMedications)}</span>, 
@@ -206,7 +206,7 @@ export default function ReviewForm() {
           {/* Opioid Use */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              Opioid use: <span style={{ fontWeight: 'normal' }}>{formData.opioidUse === 'yes' ? 'Yes' : formData.opioidUse === 'no' ? 'No' : 'not specified'}</span>
+              Opioid use: <span style={{ fontWeight: 'normal' }}>{formData.opioidUse === 'yes' ? 'Yes' : formData.opioidUse === 'no' ? 'No' : '[not specified]'}</span>
               {formData.opioidUse === 'yes' && (
                 <span>
                   , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.opioidMedications)}</span>
@@ -218,7 +218,7 @@ export default function ReviewForm() {
           {/* Tobacco Use */}
           <Box>
             <Typography variant="body1" sx={{ fontWeight: 500 }}>
-              Tobacco use: <span style={{ fontWeight: 'normal' }}>{formData.tobaccoUse === 'yes' ? 'Yes' : formData.tobaccoUse === 'no' ? 'No' : 'not specified'}</span>
+              Tobacco use: <span style={{ fontWeight: 'normal' }}>{formData.tobaccoUse === 'yes' ? 'Yes' : formData.tobaccoUse === 'no' ? 'No' : '[not specified]'}</span>
               {formData.tobaccoUse === 'yes' && (
                 <span>
                   , type - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.tobaccoType)}</span>, 

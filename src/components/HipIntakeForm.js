@@ -13,6 +13,7 @@ import {
   Snackbar,
 } from '@mui/material';
 import HipComplaintForm from './HipComplaintForm';
+import MedicalHistoryPrompt from './MedicalHistoryPrompt';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import HipReviewForm from './HipReviewForm';
 import { generateHipReportPDF } from '../utils/hipPdfGenerator';
@@ -53,113 +54,180 @@ const schema = yup.object({
   }),
   imagingStudies: yup.string().required('Please select imaging studies').notOneOf([''], 'Please select imaging studies'),
   
-  // Medical History fields
-  preferredName: yup.string().required('Preferred name is required'),
-  pcp: yup.string().required('PCP information is required'),
-  dm2: yup.string().required('Please select DM2 status').notOneOf([''], 'Please select DM2 status'),
-  dm2A1c: yup.string().when('dm2', {
+  // Medical History conditional
+  includeMedicalHistory: yup.string().required('Please select whether to include medical history').notOneOf([''], 'Please select option'),
+  
+  // Medical History fields (conditional)
+  preferredName: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Preferred name is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  pcp: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('PCP information is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  dm2: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Please select DM2 status').notOneOf([''], 'Please select DM2 status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  dm2A1c: yup.string().when(['includeMedicalHistory', 'dm2'], {
+    is: (includeMedicalHistory, dm2) => includeMedicalHistory === 'yes' && dm2 === 'yes',
     then: (schema) => schema.required('A1C is required when DM2 is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  dm2Medications: yup.string().when('dm2', {
-    is: 'yes',
+  dm2Medications: yup.string().when(['includeMedicalHistory', 'dm2'], {
+    is: (includeMedicalHistory, dm2) => includeMedicalHistory === 'yes' && dm2 === 'yes',
     then: (schema) => schema.required('DM2 medications are required when DM2 is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  cardiacHistory: yup.string().required('Please select cardiac history').notOneOf([''], 'Please select cardiac history'),
-  cardiacDiagnosis: yup.string().when('cardiacHistory', {
+  cardiacHistory: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select cardiac history').notOneOf([''], 'Please select cardiac history'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  cardiacDiagnosis: yup.string().when(['includeMedicalHistory', 'cardiacHistory'], {
+    is: (includeMedicalHistory, cardiacHistory) => includeMedicalHistory === 'yes' && cardiacHistory === 'yes',
     then: (schema) => schema.required('Cardiac diagnosis is required when cardiac history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  cardiacProcedures: yup.string().when('cardiacHistory', {
-    is: 'yes',
+  cardiacProcedures: yup.string().when(['includeMedicalHistory', 'cardiacHistory'], {
+    is: (includeMedicalHistory, cardiacHistory) => includeMedicalHistory === 'yes' && cardiacHistory === 'yes',
     then: (schema) => schema.required('Cardiac procedures are required when cardiac history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  cardiologist: yup.string().when('cardiacHistory', {
-    is: 'yes',
+  cardiologist: yup.string().when(['includeMedicalHistory', 'cardiacHistory'], {
+    is: (includeMedicalHistory, cardiacHistory) => includeMedicalHistory === 'yes' && cardiacHistory === 'yes',
     then: (schema) => schema.required('Cardiologist is required when cardiac history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  dvtHistory: yup.string().required('Please select DVT history').notOneOf([''], 'Please select DVT history'),
-  dvtLocation: yup.string().when('dvtHistory', {
+  dvtHistory: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select DVT history').notOneOf([''], 'Please select DVT history'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  dvtLocation: yup.string().when(['includeMedicalHistory', 'dvtHistory'], {
+    is: (includeMedicalHistory, dvtHistory) => includeMedicalHistory === 'yes' && dvtHistory === 'yes',
     then: (schema) => schema.required('DVT location is required when DVT history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  dvtDate: yup.string().when('dvtHistory', {
-    is: 'yes',
+  dvtDate: yup.string().when(['includeMedicalHistory', 'dvtHistory'], {
+    is: (includeMedicalHistory, dvtHistory) => includeMedicalHistory === 'yes' && dvtHistory === 'yes',
     then: (schema) => schema.required('DVT date is required when DVT history is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  mrsaSsi: yup.string().required('Please select MRSA/SSI status').notOneOf([''], 'Please select MRSA/SSI status'),
-  mrsaSsiLocation: yup.string().when('mrsaSsi', {
+  mrsaSsi: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select MRSA/SSI status').notOneOf([''], 'Please select MRSA/SSI status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  mrsaSsiLocation: yup.string().when(['includeMedicalHistory', 'mrsaSsi'], {
+    is: (includeMedicalHistory, mrsaSsi) => includeMedicalHistory === 'yes' && mrsaSsi === 'yes',
     then: (schema) => schema.required('MRSA/SSI location is required when MRSA/SSI is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  mrsaSsiDate: yup.string().when('mrsaSsi', {
-    is: 'yes',
+  mrsaSsiDate: yup.string().when(['includeMedicalHistory', 'mrsaSsi'], {
+    is: (includeMedicalHistory, mrsaSsi) => includeMedicalHistory === 'yes' && mrsaSsi === 'yes',
     then: (schema) => schema.required('MRSA/SSI date is required when MRSA/SSI is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  bloodThinners: yup.string().required('Please select blood thinners status').notOneOf([''], 'Please select blood thinners status'),
-  bloodThinnerMedications: yup.string().when('bloodThinners', {
+  bloodThinners: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select blood thinners status').notOneOf([''], 'Please select blood thinners status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  bloodThinnerMedications: yup.string().when(['includeMedicalHistory', 'bloodThinners'], {
+    is: (includeMedicalHistory, bloodThinners) => includeMedicalHistory === 'yes' && bloodThinners === 'yes',
     then: (schema) => schema.required('Blood thinner medications are required when blood thinners is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  immunosuppression: yup.string().required('Please select immunosuppression status').notOneOf([''], 'Please select immunosuppression status'),
-  immunosuppressionMedications: yup.string().when('immunosuppression', {
+  immunosuppression: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select immunosuppression status').notOneOf([''], 'Please select immunosuppression status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  immunosuppressionMedications: yup.string().when(['includeMedicalHistory', 'immunosuppression'], {
+    is: (includeMedicalHistory, immunosuppression) => includeMedicalHistory === 'yes' && immunosuppression === 'yes',
     then: (schema) => schema.required('Immunosuppression medications are required when immunosuppression is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  immunosuppressionDiagnosis: yup.string().when('immunosuppression', {
-    is: 'yes',
+  immunosuppressionDiagnosis: yup.string().when(['includeMedicalHistory', 'immunosuppression'], {
+    is: (includeMedicalHistory, immunosuppression) => includeMedicalHistory === 'yes' && immunosuppression === 'yes',
     then: (schema) => schema.required('Immunosuppression diagnosis is required when immunosuppression is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  opioidUse: yup.string().required('Please select opioid use status').notOneOf([''], 'Please select opioid use status'),
-  opioidMedications: yup.string().when('opioidUse', {
+  opioidUse: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select opioid use status').notOneOf([''], 'Please select opioid use status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  opioidMedications: yup.string().when(['includeMedicalHistory', 'opioidUse'], {
+    is: (includeMedicalHistory, opioidUse) => includeMedicalHistory === 'yes' && opioidUse === 'yes',
     then: (schema) => schema.required('Opioid medications are required when opioid use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  painManagement: yup.string().when('opioidUse', {
-    is: 'yes',
+  painManagement: yup.string().when(['includeMedicalHistory', 'opioidUse'], {
+    is: (includeMedicalHistory, opioidUse) => includeMedicalHistory === 'yes' && opioidUse === 'yes',
     then: (schema) => schema.required('Pain management status is required when opioid use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  painManagementProvider: yup.string().when(['opioidUse', 'painManagement'], {
-    is: (opioidUse, painManagement) => opioidUse === 'yes' && painManagement === 'yes',
+  painManagementProvider: yup.string().when(['includeMedicalHistory', 'opioidUse', 'painManagement'], {
+    is: (includeMedicalHistory, opioidUse, painManagement) => includeMedicalHistory === 'yes' && opioidUse === 'yes' && painManagement === 'yes',
     then: (schema) => schema.required('Pain management provider is required when following with pain management'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  tobaccoUse: yup.string().required('Please select tobacco use status').notOneOf([''], 'Please select tobacco use status'),
-  tobaccoType: yup.string().when('tobaccoUse', {
+  tobaccoUse: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Please select tobacco use status').notOneOf([''], 'Please select tobacco use status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  tobaccoType: yup.string().when(['includeMedicalHistory', 'tobaccoUse'], {
+    is: (includeMedicalHistory, tobaccoUse) => includeMedicalHistory === 'yes' && tobaccoUse === 'yes',
     then: (schema) => schema.required('Tobacco type is required when tobacco use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  tobaccoFrequency: yup.string().when('tobaccoUse', {
-    is: 'yes',
+  tobaccoFrequency: yup.string().when(['includeMedicalHistory', 'tobaccoUse'], {
+    is: (includeMedicalHistory, tobaccoUse) => includeMedicalHistory === 'yes' && tobaccoUse === 'yes',
     then: (schema) => schema.required('Tobacco frequency is required when tobacco use is yes'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  residence: yup.string().required('Residence is required'),
-  hasStairs: yup.string().required('Stairs status is required').notOneOf([''], 'Please select stairs status'),
-  stairCount: yup.string().when('hasStairs', {
+  residence: yup.string().when('includeMedicalHistory', {
     is: 'yes',
+    then: (schema) => schema.required('Residence is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  hasStairs: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Stairs status is required').notOneOf([''], 'Please select stairs status'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  stairCount: yup.string().when(['includeMedicalHistory', 'hasStairs'], {
+    is: (includeMedicalHistory, hasStairs) => includeMedicalHistory === 'yes' && hasStairs === 'yes',
     then: (schema) => schema.required('Stair count is required when stairs are present'),
     otherwise: (schema) => schema.notRequired(),
   }),
-  support: yup.string().required('Support is required'),
-  ambulatoryCapacity: yup.string().required('Ambulatory capacity is required'),
-  occupation: yup.string().required('Occupation is required'),
-  referredBy: yup.string().required('Referred by information is required'),
+  support: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Support is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  ambulatoryCapacity: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Ambulatory capacity is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  occupation: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Occupation is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  referredBy: yup.string().when('includeMedicalHistory', {
+    is: 'yes',
+    then: (schema) => schema.required('Referred by information is required'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
 });
 
 export default function HipIntakeForm() {
@@ -190,6 +258,9 @@ export default function HipIntakeForm() {
       lumbarSpineHistory: '',
       lumbarSpineDescription: '',
       imagingStudies: '',
+      
+      // Medical History conditional
+      includeMedicalHistory: '',
       
       // Medical History fields
       preferredName: '',
@@ -229,7 +300,8 @@ export default function HipIntakeForm() {
     },
   });
 
-  const { handleSubmit, formState: { errors }, trigger, getValues } = methods;
+  const { handleSubmit, formState: { errors }, trigger, getValues, watch } = methods;
+  const includeMedicalHistory = watch('includeMedicalHistory');
 
   const handleNext = async () => {
     const fieldsToValidate = getFieldsForStep(activeStep);
@@ -274,13 +346,19 @@ export default function HipIntakeForm() {
           'lumbarSpineDescription', 'imagingStudies'
         ];
       case 1:
-        return [
-          'pcp', 'dm2', 'dm2A1c', 'dm2Medications', 'cardiacHistory', 'cardiacDiagnosis',
-          'cardiacProcedures', 'cardiologist', 'dvtHistory', 'dvtLocation', 'dvtDate',
-          'mrsaSsi', 'mrsaSsiLocation', 'mrsaSsiDate', 'bloodThinners', 'bloodThinnerMedications',
-          'immunosuppression', 'immunosuppressionMedications', 'immunosuppressionDiagnosis',
-          'opioidUse', 'opioidMedications', 'tobaccoUse', 'tobaccoType', 'tobaccoFrequency', 'referredBy'
-        ];
+        if (includeMedicalHistory === 'yes') {
+          return [
+            'includeMedicalHistory', 'preferredName', 'pcp', 'referredBy', 'dm2', 'dm2A1c', 'dm2Medications',
+            'cardiacHistory', 'cardiacDiagnosis', 'cardiacProcedures', 'cardiologist',
+            'dvtHistory', 'dvtLocation', 'dvtDate', 'mrsaSsi', 'mrsaSsiLocation',
+            'mrsaSsiDate', 'bloodThinners', 'bloodThinnerMedications', 'immunosuppression',
+            'immunosuppressionMedications', 'immunosuppressionDiagnosis', 'opioidUse',
+            'opioidMedications', 'painManagement', 'painManagementProvider', 'tobaccoUse',
+            'tobaccoType', 'tobaccoFrequency', 'residence', 'hasStairs', 'stairCount',
+            'support', 'ambulatoryCapacity', 'occupation'
+          ];
+        }
+        return ['includeMedicalHistory'];
       case 2:
         return [];
       default:
@@ -293,7 +371,7 @@ export default function HipIntakeForm() {
       case 0:
         return <HipComplaintForm />;
       case 1:
-        return <MedicalHistoryForm />;
+        return <MedicalHistoryPrompt />;
       case 2:
         return <HipReviewForm />;
       default:
