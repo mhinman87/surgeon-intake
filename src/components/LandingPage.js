@@ -101,6 +101,7 @@ const LandingPage = () => {
               <Card
                 sx={{
                   height: '100%',
+                  minHeight: '320px',
                   display: 'flex',
                   flexDirection: 'column',
                   transition: 'all 0.3s ease-in-out',
@@ -122,44 +123,53 @@ const LandingPage = () => {
                     alignItems: 'stretch',
                   }}
                 >
-                  <CardContent sx={{ flexGrow: 1, textAlign: 'center', p: 3 }}>
-                    {/* Icon */}
-                    <Typography
-                      variant="h2"
-                      sx={{
-                        mb: 2,
-                        fontSize: '3rem',
-                        opacity: option.available ? 1 : 0.5,
-                      }}
-                    >
-                      {option.icon}
-                    </Typography>
+                  <CardContent sx={{ 
+                    flexGrow: 1, 
+                    textAlign: 'center', 
+                    p: 3,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}>
+                    <Box>
+                      {/* Icon */}
+                      <Typography
+                        variant="h2"
+                        sx={{
+                          mb: 2,
+                          fontSize: '3rem',
+                          opacity: option.available ? 1 : 0.5,
+                        }}
+                      >
+                        {option.icon}
+                      </Typography>
 
-                    {/* Title */}
-                    <Typography
-                      variant="h5"
-                      component="h2"
-                      gutterBottom
-                      sx={{
-                        fontWeight: 600,
-                        color: option.available ? 'primary.main' : 'text.secondary',
-                        mb: 2,
-                      }}
-                    >
-                      {option.title}
-                    </Typography>
+                      {/* Title */}
+                      <Typography
+                        variant="h5"
+                        component="h2"
+                        gutterBottom
+                        sx={{
+                          fontWeight: 600,
+                          color: option.available ? 'primary.main' : 'text.secondary',
+                          mb: 2,
+                        }}
+                      >
+                        {option.title}
+                      </Typography>
 
-                    {/* Description */}
-                    <Typography
-                      variant="body1"
-                      color="text.secondary"
-                      sx={{
-                        mb: 3,
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {option.description}
-                    </Typography>
+                      {/* Description */}
+                      <Typography
+                        variant="body1"
+                        color="text.secondary"
+                        sx={{
+                          mb: 3,
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {option.description}
+                      </Typography>
+                    </Box>
 
                     {/* Status Button */}
                     <Button
