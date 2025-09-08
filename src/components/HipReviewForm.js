@@ -1,0 +1,248 @@
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
+import {
+  Box,
+  Typography,
+  Paper,
+} from '@mui/material';
+
+const HipReviewForm = () => {
+  const { getValues } = useFormContext();
+  const formData = getValues();
+
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return 'not specified';
+    }
+    return value;
+  };
+
+  const formatHipSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      case 'bilateral': return 'bilateral';
+      default: return 'not specified';
+    }
+  };
+
+  const formatInjuryHistory = (injury) => {
+    switch (injury) {
+      case 'positive': return 'positive';
+      case 'negative': return 'negative';
+      default: return 'not specified';
+    }
+  };
+
+  const formatImaging = (imaging) => {
+    switch (imaging) {
+      case 'none': return 'none';
+      case 'x-rays': return 'X-rays';
+      case 'mri': return 'MRI';
+      case 'ct': return 'CT';
+      default: return 'not specified';
+    }
+  };
+
+  const formatSuccess = (success) => {
+    switch (success) {
+      case 'no': return 'no';
+      case 'minimal': return 'minimal';
+      case 'mild': return 'mild';
+      case 'moderate': return 'moderate';
+      case 'significant': return 'significant';
+      default: return 'not specified';
+    }
+  };
+
+  const buildNarrative = () => {
+    const hipSide = formatHipSide(formData.hipSide);
+    const worseSide = formData.hipSide === 'bilateral' ? formatValue(formData.worseSide) : '';
+    const painLocation = formatValue(formData.painLocation);
+    const injuryHistory = formatInjuryHistory(formData.injuryHistory);
+    const injuryDescription = formData.injuryHistory === 'positive' ? formatValue(formData.injuryDescription) : '';
+    const previousSurgeries = formatValue(formData.previousSurgeries);
+    const symptomDuration = formatValue(formData.symptomDuration);
+    const symptomProgression = formatValue(formData.symptomProgression);
+    const worstPain = formatValue(formData.worstPainLevel);
+    const bestPain = formatValue(formData.bestPainLevel);
+    const painDescription = formatValue(formData.painDescription);
+    const aggravatingFactors = formatValue(formData.aggravatingFactors);
+    const alleviatingFactors = formatValue(formData.alleviatingFactors);
+    const associatedSymptoms = formatValue(formData.associatedSymptoms);
+    const attemptedTreatments = formatValue(formData.attemptedTreatments);
+    const treatmentSuccess = formatSuccess(formData.treatmentSuccess);
+    const lumbarSpineHistory = formatInjuryHistory(formData.lumbarSpineHistory);
+    const lumbarSpineDescription = formData.lumbarSpineHistory === 'positive' ? formatValue(formData.lumbarSpineDescription) : '';
+    const imagingStudies = formatImaging(formData.imagingStudies);
+
+    let narrative = `The patient presents for ${hipSide} hip pain.`;
+    
+    if (formData.hipSide === 'bilateral' && worseSide) {
+      narrative += ` The ${worseSide}.`;
+    }
+    
+    narrative += ` The pain is located at the ${painLocation} aspect of the hip(s). There is a ${injuryHistory} history of injury.`;
+    
+    if (formData.injuryHistory === 'positive' && injuryDescription) {
+      narrative += ` The injury was ${injuryDescription}.`;
+    }
+    
+    narrative += ` Previous hip surgeries consist of ${previousSurgeries}. The symptoms have been present for ${symptomDuration}. The patient's symptoms have been ${symptomProgression}. At worst the pain is rated as a ${worstPain} out of 10. At best, the pain is rated as a ${bestPain} out of 10. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. The patient has a ${lumbarSpineHistory} history of lumbar spine pathology.`;
+    
+    if (formData.lumbarSpineHistory === 'positive' && lumbarSpineDescription) {
+      narrative += ` The history is ${lumbarSpineDescription}.`;
+    }
+    
+    narrative += ` Previous imaging studies consist of ${imagingStudies}.`;
+
+    return narrative;
+  };
+
+  return (
+    <Box>
+      <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
+        Review Your Information
+      </Typography>
+
+      {/* Patient Summary */}
+      <Paper elevation={1} sx={{ p: 4, mb: 3 }}>
+        <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
+          Patient Summary
+        </Typography>
+        
+        <Typography variant="body1" sx={{ lineHeight: 1.8, textAlign: 'justify' }}>
+          {buildNarrative()}
+        </Typography>
+      </Paper>
+
+      {/* Medical History */}
+      <Paper elevation={1} sx={{ p: 4, mb: 3 }}>
+        <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
+          Medical History
+        </Typography>
+        
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {/* PCP */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              PCP: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.pcp)}</span>
+            </Typography>
+          </Box>
+          
+          {/* DM2 */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              DM2: <span style={{ fontWeight: 'normal' }}>{formData.dm2 === 'yes' ? 'Yes' : formData.dm2 === 'no' ? 'No' : 'not specified'}</span>
+              {formData.dm2 === 'yes' && (
+                <span>
+                  , A1C <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dm2A1c)}</span>, 
+                  medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dm2Medications)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Cardiac History */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Cardiac history: <span style={{ fontWeight: 'normal' }}>{formData.cardiacHistory === 'yes' ? 'Yes' : formData.cardiacHistory === 'no' ? 'No' : 'not specified'}</span>
+              {formData.cardiacHistory === 'yes' && (
+                <span>
+                  , diagnosis - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.cardiacDiagnosis)}</span>, 
+                  procedures - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.cardiacProcedures)}</span>, 
+                  Cardiologist - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.cardiologist)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* DVT History */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              DVT history: <span style={{ fontWeight: 'normal' }}>{formData.dvtHistory === 'yes' ? 'Yes' : formData.dvtHistory === 'no' ? 'No' : 'not specified'}</span>
+              {formData.dvtHistory === 'yes' && (
+                <span>
+                  , location - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dvtLocation)}</span>, 
+                  date - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.dvtDate)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* MRSA/SSI */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              MRSA/SSI: <span style={{ fontWeight: 'normal' }}>{formData.mrsaSsi === 'yes' ? 'Yes' : formData.mrsaSsi === 'no' ? 'No' : 'not specified'}</span>
+              {formData.mrsaSsi === 'yes' && (
+                <span>
+                  , location - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.mrsaSsiLocation)}</span>, 
+                  date - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.mrsaSsiDate)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Blood Thinners */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Blood thinners: <span style={{ fontWeight: 'normal' }}>{formData.bloodThinners === 'yes' ? 'Yes' : formData.bloodThinners === 'no' ? 'No' : 'not specified'}</span>
+              {formData.bloodThinners === 'yes' && (
+                <span>
+                  , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.bloodThinnerMedications)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Immunosuppression */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Immunosuppression: <span style={{ fontWeight: 'normal' }}>{formData.immunosuppression === 'yes' ? 'Yes' : formData.immunosuppression === 'no' ? 'No' : 'not specified'}</span>
+              {formData.immunosuppression === 'yes' && (
+                <span>
+                  , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.immunosuppressionMedications)}</span>, 
+                  diagnosis - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.immunosuppressionDiagnosis)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Opioid Use */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Opioid use: <span style={{ fontWeight: 'normal' }}>{formData.opioidUse === 'yes' ? 'Yes' : formData.opioidUse === 'no' ? 'No' : 'not specified'}</span>
+              {formData.opioidUse === 'yes' && (
+                <span>
+                  , medications - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.opioidMedications)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Tobacco Use */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Tobacco use: <span style={{ fontWeight: 'normal' }}>{formData.tobaccoUse === 'yes' ? 'Yes' : formData.tobaccoUse === 'no' ? 'No' : 'not specified'}</span>
+              {formData.tobaccoUse === 'yes' && (
+                <span>
+                  , type - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.tobaccoType)}</span>, 
+                  frequency - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.tobaccoFrequency)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+          
+          {/* Referred By */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Referred by: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.referredBy)}</span>
+            </Typography>
+          </Box>
+        </Box>
+      </Paper>
+    </Box>
+  );
+};
+
+export default HipReviewForm;
