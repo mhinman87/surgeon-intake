@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generatePatientReportPDF = (formData) => {
   console.log('PDF Generator called with data:', formData);
@@ -51,8 +52,21 @@ export const generatePatientReportPDF = (formData) => {
     }
   };
 
-  // Build the narrative paragraph
-  const buildNarrative = () => {
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'knee');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
+  
+  // Build the narrative paragraph (OLD - REPLACED)
+  const buildNarrativeOld = () => {
     const kneeSide = formatKneeSide(formData.kneeSide);
     const worseSide = formData.kneeSide === 'bilateral' ? formatValue(formData.worseSide) : '';
     const painLocation = formatValue(formData.painLocation);
@@ -107,7 +121,7 @@ export const generatePatientReportPDF = (formData) => {
   doc.setFont('helvetica', 'normal');
   
   // Split the narrative into lines that fit the page width
-  const narrative = buildNarrative();
+  // narrative is already defined above from centralized text generator
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 80);
   

@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generateUnplannedTHAReportPDF = (formData) => {
   console.log('Unplanned THA PDF Generator called with data:', formData);
@@ -13,54 +14,22 @@ export const generateUnplannedTHAReportPDF = (formData) => {
   doc.setLineWidth(0.5);
   doc.line(20, 35, 190, 35);
   
-  // Build the narrative
-  const buildNarrative = () => {
-    const hipSide = formData.hipSide;
-    const surgeryType = formData.surgeryType;
-    const surgeryDate = formData.surgeryDate;
-    const surgeryLocation = formData.surgeryLocation;
-    const returnReason = formData.returnReason;
-    const injuryHistory = formData.injuryHistory;
-    const injuryDetails = formData.injuryDetails;
-    const attemptedRelief = formData.attemptedRelief;
-    const reliefSuccess = formData.reliefSuccess;
-    const associatedSymptoms = formData.associatedSymptoms;
-    const aggravatedBy = formData.aggravatedBy;
-    const alleviatedBy = formData.alleviatedBy;
-    const painMedication = formData.painMedication;
-    const ambulationStatus = formData.ambulationStatus;
-    const assistiveDevices = formData.assistiveDevices;
-    const normalActivity = formData.normalActivity;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
-
-    let narrative = `Unplanned <1-year post-op THA presents s/p ${hipSide} ${surgeryType} THA on ${surgeryDate} at ${surgeryLocation} performed by myself. The patient was last seen at their post-op visit and found to be progressing within normal limits. The next planned follow-up was to be at 1 year following surgery. The patient returns early today due to ${returnReason}. Since last visit there is ${injuryHistory} injury history.`;
-    
-    if (injuryHistory === 'positive' && injuryDetails) {
-      narrative += ` ${injuryDetails}.`;
-    }
-    
-    narrative += ` The patient has attempted ${attemptedRelief} for relief with ${reliefSuccess} success. The patient's associated symptoms are ${associatedSymptoms}. The symptoms are aggravated by ${aggravatedBy} and alleviated by ${alleviatedBy}. They are using ${painMedication} medication for discomfort. The patient is ambulating ${ambulationStatus} assistive devices.`;
-    
-    if (ambulationStatus === 'with' && assistiveDevices) {
-      narrative += ` ${assistiveDevices}.`;
-    }
-    
-    narrative += ` They ${normalActivity} returned to normal daily activity.`;
-    
-    if (hasQuestions === 'yes') {
-      narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
-    } else {
-      narrative += ` Questions/concerns? No`;
-    }
-
-    return narrative;
-  };
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'unplanned');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
 
   // Add the narrative
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  const narrative = buildNarrative();
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 50);
   

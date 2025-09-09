@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generatePostopTHAReportPDF = (formData) => {
   console.log('Post-op THA PDF Generator called with data:', formData);
@@ -13,48 +14,22 @@ export const generatePostopTHAReportPDF = (formData) => {
   doc.setLineWidth(0.5);
   doc.line(20, 35, 190, 35);
   
-  // Build the narrative
-  const buildNarrative = () => {
-    const hipSide = formData.hipSide;
-    const surgeryType = formData.surgeryType;
-    const surgeryDate = formData.surgeryDate;
-    const surgeryLocation = formData.surgeryLocation;
-    const historyChanges = formData.historyChanges;
-    const progressLevel = formData.progressLevel;
-    const recoveryPercentage = formData.recoveryPercentage;
-    const therapyWeeks = formData.therapyWeeks;
-    const therapyLocation = formData.therapyLocation;
-    const therapyVisitsPerWeek = formData.therapyVisitsPerWeek;
-    const therapyDischarged = formData.therapyDischarged;
-    const ambulationStatus = formData.ambulationStatus;
-    const assistiveDevices = formData.assistiveDevices;
-    const painMedication = formData.painMedication;
-    const symptomRelief = formData.symptomRelief;
-    const satisfaction = formData.satisfaction;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
-
-    let narrative = `Post-op THA presents s/p ${hipSide} ${surgeryType} THA on ${surgeryDate} at ${surgeryLocation} performed by myself. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient feels as if they are making ${progressLevel} progress and feels ${recoveryPercentage} recovered. They have participated in ${therapyWeeks} weeks of therapy at ${therapyLocation} ${therapyVisitsPerWeek} visits per week. They ${therapyDischarged} been discharged from therapy. The patient is ambulating ${ambulationStatus} assistive devices.`;
-    
-    if (ambulationStatus === 'with' && assistiveDevices) {
-      narrative += ` ${assistiveDevices}.`;
-    }
-    
-    narrative += ` They are using ${painMedication} medication for discomfort. The patient has ${symptomRelief} relief of their pre-operative symptoms. The patient ${satisfaction} satisfied with their results thus far.`;
-    
-    if (hasQuestions === 'yes') {
-      narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
-    } else {
-      narrative += ` Questions/concerns? No`;
-    }
-
-    return narrative;
-  };
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'postop');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
 
   // Add the narrative
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  const narrative = buildNarrative();
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 50);
   

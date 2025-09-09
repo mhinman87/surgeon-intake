@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generateHipReportPDF = (formData) => {
   console.log('Hip PDF Generator called with data:', formData);
@@ -50,8 +51,21 @@ export const generateHipReportPDF = (formData) => {
     }
   };
 
-  // Build the narrative paragraph
-  const buildNarrative = () => {
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'hip');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
+  
+  // Build the narrative paragraph (OLD - REPLACED)
+  const buildNarrativeOld = () => {
     const hipSide = formatHipSide(formData.hipSide);
     const worseSide = formData.hipSide === 'bilateral' ? formatValue(formData.worseSide) : '';
     const painLocation = formatValue(formData.painLocation);
@@ -117,7 +131,7 @@ export const generateHipReportPDF = (formData) => {
   doc.setFont('helvetica', 'normal');
   
   // Split the narrative into lines that fit the page width
-  const narrative = buildNarrative();
+  // narrative is already defined above from centralized text generator
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 80);
   

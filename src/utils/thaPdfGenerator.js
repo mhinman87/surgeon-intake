@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generateTHAReportPDF = (formData) => {
   console.log('THA PDF Generator called with data:', formData);
@@ -49,8 +50,21 @@ export const generateTHAReportPDF = (formData) => {
     }
   };
 
-  // Build the narrative paragraph
-  const buildNarrative = () => {
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'hip');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
+  
+  // Build the narrative paragraph (OLD - REPLACED)
+  const buildNarrativeOld = () => {
     const hipSide = formatHipSide(formData.hipSide);
     const originalSurgeon = formatValue(formData.originalSurgeon);
     const originalLocation = formatValue(formData.originalLocation);
@@ -137,7 +151,7 @@ export const generateTHAReportPDF = (formData) => {
   doc.setFont('helvetica', 'normal');
   
   // Split the narrative into lines that fit the page width
-  const narrative = buildNarrative();
+  // narrative is already defined above from centralized text generator
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 80);
   
