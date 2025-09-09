@@ -24,7 +24,7 @@ export default function FollowupKneeComplaintForm() {
 
       <Grid container spacing={3}>
         {/* Knee Side */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>
             <InputLabel id="knee-side-label" shrink notched>
               Knee Side
@@ -34,8 +34,19 @@ export default function FollowupKneeComplaintForm() {
               id="kneeSide"
               {...register('kneeSide')}
               displayEmpty
-              renderValue={(value) => value || 'Select knee side'}
+              notched
+              label="Knee Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select knee side</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -54,7 +65,7 @@ export default function FollowupKneeComplaintForm() {
         </Grid>
 
         {/* Clinic History */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Clinic History"
@@ -72,7 +83,7 @@ export default function FollowupKneeComplaintForm() {
         </Grid>
 
         {/* Treatment Plan */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.treatmentPlan}>
             <InputLabel id="treatment-plan-label" shrink notched>
               Treatment Plan
@@ -82,8 +93,19 @@ export default function FollowupKneeComplaintForm() {
               id="treatmentPlan"
               {...register('treatmentPlan')}
               displayEmpty
-              renderValue={(value) => value || 'Select treatment plan'}
+              notched
+              label="Treatment Plan"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select treatment plan</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -106,7 +128,7 @@ export default function FollowupKneeComplaintForm() {
 
         {/* Treatment Plan Other - Conditional */}
         {treatmentPlan === 'other' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please specify other treatment plan"
@@ -123,7 +145,7 @@ export default function FollowupKneeComplaintForm() {
         )}
 
         {/* Symptoms Status */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.symptomsStatus}>
             <InputLabel id="symptoms-status-label" shrink notched>
               Symptoms Status
@@ -133,8 +155,19 @@ export default function FollowupKneeComplaintForm() {
               id="symptomsStatus"
               {...register('symptomsStatus')}
               displayEmpty
-              renderValue={(value) => value || 'Select symptoms status'}
+              notched
+              label="Symptoms Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select symptoms status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -153,7 +186,7 @@ export default function FollowupKneeComplaintForm() {
         </Grid>
 
         {/* History Changes */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Orthopedic/Medical History Changes"
@@ -171,7 +204,7 @@ export default function FollowupKneeComplaintForm() {
         </Grid>
 
         {/* Treatment Consideration */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.treatmentConsideration}>
             <InputLabel id="treatment-consideration-label" shrink notched>
               Treatment Consideration
@@ -181,8 +214,19 @@ export default function FollowupKneeComplaintForm() {
               id="treatmentConsideration"
               {...register('treatmentConsideration')}
               displayEmpty
-              renderValue={(value) => value || 'Select treatment consideration'}
+              notched
+              label="Treatment Consideration"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select treatment consideration</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -200,7 +244,7 @@ export default function FollowupKneeComplaintForm() {
         </Grid>
 
         {/* Questions/Concerns */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
             <InputLabel id="has-questions-label" shrink notched>
               Questions/Concerns
@@ -210,8 +254,19 @@ export default function FollowupKneeComplaintForm() {
               id="hasQuestions"
               {...register('hasQuestions')}
               displayEmpty
-              renderValue={(value) => value || 'Select questions/concerns status'}
+              notched
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -230,7 +285,7 @@ export default function FollowupKneeComplaintForm() {
 
         {/* Questions Details - Conditional */}
         {hasQuestions === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please provide details about questions/concerns"

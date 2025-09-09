@@ -112,10 +112,12 @@ export default function ReviewForm() {
         </Typography>
       </Paper>
 
-      <Paper elevation={1} sx={{ p: 4, mb: 3 }}>
-        <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
-          Medical History
-        </Typography>
+      {/* Medical History - Conditional */}
+      {formData.includeMedicalHistory === 'yes' && (
+        <Paper elevation={1} sx={{ p: 4, mb: 3 }}>
+          <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
+            Medical History
+          </Typography>
         
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {/* PCP */}
@@ -235,7 +237,8 @@ export default function ReviewForm() {
             </Typography>
           </Box>
         </Box>
-      </Paper>
+        </Paper>
+      )}
 
       <Paper elevation={2} sx={{ p: 3, backgroundColor: 'primary.light', color: 'primary.contrastText' }}>
         <Typography variant="h6" gutterBottom>

@@ -25,7 +25,7 @@ export default function UnplannedTHAComplaintForm() {
 
       <Grid container spacing={3}>
         {/* Hip Side */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hipSide}>
             <InputLabel id="hip-side-label" shrink notched>
               Hip Side
@@ -35,8 +35,19 @@ export default function UnplannedTHAComplaintForm() {
               id="hipSide"
               {...register('hipSide')}
               displayEmpty
-              renderValue={(value) => value || 'Select hip side'}
+              notched
+              label="Hip Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select hip side</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -54,7 +65,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Type */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.surgeryType}>
             <InputLabel id="surgery-type-label" shrink notched>
               Surgery Type
@@ -64,8 +75,19 @@ export default function UnplannedTHAComplaintForm() {
               id="surgeryType"
               {...register('surgeryType')}
               displayEmpty
-              renderValue={(value) => value || 'Select surgery type'}
+              notched
+              label="Surgery Type"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select surgery type</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -83,7 +105,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Date */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Date"
@@ -99,7 +121,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Location */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Location"
@@ -115,7 +137,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Return Reason */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Return Reason"
@@ -133,7 +155,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Injury History */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.injuryHistory}>
             <InputLabel id="injury-history-label" shrink notched>
               Injury History
@@ -143,8 +165,19 @@ export default function UnplannedTHAComplaintForm() {
               id="injuryHistory"
               {...register('injuryHistory')}
               displayEmpty
-              renderValue={(value) => value || 'Select injury history'}
+              notched
+              label="Injury History"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select injury history</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -163,7 +196,7 @@ export default function UnplannedTHAComplaintForm() {
 
         {/* Injury Details - Conditional */}
         {injuryHistory === 'positive' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Injury Details"
@@ -182,7 +215,7 @@ export default function UnplannedTHAComplaintForm() {
         )}
 
         {/* Attempted Relief */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Attempted Relief"
@@ -200,7 +233,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Relief Success */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.reliefSuccess}>
             <InputLabel id="relief-success-label" shrink notched>
               Relief Success Level
@@ -210,8 +243,19 @@ export default function UnplannedTHAComplaintForm() {
               id="reliefSuccess"
               {...register('reliefSuccess')}
               displayEmpty
-              renderValue={(value) => value || 'Select relief success level'}
+              notched
+              label="Relief Success Level"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select relief success level</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -232,7 +276,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Associated Symptoms */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Associated Symptoms"
@@ -250,7 +294,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Aggravated By */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Aggravated By"
@@ -266,7 +310,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Alleviated By */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Alleviated By"
@@ -282,7 +326,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Pain Medication */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.painMedication}>
             <InputLabel id="pain-medication-label" shrink notched>
               Pain Medication
@@ -292,8 +336,19 @@ export default function UnplannedTHAComplaintForm() {
               id="painMedication"
               {...register('painMedication')}
               displayEmpty
-              renderValue={(value) => value || 'Select pain medication status'}
+              notched
+              label="Pain Medication"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select pain medication status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -312,7 +367,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Ambulation Status */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.ambulationStatus}>
             <InputLabel id="ambulation-status-label" shrink notched>
               Ambulation Status
@@ -322,8 +377,19 @@ export default function UnplannedTHAComplaintForm() {
               id="ambulationStatus"
               {...register('ambulationStatus')}
               displayEmpty
-              renderValue={(value) => value || 'Select ambulation status'}
+              notched
+              label="Ambulation Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select ambulation status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -342,7 +408,7 @@ export default function UnplannedTHAComplaintForm() {
 
         {/* Assistive Devices - Conditional */}
         {ambulationStatus === 'with' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Assistive Devices"
@@ -359,7 +425,7 @@ export default function UnplannedTHAComplaintForm() {
         )}
 
         {/* Normal Activity */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.normalActivity}>
             <InputLabel id="normal-activity-label" shrink notched>
               Normal Activity Status
@@ -369,8 +435,19 @@ export default function UnplannedTHAComplaintForm() {
               id="normalActivity"
               {...register('normalActivity')}
               displayEmpty
-              renderValue={(value) => value || 'Select normal activity status'}
+              notched
+              label="Normal Activity Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select normal activity status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -388,7 +465,7 @@ export default function UnplannedTHAComplaintForm() {
         </Grid>
 
         {/* Questions/Concerns */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
             <InputLabel id="has-questions-label" shrink notched>
               Questions/Concerns
@@ -398,8 +475,19 @@ export default function UnplannedTHAComplaintForm() {
               id="hasQuestions"
               {...register('hasQuestions')}
               displayEmpty
-              renderValue={(value) => value || 'Select questions/concerns status'}
+              notched
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -418,7 +506,7 @@ export default function UnplannedTHAComplaintForm() {
 
         {/* Questions Details - Conditional */}
         {hasQuestions === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please provide details about questions/concerns"

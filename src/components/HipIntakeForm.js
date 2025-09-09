@@ -300,27 +300,60 @@ export default function HipIntakeForm() {
     },
   });
 
-  const { handleSubmit, formState: { errors }, trigger, getValues, watch } = methods;
+  const { handleSubmit, formState: { errors }, trigger, getValues, watch, reset } = methods;
   const includeMedicalHistory = watch('includeMedicalHistory');
 
-  const handleNext = async () => {
-    const fieldsToValidate = getFieldsForStep(activeStep);
-    const isValid = await trigger(fieldsToValidate);
-    
-    if (isValid) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const onSubmit = (data) => {
+  const handleReset = () => {
+    // Reset form to default values
+    reset();
+    // Reset active step
+    setActiveStep(0);
+    // Navigate back to landing page
+    navigate('/');
+  };
+
+  const onSubmit = async (data) => {
     console.log('Hip form submitted:', data);
-    console.log('About to generate PDF...');
     
-    // Also show an alert for immediate feedback
+    // Validate all required fields before generating PDF
+    const allFields = [
+      'hipSide', 'worseSide', 'painLocation', 'injuryHistory', 'injuryDescription',
+      'previousSurgeries', 'symptomDuration', 'symptomProgression', 'worstPainLevel',
+      'bestPainLevel', 'painDescription', 'aggravatingFactors', 'alleviatingFactors',
+      'associatedSymptoms', 'attemptedTreatments', 'treatmentSuccess', 'lumbarSpineHistory',
+      'lumbarSpineDescription', 'imagingStudies', 'includeMedicalHistory'
+    ];
+    
+    // Add medical history fields if user chose to include them
+    if (data.includeMedicalHistory === 'yes') {
+      allFields.push(
+        'preferredName', 'pcp', 'referredBy', 'dm2', 'dm2A1c', 'dm2Medications',
+        'cardiacHistory', 'cardiacDiagnosis', 'cardiacProcedures', 'cardiologist',
+        'dvtHistory', 'dvtLocation', 'dvtDate', 'mrsaSsi', 'mrsaSsiLocation',
+        'mrsaSsiDate', 'bloodThinners', 'bloodThinnerMedications', 'immunosuppression',
+        'immunosuppressionMedications', 'immunosuppressionDiagnosis', 'opioidUse',
+        'opioidMedications', 'painManagement', 'painManagementProvider', 'tobaccoUse',
+        'tobaccoType', 'tobaccoFrequency', 'residence', 'hasStairs', 'stairCount',
+        'support', 'ambulatoryCapacity', 'occupation'
+      );
+    }
+    
+    const isValid = await trigger(allFields);
+    
+    if (!isValid) {
+      alert('Please fill out all required fields before generating the report.');
+      return;
+    }
+    
+    console.log('About to generate PDF...');
     alert('Hip intake form submitted! PDF is being generated. Check your downloads folder or look for a new tab/window.');
     
     try {
@@ -383,9 +416,20 @@ export default function HipIntakeForm() {
     <FormProvider {...methods}>
       <Box>
         <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
-          {steps.map((label) => (
+          {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel 
+                onClick={() => setActiveStep(index)}
+                sx={{ 
+                  cursor: 'pointer',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    borderRadius: 1
+                  }
+                }}
+              >
+                {label}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -405,45 +449,35 @@ export default function HipIntakeForm() {
           {renderStepContent(activeStep)}
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Button
             disabled={activeStep === 0}
             onClick={handleBack}
+            variant="outlined"
             sx={{ mr: 1 }}
           >
-            Back
+            ← Previous
           </Button>
+          
           <Box sx={{ display: 'flex', gap: 2 }}>
-            {/* Development shortcuts */}
-            {activeStep === 0 && (
-              <Button 
-                variant="outlined" 
-                color="secondary"
-                onClick={() => setActiveStep(1)}
-                sx={{ mr: 1 }}
-              >
-                Skip to Step 2 (Dev)
-              </Button>
-            )}
-            {activeStep === 1 && (
-              <Button 
-                variant="outlined" 
-                color="secondary"
-                onClick={() => setActiveStep(2)}
-                sx={{ mr: 1 }}
-              >
-                Skip to Step 3 (Dev)
-              </Button>
-            )}
             {activeStep === steps.length - 1 ? (
               <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-                Submit
+                Generate Report
               </Button>
             ) : (
               <Button variant="contained" onClick={handleNext}>
-                Next
+                Next →
               </Button>
             )}
+            
+            <Button 
+              variant="outlined" 
+              color="error" 
+              onClick={handleReset}
+              sx={{ ml: 'auto' }}
+            >
+              Reset Form
+            </Button>
           </Box>
         </Box>
 

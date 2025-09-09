@@ -287,7 +287,7 @@ export default function OneYearTKAIntakeForm() {
     },
   });
 
-  const { handleSubmit, trigger, formState: { errors }, watch } = methods;
+  const { handleSubmit, trigger, formState: { errors }, watch, reset } = methods;
   const includeMedicalHistory = watch('includeMedicalHistory');
 
   const getFieldsForStep = (step) => {
@@ -320,16 +320,21 @@ export default function OneYearTKAIntakeForm() {
     }
   };
 
-  const handleNext = async () => {
-    const fieldsToValidate = getFieldsForStep(activeStep);
-    const isStepValid = await trigger(fieldsToValidate);
-    if (isStepValid) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    }
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    // Reset form to default values
+    reset();
+    // Reset active step
+    setActiveStep(0);
+    // Navigate back to landing page
+    navigate('/');
   };
 
   const onSubmit = (data) => {
@@ -369,9 +374,20 @@ export default function OneYearTKAIntakeForm() {
     <FormProvider {...methods}>
       <Box sx={{ width: '100%' }}>
         <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
-          {steps.map((label) => (
+          {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel 
+                onClick={() => setActiveStep(index)}
+                sx={{ 
+                  cursor: 'pointer',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    borderRadius: 1
+                  }
+                }}
+              >
+                {label}
+              </StepLabel>
             </Step>
           ))}
         </Stepper>
@@ -391,35 +407,36 @@ export default function OneYearTKAIntakeForm() {
           {renderStepContent(activeStep)}
         </Box>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Button
             disabled={activeStep === 0}
             onClick={handleBack}
+            variant="outlined"
             sx={{ mr: 1 }}
           >
-            Back
+            ← Previous
           </Button>
-
-          {/* Development shortcuts */}
-          {activeStep === 0 && (
-            <Button
-              variant="outlined"
-              onClick={() => setActiveStep(2)}
-              sx={{ mr: 1 }}
+          
+          <Box sx={{ display: 'flex', gap: 2 }}>
+            {activeStep === steps.length - 1 ? (
+              <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+                Generate Report
+              </Button>
+            ) : (
+              <Button variant="contained" onClick={handleNext}>
+                Next →
+              </Button>
+            )}
+            
+            <Button 
+              variant="outlined" 
+              color="error" 
+              onClick={handleReset}
+              sx={{ ml: 'auto' }}
             >
-              Skip to Review (Dev)
+              Reset Form
             </Button>
-          )}
-
-          {activeStep === steps.length - 1 ? (
-            <Button variant="contained" onClick={handleSubmit(onSubmit)}>
-              Submit
-            </Button>
-          ) : (
-            <Button variant="contained" onClick={handleNext}>
-              Next
-            </Button>
-          )}
+          </Box>
         </Box>
 
         <Snackbar

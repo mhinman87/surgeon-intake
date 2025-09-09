@@ -24,7 +24,7 @@ export default function PostopTHAComplaintForm() {
 
       <Grid container spacing={3}>
         {/* Hip Side */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hipSide}>
             <InputLabel id="hip-side-label" shrink notched>
               Hip Side
@@ -34,8 +34,19 @@ export default function PostopTHAComplaintForm() {
               id="hipSide"
               {...register('hipSide')}
               displayEmpty
-              renderValue={(value) => value || 'Select hip side'}
+              notched
+              label="Hip Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select hip side</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -53,7 +64,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Type */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.surgeryType}>
             <InputLabel id="surgery-type-label" shrink notched>
               Surgery Type
@@ -63,8 +74,19 @@ export default function PostopTHAComplaintForm() {
               id="surgeryType"
               {...register('surgeryType')}
               displayEmpty
-              renderValue={(value) => value || 'Select surgery type'}
+              notched
+              label="Surgery Type"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select surgery type</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -82,7 +104,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Date */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Date"
@@ -98,7 +120,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Surgery Location */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Location"
@@ -114,7 +136,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* History Changes */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Orthopedic/Medical History Changes"
@@ -132,7 +154,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Progress Level */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.progressLevel}>
             <InputLabel id="progress-level-label" shrink notched>
               Progress Level
@@ -142,8 +164,19 @@ export default function PostopTHAComplaintForm() {
               id="progressLevel"
               {...register('progressLevel')}
               displayEmpty
-              renderValue={(value) => value || 'Select progress level'}
+              notched
+              label="Progress Level"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select progress level</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -163,7 +196,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Recovery Percentage */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Recovery Percentage"
@@ -180,7 +213,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Therapy Weeks */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Therapy Weeks"
@@ -196,7 +229,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Therapy Location */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Therapy Location"
@@ -212,7 +245,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Therapy Visits Per Week */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Therapy Visits Per Week"
@@ -228,7 +261,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Therapy Discharged */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.therapyDischarged}>
             <InputLabel id="therapy-discharged-label" shrink notched>
               Therapy Discharge Status
@@ -238,8 +271,19 @@ export default function PostopTHAComplaintForm() {
               id="therapyDischarged"
               {...register('therapyDischarged')}
               displayEmpty
-              renderValue={(value) => value || 'Select therapy discharge status'}
+              notched
+              label="Therapy Discharge Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select therapy discharge status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -257,7 +301,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Ambulation Status */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.ambulationStatus}>
             <InputLabel id="ambulation-status-label" shrink notched>
               Ambulation Status
@@ -267,8 +311,19 @@ export default function PostopTHAComplaintForm() {
               id="ambulationStatus"
               {...register('ambulationStatus')}
               displayEmpty
-              renderValue={(value) => value || 'Select ambulation status'}
+              notched
+              label="Ambulation Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select ambulation status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -287,7 +342,7 @@ export default function PostopTHAComplaintForm() {
 
         {/* Assistive Devices - Conditional */}
         {ambulationStatus === 'with' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Assistive Devices"
@@ -304,7 +359,7 @@ export default function PostopTHAComplaintForm() {
         )}
 
         {/* Pain Medication */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.painMedication}>
             <InputLabel id="pain-medication-label" shrink notched>
               Pain Medication
@@ -314,8 +369,19 @@ export default function PostopTHAComplaintForm() {
               id="painMedication"
               {...register('painMedication')}
               displayEmpty
-              renderValue={(value) => value || 'Select pain medication status'}
+              notched
+              label="Pain Medication"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select pain medication status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -334,7 +400,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Symptom Relief */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.symptomRelief}>
             <InputLabel id="symptom-relief-label" shrink notched>
               Symptom Relief Level
@@ -344,8 +410,19 @@ export default function PostopTHAComplaintForm() {
               id="symptomRelief"
               {...register('symptomRelief')}
               displayEmpty
-              renderValue={(value) => value || 'Select symptom relief level'}
+              notched
+              label="Symptom Relief Level"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select symptom relief level</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -365,7 +442,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Satisfaction */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.satisfaction}>
             <InputLabel id="satisfaction-label" shrink notched>
               Satisfaction Status
@@ -375,8 +452,19 @@ export default function PostopTHAComplaintForm() {
               id="satisfaction"
               {...register('satisfaction')}
               displayEmpty
-              renderValue={(value) => value || 'Select satisfaction status'}
+              notched
+              label="Satisfaction Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select satisfaction status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -394,7 +482,7 @@ export default function PostopTHAComplaintForm() {
         </Grid>
 
         {/* Questions/Concerns */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
             <InputLabel id="has-questions-label" shrink notched>
               Questions/Concerns
@@ -404,8 +492,19 @@ export default function PostopTHAComplaintForm() {
               id="hasQuestions"
               {...register('hasQuestions')}
               displayEmpty
-              renderValue={(value) => value || 'Select questions/concerns status'}
+              notched
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -424,7 +523,7 @@ export default function PostopTHAComplaintForm() {
 
         {/* Questions Details - Conditional */}
         {hasQuestions === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please provide details about questions/concerns"

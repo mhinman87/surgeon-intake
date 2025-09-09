@@ -24,7 +24,7 @@ export default function FollowupPainfulTHAComplaintForm() {
 
       <Grid container spacing={3}>
         {/* Hip Side */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hipSide}>
             <InputLabel id="hip-side-label" shrink notched>
               Hip Side
@@ -34,8 +34,19 @@ export default function FollowupPainfulTHAComplaintForm() {
               id="hipSide"
               {...register('hipSide')}
               displayEmpty
-              renderValue={(value) => value || 'Select hip side'}
+              notched
+              label="Hip Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select hip side</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -53,7 +64,7 @@ export default function FollowupPainfulTHAComplaintForm() {
         </Grid>
 
         {/* Known History */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Known History"
@@ -71,7 +82,7 @@ export default function FollowupPainfulTHAComplaintForm() {
         </Grid>
 
         {/* Treatment Plan */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.treatmentPlan}>
             <InputLabel id="treatment-plan-label" shrink notched>
               Treatment Plan
@@ -81,8 +92,19 @@ export default function FollowupPainfulTHAComplaintForm() {
               id="treatmentPlan"
               {...register('treatmentPlan')}
               displayEmpty
-              renderValue={(value) => value || 'Select treatment plan'}
+              notched
+              label="Treatment Plan"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select treatment plan</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -105,7 +127,7 @@ export default function FollowupPainfulTHAComplaintForm() {
 
         {/* Other Treatment - Conditional */}
         {treatmentPlan === 'other' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please specify other treatment"
@@ -122,7 +144,7 @@ export default function FollowupPainfulTHAComplaintForm() {
         )}
 
         {/* History Changes */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Orthopedic/Medical History Changes"
@@ -140,7 +162,7 @@ export default function FollowupPainfulTHAComplaintForm() {
         </Grid>
 
         {/* Symptoms Status */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.symptomsStatus}>
             <InputLabel id="symptoms-status-label" shrink notched>
               Symptoms Status
@@ -150,8 +172,19 @@ export default function FollowupPainfulTHAComplaintForm() {
               id="symptomsStatus"
               {...register('symptomsStatus')}
               displayEmpty
-              renderValue={(value) => value || 'Select symptoms status'}
+              notched
+              label="Symptoms Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select symptoms status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -170,7 +203,7 @@ export default function FollowupPainfulTHAComplaintForm() {
         </Grid>
 
         {/* Questions/Concerns */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
             <InputLabel id="has-questions-label" shrink notched>
               Questions/Concerns
@@ -180,8 +213,19 @@ export default function FollowupPainfulTHAComplaintForm() {
               id="hasQuestions"
               {...register('hasQuestions')}
               displayEmpty
-              renderValue={(value) => value || 'Select questions/concerns status'}
+              notched
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -200,7 +244,7 @@ export default function FollowupPainfulTHAComplaintForm() {
 
         {/* Questions Details - Conditional */}
         {hasQuestions === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please provide details about questions/concerns"

@@ -24,7 +24,7 @@ export default function OneYearTKAComplaintForm() {
 
       <Grid container spacing={3}>
         {/* Knee Side */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>
             <InputLabel id="knee-side-label" shrink notched>
               Knee Side
@@ -34,8 +34,19 @@ export default function OneYearTKAComplaintForm() {
               id="kneeSide"
               {...register('kneeSide')}
               displayEmpty
-              renderValue={(value) => value || 'Select knee side'}
+              notched
+              label="Knee Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select knee side</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -53,7 +64,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Surgery Type */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.surgeryType}>
             <InputLabel id="surgery-type-label" shrink notched>
               Surgery Type
@@ -63,8 +74,19 @@ export default function OneYearTKAComplaintForm() {
               id="surgeryType"
               {...register('surgeryType')}
               displayEmpty
-              renderValue={(value) => value || 'Select surgery type'}
+              notched
+              label="Surgery Type"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select surgery type</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -82,7 +104,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Surgery Date */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Date"
@@ -98,7 +120,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Surgery Location */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgery Location"
@@ -114,7 +136,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Surgeon */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Surgeon"
@@ -130,7 +152,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* History Changes */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Orthopedic/Medical History Changes"
@@ -148,7 +170,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Full Recovery */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.fullRecovery}>
             <InputLabel id="full-recovery-label" shrink notched>
               Full Recovery Status
@@ -158,8 +180,19 @@ export default function OneYearTKAComplaintForm() {
               id="fullRecovery"
               {...register('fullRecovery')}
               displayEmpty
-              renderValue={(value) => value || 'Select full recovery status'}
+              notched
+              label="Full Recovery Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select full recovery status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -177,7 +210,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Normal Activity */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.normalActivity}>
             <InputLabel id="normal-activity-label" shrink notched>
               Normal Activity Status
@@ -187,8 +220,19 @@ export default function OneYearTKAComplaintForm() {
               id="normalActivity"
               {...register('normalActivity')}
               displayEmpty
-              renderValue={(value) => value || 'Select normal activity status'}
+              notched
+              label="Normal Activity Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select normal activity status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -206,7 +250,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Symptom Relief */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.symptomRelief}>
             <InputLabel id="symptom-relief-label" shrink notched>
               Symptom Relief Level
@@ -216,8 +260,19 @@ export default function OneYearTKAComplaintForm() {
               id="symptomRelief"
               {...register('symptomRelief')}
               displayEmpty
-              renderValue={(value) => value || 'Select symptom relief level'}
+              notched
+              label="Symptom Relief Level"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select symptom relief level</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -237,7 +292,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Ambulation Status */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.ambulationStatus}>
             <InputLabel id="ambulation-status-label" shrink notched>
               Ambulation Status
@@ -247,8 +302,19 @@ export default function OneYearTKAComplaintForm() {
               id="ambulationStatus"
               {...register('ambulationStatus')}
               displayEmpty
-              renderValue={(value) => value || 'Select ambulation status'}
+              notched
+              label="Ambulation Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select ambulation status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -267,7 +333,7 @@ export default function OneYearTKAComplaintForm() {
 
         {/* Assistive Devices - Conditional */}
         {ambulationStatus === 'with' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Assistive Devices"
@@ -284,7 +350,7 @@ export default function OneYearTKAComplaintForm() {
         )}
 
         {/* Pain Medication */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.painMedication}>
             <InputLabel id="pain-medication-label" shrink notched>
               Pain Medication
@@ -294,8 +360,19 @@ export default function OneYearTKAComplaintForm() {
               id="painMedication"
               {...register('painMedication')}
               displayEmpty
-              renderValue={(value) => value || 'Select pain medication status'}
+              notched
+              label="Pain Medication"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select pain medication status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -314,7 +391,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Satisfaction */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.satisfaction}>
             <InputLabel id="satisfaction-label" shrink notched>
               Satisfaction Status
@@ -324,8 +401,19 @@ export default function OneYearTKAComplaintForm() {
               id="satisfaction"
               {...register('satisfaction')}
               displayEmpty
-              renderValue={(value) => value || 'Select satisfaction status'}
+              notched
+              label="Satisfaction Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select satisfaction status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -343,7 +431,7 @@ export default function OneYearTKAComplaintForm() {
         </Grid>
 
         {/* Questions/Concerns */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
             <InputLabel id="has-questions-label" shrink notched>
               Questions/Concerns
@@ -353,8 +441,19 @@ export default function OneYearTKAComplaintForm() {
               id="hasQuestions"
               {...register('hasQuestions')}
               displayEmpty
-              renderValue={(value) => value || 'Select questions/concerns status'}
+              notched
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
               sx={{
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#e0e0e0',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
                 },
@@ -373,7 +472,7 @@ export default function OneYearTKAComplaintForm() {
 
         {/* Questions Details - Conditional */}
         {hasQuestions === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Please provide details about questions/concerns"
