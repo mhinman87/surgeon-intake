@@ -10,35 +10,50 @@ export default function PostopTHAReviewForm() {
   const { watch } = useFormContext();
   const formData = watch();
 
-  const buildNarrative = () => {
-    const hipSide = formData.hipSide;
-    const surgeryType = formData.surgeryType;
-    const surgeryDate = formData.surgeryDate;
-    const surgeryLocation = formData.surgeryLocation;
-    const historyChanges = formData.historyChanges;
-    const progressLevel = formData.progressLevel;
-    const recoveryPercentage = formData.recoveryPercentage;
-    const therapyWeeks = formData.therapyWeeks;
-    const therapyLocation = formData.therapyLocation;
-    const therapyVisitsPerWeek = formData.therapyVisitsPerWeek;
-    const therapyDischarged = formData.therapyDischarged;
-    const ambulationStatus = formData.ambulationStatus;
-    const assistiveDevices = formData.assistiveDevices;
-    const painMedication = formData.painMedication;
-    const symptomRelief = formData.symptomRelief;
-    const satisfaction = formData.satisfaction;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
+    }
+    return value;
+  };
 
-    let narrative = `Post-op THA presents s/p ${hipSide} ${surgeryType} THA on ${surgeryDate} at ${surgeryLocation} performed by myself. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient feels as if they are making ${progressLevel} progress and feels ${recoveryPercentage} recovered. They have participated in ${therapyWeeks} weeks of therapy at ${therapyLocation} ${therapyVisitsPerWeek} visits per week. They ${therapyDischarged} been discharged from therapy. The patient is ambulating ${ambulationStatus} assistive devices.`;
-    
-    if (ambulationStatus === 'with' && assistiveDevices) {
+  const formatHipSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      default: return '[not specified]';
+    }
+  };
+
+  const buildNarrative = () => {
+    const hipSide = formatHipSide(formData.hipSide);
+    const surgeryType = formatValue(formData.surgeryType);
+    const surgeryDate = formatValue(formData.surgeryDate);
+    const surgeryLocation = formatValue(formData.surgeryLocation);
+    const historyChanges = formatValue(formData.historyChanges);
+    const progressLevel = formatValue(formData.progressLevel);
+    const recoveryPercentage = formatValue(formData.recoveryPercentage);
+    const therapyWeeks = formatValue(formData.therapyWeeks);
+    const therapyLocation = formatValue(formData.therapyLocation);
+    const therapyVisitsPerWeek = formatValue(formData.therapyVisitsPerWeek);
+    const therapyDischarged = formatValue(formData.therapyDischarged);
+    const ambulationStatus = formatValue(formData.ambulationStatus);
+    const assistiveDevices = formatValue(formData.assistiveDevices);
+    const painMedication = formatValue(formData.painMedication);
+    const symptomRelief = formatValue(formData.symptomRelief);
+    const satisfaction = formatValue(formData.satisfaction);
+    const hasQuestions = formatValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents s/p ${hipSide} ${surgeryType} THA on ${surgeryDate} at ${surgeryLocation} performed by myself. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient feels as if they are making ${progressLevel} progress and feels ${recoveryPercentage} recovered. They have participated in ${therapyWeeks} weeks of therapy at ${therapyLocation} ${therapyVisitsPerWeek} visits per week. They ${therapyDischarged} been discharged from therapy. The patient is ambulating ${ambulationStatus} assistive devices.`;
+
+    if (formData.ambulationStatus === 'with' && assistiveDevices && assistiveDevices !== '[not specified]') {
       narrative += ` ${assistiveDevices}.`;
     }
-    
+
     narrative += ` They are using ${painMedication} medication for discomfort. The patient has ${symptomRelief} relief of their pre-operative symptoms. The patient ${satisfaction} satisfied with their results thus far.`;
-    
-    if (hasQuestions === 'yes') {
+
+    if (formData.hasQuestions === 'yes') {
       narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
     } else {
       narrative += ` Questions/concerns? No`;

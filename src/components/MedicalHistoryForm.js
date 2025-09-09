@@ -26,13 +26,9 @@ export default function MedicalHistoryForm() {
 
   return (
     <Box>
-      <Typography variant="h5" component="h2" gutterBottom sx={{ mb: 3, color: 'primary.main' }}>
-        Medical, Social & Referral History
-      </Typography>
-
       <Grid container spacing={3}>
         {/* Preferred Name */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Preferred Name"
@@ -48,7 +44,7 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* PCP */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="PCP"
@@ -64,7 +60,7 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* Referred By */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Referred By"
@@ -80,20 +76,36 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* DM2 */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.dm2}>
-            <InputLabel id="dm2-label" shrink notched>
-              DM2
-            </InputLabel>
+            <InputLabel id="dm2-label" shrink={true}>DM2</InputLabel>
             <Select
-              labelId="dm2-label"
-              id="dm2"
               {...register('dm2')}
+              labelId="dm2-label"
+              label="DM2"
               displayEmpty
-              renderValue={(value) => value || 'Select DM2 status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select DM2 status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -110,7 +122,7 @@ export default function MedicalHistoryForm() {
 
         {/* DM2 A1C - Conditional */}
         {dm2 === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="A1C"
@@ -128,7 +140,7 @@ export default function MedicalHistoryForm() {
 
         {/* DM2 Medications - Conditional */}
         {dm2 === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="DM2 Medications"
@@ -145,20 +157,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Cardiac History */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.cardiacHistory}>
-            <InputLabel id="cardiac-history-label" shrink notched>
-              Cardiac History
-            </InputLabel>
+            <InputLabel id="cardiac-history-label" shrink={true}>Cardiac History</InputLabel>
             <Select
-              labelId="cardiac-history-label"
-              id="cardiacHistory"
               {...register('cardiacHistory')}
+              labelId="cardiac-history-label"
+              label="Cardiac History"
               displayEmpty
-              renderValue={(value) => value || 'Select cardiac history'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select cardiac history</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -175,7 +203,7 @@ export default function MedicalHistoryForm() {
 
         {/* Cardiac Diagnosis - Conditional */}
         {cardiacHistory === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Cardiac Diagnosis"
@@ -193,7 +221,7 @@ export default function MedicalHistoryForm() {
 
         {/* Cardiac Procedures - Conditional */}
         {cardiacHistory === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Cardiac Procedures"
@@ -211,7 +239,7 @@ export default function MedicalHistoryForm() {
 
         {/* Cardiologist - Conditional */}
         {cardiacHistory === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Cardiologist"
@@ -228,20 +256,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* DVT History */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.dvtHistory}>
-            <InputLabel id="dvt-history-label" shrink notched>
-              DVT History
-            </InputLabel>
+            <InputLabel id="dvt-history-label" shrink={true}>DVT History</InputLabel>
             <Select
-              labelId="dvt-history-label"
-              id="dvtHistory"
               {...register('dvtHistory')}
+              labelId="dvt-history-label"
+              label="DVT History"
               displayEmpty
-              renderValue={(value) => value || 'Select DVT history'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select DVT history</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -258,7 +302,7 @@ export default function MedicalHistoryForm() {
 
         {/* DVT Location - Conditional */}
         {dvtHistory === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="DVT Location"
@@ -276,7 +320,7 @@ export default function MedicalHistoryForm() {
 
         {/* DVT Date - Conditional */}
         {dvtHistory === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="DVT Date"
@@ -293,20 +337,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* MRSA/SSI */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.mrsaSsi}>
-            <InputLabel id="mrsa-ssi-label" shrink notched>
-              MRSA/SSI
-            </InputLabel>
+            <InputLabel id="mrsa-ssi-label" shrink={true}>MRSA/SSI</InputLabel>
             <Select
-              labelId="mrsa-ssi-label"
-              id="mrsaSsi"
               {...register('mrsaSsi')}
+              labelId="mrsa-ssi-label"
+              label="MRSA/SSI"
               displayEmpty
-              renderValue={(value) => value || 'Select MRSA/SSI history'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select MRSA/SSI history</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -323,7 +383,7 @@ export default function MedicalHistoryForm() {
 
         {/* MRSA/SSI Location - Conditional */}
         {mrsaSsi === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="MRSA/SSI Location"
@@ -341,7 +401,7 @@ export default function MedicalHistoryForm() {
 
         {/* MRSA/SSI Date - Conditional */}
         {mrsaSsi === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="MRSA/SSI Date"
@@ -358,20 +418,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Blood Thinners */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.bloodThinners}>
-            <InputLabel id="blood-thinners-label" shrink notched>
-              Blood Thinners
-            </InputLabel>
+            <InputLabel id="blood-thinners-label" shrink={true}>Blood Thinners</InputLabel>
             <Select
-              labelId="blood-thinners-label"
-              id="bloodThinners"
               {...register('bloodThinners')}
+              labelId="blood-thinners-label"
+              label="Blood Thinners"
               displayEmpty
-              renderValue={(value) => value || 'Select blood thinners status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select blood thinners status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -388,7 +464,7 @@ export default function MedicalHistoryForm() {
 
         {/* Blood Thinner Medications - Conditional */}
         {bloodThinners === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Blood Thinner Medications"
@@ -405,20 +481,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Immunosuppression */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.immunosuppression}>
-            <InputLabel id="immunosuppression-label" shrink notched>
-              Immunosuppression
-            </InputLabel>
+            <InputLabel id="immunosuppression-label" shrink={true}>Immunosuppression</InputLabel>
             <Select
-              labelId="immunosuppression-label"
-              id="immunosuppression"
               {...register('immunosuppression')}
+              labelId="immunosuppression-label"
+              label="Immunosuppression"
               displayEmpty
-              renderValue={(value) => value || 'Select immunosuppression status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select immunosuppression status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -435,7 +527,7 @@ export default function MedicalHistoryForm() {
 
         {/* Immunosuppression Medications - Conditional */}
         {immunosuppression === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Immunosuppression Medications"
@@ -453,7 +545,7 @@ export default function MedicalHistoryForm() {
 
         {/* Immunosuppression Diagnosis - Conditional */}
         {immunosuppression === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Immunosuppression Diagnosis"
@@ -470,20 +562,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Opioid Use */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.opioidUse}>
-            <InputLabel id="opioid-use-label" shrink notched>
-              Opioid Use
-            </InputLabel>
+            <InputLabel id="opioid-use-label" shrink={true}>Opioid Use</InputLabel>
             <Select
-              labelId="opioid-use-label"
-              id="opioidUse"
               {...register('opioidUse')}
+              labelId="opioid-use-label"
+              label="Opioid Use"
               displayEmpty
-              renderValue={(value) => value || 'Select opioid use status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select opioid use status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -500,7 +608,7 @@ export default function MedicalHistoryForm() {
 
         {/* Opioid Medications - Conditional */}
         {opioidUse === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Opioid Medications"
@@ -518,20 +626,36 @@ export default function MedicalHistoryForm() {
 
         {/* Following with Pain Management - Conditional */}
         {opioidUse === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <FormControl fullWidth error={!!errors.painManagement}>
-              <InputLabel id="pain-management-label" shrink notched>
-                Following with Pain Management?
-              </InputLabel>
+              <InputLabel id="pain-management-label" shrink={true}>Following with Pain Management?</InputLabel>
               <Select
-                labelId="pain-management-label"
-                id="painManagement"
                 {...register('painManagement')}
+                labelId="pain-management-label"
+                label="Following with Pain Management?"
                 displayEmpty
-                renderValue={(value) => value || 'Select pain management status'}
-                sx={{
+                notched
+                renderValue={(selected) => {
+                  if (!selected) {
+                    return <em style={{ color: '#666' }}>Select pain management status</em>;
+                  }
+                  return selected.charAt(0).toUpperCase() + selected.slice(1);
+                }}
+                sx={{ 
                   '& .MuiSelect-select': {
-                    padding: '16.5px 14px',
+                    padding: '16px 14px 8px 14px',
+                    minHeight: 'auto',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#1976d2',
+                  },
+                  '&:hover .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#1976d2',
+                    borderWidth: 2,
+                  },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                    borderColor: '#1976d2',
+                    borderWidth: 2,
                   },
                 }}
               >
@@ -549,7 +673,7 @@ export default function MedicalHistoryForm() {
 
         {/* Pain Management Provider - Conditional */}
         {opioidUse === 'yes' && watch('painManagement') === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Pain Management Provider"
@@ -566,20 +690,36 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Tobacco Use */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.tobaccoUse}>
-            <InputLabel id="tobacco-use-label" shrink notched>
-              Tobacco Use
-            </InputLabel>
+            <InputLabel id="tobacco-use-label" shrink={true}>Tobacco Use</InputLabel>
             <Select
-              labelId="tobacco-use-label"
-              id="tobaccoUse"
               {...register('tobaccoUse')}
+              labelId="tobacco-use-label"
+              label="Tobacco Use"
               displayEmpty
-              renderValue={(value) => value || 'Select tobacco use status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select tobacco use status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -596,7 +736,7 @@ export default function MedicalHistoryForm() {
 
         {/* Tobacco Type - Conditional */}
         {tobaccoUse === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Tobacco Type"
@@ -614,7 +754,7 @@ export default function MedicalHistoryForm() {
 
         {/* Tobacco Frequency - Conditional */}
         {tobaccoUse === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Tobacco Frequency"
@@ -631,7 +771,7 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Residence */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Residence"
@@ -647,20 +787,36 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* Has Stairs */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasStairs}>
-            <InputLabel id="has-stairs-label" shrink notched>
-              Has Stairs
-            </InputLabel>
+            <InputLabel id="has-stairs-label" shrink={true}>Has Stairs</InputLabel>
             <Select
-              labelId="has-stairs-label"
-              id="hasStairs"
               {...register('hasStairs')}
+              labelId="has-stairs-label"
+              label="Has Stairs"
               displayEmpty
-              renderValue={(value) => value || 'Select stairs status'}
-              sx={{
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select stairs status</em>;
+                }
+                return selected.charAt(0).toUpperCase() + selected.slice(1);
+              }}
+              sx={{ 
                 '& .MuiSelect-select': {
-                  padding: '16.5px 14px',
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#1976d2',
+                  borderWidth: 2,
                 },
               }}
             >
@@ -677,7 +833,7 @@ export default function MedicalHistoryForm() {
 
         {/* Stair Count - Conditional */}
         {hasStairs === 'yes' && (
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
             <TextField
               fullWidth
               label="Stair Count"
@@ -694,7 +850,7 @@ export default function MedicalHistoryForm() {
         )}
 
         {/* Support */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Support"
@@ -710,7 +866,7 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* Ambulatory Capacity */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Ambulatory Capacity"
@@ -726,7 +882,7 @@ export default function MedicalHistoryForm() {
         </Grid>
 
         {/* Occupation */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <TextField
             fullWidth
             label="Occupation"

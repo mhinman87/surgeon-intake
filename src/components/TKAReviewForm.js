@@ -12,7 +12,7 @@ const TKAReviewForm = () => {
 
   const formatValue = (value) => {
     if (value === '' || value === null || value === undefined) {
-      return 'not specified';
+      return '[not specified]';
     }
     return value;
   };
@@ -21,7 +21,7 @@ const TKAReviewForm = () => {
     switch (side) {
       case 'right': return 'right';
       case 'left': return 'left';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -29,7 +29,7 @@ const TKAReviewForm = () => {
     switch (history) {
       case 'positive': return 'positive';
       case 'negative': return 'negative';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -39,7 +39,7 @@ const TKAReviewForm = () => {
       case 'x-rays': return 'X-rays';
       case 'mri': return 'MRI';
       case 'ct': return 'CT';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -50,7 +50,7 @@ const TKAReviewForm = () => {
       case 'mild': return 'mild';
       case 'moderate': return 'moderate';
       case 'significant': return 'significant';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -82,30 +82,30 @@ const TKAReviewForm = () => {
     const treatmentSuccess = formatSuccess(formData.treatmentSuccess);
     const imagingStudies = formatImaging(formData.imagingStudies);
 
-    let narrative = `The patient presents for evaluation of their ${kneeSide} knee. They have undergone TKA performed by ${originalSurgeon} in ${originalLocation} in ${originalYear}. There is a ${complicationsHistory} history of complications during their initial surgical episode.`;
-    
-    if (formData.complicationsHistory === 'positive' && complicationsDescription) {
+    let narrative = `presents for evaluation of their ${kneeSide} knee. They have undergone TKA performed by ${originalSurgeon} in ${originalLocation} in ${originalYear}. There is a ${complicationsHistory} history of complications during their initial surgical episode.`;
+
+    if (formData.complicationsHistory === 'positive' && complicationsDescription && complicationsDescription !== '[not specified]') {
       narrative += ` The complication was ${complicationsDescription}.`;
     }
-    
+
     narrative += ` There is a ${additionalSurgeryHistory} history of additional surgery following the TKA.`;
-    
-    if (formData.additionalSurgeryHistory === 'positive' && additionalSurgeryDescription) {
+
+    if (formData.additionalSurgeryHistory === 'positive' && additionalSurgeryDescription && additionalSurgeryDescription !== '[not specified]') {
       narrative += ` The additional surgery was ${additionalSurgeryDescription}.`;
     }
-    
+
     narrative += ` There is a ${previousSurgeryHistory} history of previous surgery prior to the TKA.`;
-    
-    if (formData.previousSurgeryHistory === 'positive' && previousSurgeryDescription) {
+
+    if (formData.previousSurgeryHistory === 'positive' && previousSurgeryDescription && previousSurgeryDescription !== '[not specified]') {
       narrative += ` The surgery was ${previousSurgeryDescription}.`;
     }
-    
+
     narrative += ` They report ${satisfactionResult} satisfaction with their result. There is a ${injurySinceTKA} history of injury since the TKA.`;
-    
-    if (formData.injurySinceTKA === 'positive' && injuryDescription) {
+
+    if (formData.injurySinceTKA === 'positive' && injuryDescription && injuryDescription !== '[not specified]') {
       narrative += ` The injury was ${injuryDescription}.`;
     }
-    
+
     narrative += ` Their primary complaint is ${primaryComplaint}. The pain is located at the ${painLocation} aspect of the knee. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. The symptoms have been present for ${symptomDuration}. The patient's symptoms have been ${symptomProgression}. At worst the severity of the symptoms is rated as a ${worstSymptomLevel} out of 10. At best, they are rated as a ${bestSymptomLevel} out of 10. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. Previous imaging studies consist of ${imagingStudies}.`;
 
     return narrative;

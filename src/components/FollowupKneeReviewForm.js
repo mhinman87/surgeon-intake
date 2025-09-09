@@ -10,26 +10,42 @@ export default function FollowupKneeReviewForm() {
   const { watch } = useFormContext();
   const formData = watch();
 
-  const buildNarrative = () => {
-    const kneeSide = formData.kneeSide;
-    const clinicHistory = formData.clinicHistory;
-    const treatmentPlan = formData.treatmentPlan;
-    const treatmentPlanOther = formData.treatmentPlanOther;
-    const symptomsStatus = formData.symptomsStatus;
-    const historyChanges = formData.historyChanges;
-    const treatmentConsideration = formData.treatmentConsideration;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
+    }
+    return value;
+  };
 
-    let narrative = `Follow-up Native Knee presents for ${kneeSide} knee follow-up. They are known to my clinic for history of ${clinicHistory}. At last visit, the treatment plan consisted of ${treatmentPlan}`;
-    
-    if (treatmentPlan === 'other' && treatmentPlanOther) {
+  const formatKneeSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      case 'bilateral': return 'bilateral';
+      default: return '[not specified]';
+    }
+  };
+
+  const buildNarrative = () => {
+    const kneeSide = formatKneeSide(formData.kneeSide);
+    const clinicHistory = formatValue(formData.clinicHistory);
+    const treatmentPlan = formatValue(formData.treatmentPlan);
+    const treatmentPlanOther = formatValue(formData.treatmentPlanOther);
+    const symptomsStatus = formatValue(formData.symptomsStatus);
+    const historyChanges = formatValue(formData.historyChanges);
+    const treatmentConsideration = formatValue(formData.treatmentConsideration);
+    const hasQuestions = formatValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents for ${kneeSide} knee follow-up. They are known to my clinic for history of ${clinicHistory}. At last visit, the treatment plan consisted of ${treatmentPlan}`;
+
+    if (formData.treatmentPlan === 'other' && treatmentPlanOther && treatmentPlanOther !== '[not specified]') {
       narrative += ` (${treatmentPlanOther})`;
     }
-    
+
     narrative += `. The symptoms are ${symptomsStatus}. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient is considering ${treatmentConsideration} their current treatment plan.`;
-    
-    if (hasQuestions === 'yes') {
+
+    if (formData.hasQuestions === 'yes') {
       narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
     } else {
       narrative += ` Questions/concerns? No`;

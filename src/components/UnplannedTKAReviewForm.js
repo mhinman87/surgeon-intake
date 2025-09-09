@@ -10,41 +10,56 @@ export default function UnplannedTKAReviewForm() {
   const { watch } = useFormContext();
   const formData = watch();
 
-  const buildNarrative = () => {
-    const kneeSide = formData.kneeSide;
-    const surgeryType = formData.surgeryType;
-    const surgeryDate = formData.surgeryDate;
-    const surgeryLocation = formData.surgeryLocation;
-    const returnReason = formData.returnReason;
-    const injuryHistory = formData.injuryHistory;
-    const injuryDetails = formData.injuryDetails;
-    const attemptedRelief = formData.attemptedRelief;
-    const reliefSuccess = formData.reliefSuccess;
-    const associatedSymptoms = formData.associatedSymptoms;
-    const aggravatedBy = formData.aggravatedBy;
-    const alleviatedBy = formData.alleviatedBy;
-    const painMedication = formData.painMedication;
-    const ambulationStatus = formData.ambulationStatus;
-    const assistiveDevices = formData.assistiveDevices;
-    const normalActivity = formData.normalActivity;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
+    }
+    return value;
+  };
 
-    let narrative = `Unplanned <1-year post-op TKA presents s/p ${kneeSide} ${surgeryType} TKA on ${surgeryDate} at ${surgeryLocation} performed by myself. The patient was last seen at their post-op visit and found to be progressing within normal limits. The next planned follow-up was to be at 1 year following surgery. The patient returns early today due to ${returnReason}. Since last visit there is ${injuryHistory} injury history.`;
-    
-    if (injuryHistory === 'positive' && injuryDetails) {
+  const formatKneeSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      default: return '[not specified]';
+    }
+  };
+
+  const buildNarrative = () => {
+    const kneeSide = formatKneeSide(formData.kneeSide);
+    const surgeryType = formatValue(formData.surgeryType);
+    const surgeryDate = formatValue(formData.surgeryDate);
+    const surgeryLocation = formatValue(formData.surgeryLocation);
+    const returnReason = formatValue(formData.returnReason);
+    const injuryHistory = formatValue(formData.injuryHistory);
+    const injuryDetails = formatValue(formData.injuryDetails);
+    const attemptedRelief = formatValue(formData.attemptedRelief);
+    const reliefSuccess = formatValue(formData.reliefSuccess);
+    const associatedSymptoms = formatValue(formData.associatedSymptoms);
+    const aggravatedBy = formatValue(formData.aggravatedBy);
+    const alleviatedBy = formatValue(formData.alleviatedBy);
+    const painMedication = formatValue(formData.painMedication);
+    const ambulationStatus = formatValue(formData.ambulationStatus);
+    const assistiveDevices = formatValue(formData.assistiveDevices);
+    const normalActivity = formatValue(formData.normalActivity);
+    const hasQuestions = formatValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents s/p ${kneeSide} ${surgeryType} TKA on ${surgeryDate} at ${surgeryLocation} performed by myself. The patient was last seen at their post-op visit and found to be progressing within normal limits. The next planned follow-up was to be at 1 year following surgery. The patient returns early today due to ${returnReason}. Since last visit there is ${injuryHistory} injury history.`;
+
+    if (formData.injuryHistory === 'positive' && injuryDetails && injuryDetails !== '[not specified]') {
       narrative += ` ${injuryDetails}.`;
     }
-    
+
     narrative += ` The patient has attempted ${attemptedRelief} for relief with ${reliefSuccess} success. The patient's associated symptoms are ${associatedSymptoms}. The symptoms are aggravated by ${aggravatedBy} and alleviated by ${alleviatedBy}. They are using ${painMedication} medication for discomfort. The patient is ambulating ${ambulationStatus} assistive devices.`;
-    
-    if (ambulationStatus === 'with' && assistiveDevices) {
+
+    if (formData.ambulationStatus === 'with' && assistiveDevices && assistiveDevices !== '[not specified]') {
       narrative += ` ${assistiveDevices}.`;
     }
-    
+
     narrative += ` They ${normalActivity} returned to normal daily activity.`;
-    
-    if (hasQuestions === 'yes') {
+
+    if (formData.hasQuestions === 'yes') {
       narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
     } else {
       narrative += ` Questions/concerns? No`;

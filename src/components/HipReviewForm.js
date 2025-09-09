@@ -12,7 +12,7 @@ const HipReviewForm = () => {
 
   const formatValue = (value) => {
     if (value === '' || value === null || value === undefined) {
-      return 'not specified';
+      return '[not specified]';
     }
     return value;
   };
@@ -22,7 +22,7 @@ const HipReviewForm = () => {
       case 'right': return 'right';
       case 'left': return 'left';
       case 'bilateral': return 'bilateral';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -30,7 +30,7 @@ const HipReviewForm = () => {
     switch (injury) {
       case 'positive': return 'positive';
       case 'negative': return 'negative';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -40,7 +40,7 @@ const HipReviewForm = () => {
       case 'x-rays': return 'X-rays';
       case 'mri': return 'MRI';
       case 'ct': return 'CT';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -51,7 +51,7 @@ const HipReviewForm = () => {
       case 'mild': return 'mild';
       case 'moderate': return 'moderate';
       case 'significant': return 'significant';
-      default: return 'not specified';
+      default: return '[not specified]';
     }
   };
 
@@ -76,24 +76,28 @@ const HipReviewForm = () => {
     const lumbarSpineDescription = formData.lumbarSpineHistory === 'positive' ? formatValue(formData.lumbarSpineDescription) : '';
     const imagingStudies = formatImaging(formData.imagingStudies);
 
-    let narrative = `The patient presents for ${hipSide} hip pain.`;
-    
-    if (formData.hipSide === 'bilateral' && worseSide) {
-      narrative += ` The ${worseSide}.`;
+    let narrative = `presents for ${hipSide} hip pain.`;
+
+    if (formData.hipSide === 'bilateral' && worseSide && worseSide !== '[not specified]') {
+      if (worseSide === 'right and left are equally painful') {
+        narrative += ` Right and left are equally painful.`;
+      } else {
+        narrative += ` The ${worseSide} is worse.`;
+      }
     }
-    
+
     narrative += ` The pain is located at the ${painLocation} aspect of the hip(s). There is a ${injuryHistory} history of injury.`;
-    
-    if (formData.injuryHistory === 'positive' && injuryDescription) {
+
+    if (formData.injuryHistory === 'positive' && injuryDescription && injuryDescription !== '[not specified]') {
       narrative += ` The injury was ${injuryDescription}.`;
     }
-    
+
     narrative += ` Previous hip surgeries consist of ${previousSurgeries}. The symptoms have been present for ${symptomDuration}. The patient's symptoms have been ${symptomProgression}. At worst the pain is rated as a ${worstPain} out of 10. At best, the pain is rated as a ${bestPain} out of 10. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. The patient has a ${lumbarSpineHistory} history of lumbar spine pathology.`;
-    
-    if (formData.lumbarSpineHistory === 'positive' && lumbarSpineDescription) {
+
+    if (formData.lumbarSpineHistory === 'positive' && lumbarSpineDescription && lumbarSpineDescription !== '[not specified]') {
       narrative += ` The history is ${lumbarSpineDescription}.`;
     }
-    
+
     narrative += ` Previous imaging studies consist of ${imagingStudies}.`;
 
     return narrative;

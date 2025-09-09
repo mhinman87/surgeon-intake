@@ -10,32 +10,47 @@ export default function OneYearTKAReviewForm() {
   const { watch } = useFormContext();
   const formData = watch();
 
-  const buildNarrative = () => {
-    const kneeSide = formData.kneeSide;
-    const surgeryType = formData.surgeryType;
-    const surgeryDate = formData.surgeryDate;
-    const surgeryLocation = formData.surgeryLocation;
-    const surgeon = formData.surgeon;
-    const historyChanges = formData.historyChanges;
-    const fullRecovery = formData.fullRecovery;
-    const normalActivity = formData.normalActivity;
-    const symptomRelief = formData.symptomRelief;
-    const ambulationStatus = formData.ambulationStatus;
-    const assistiveDevices = formData.assistiveDevices;
-    const painMedication = formData.painMedication;
-    const satisfaction = formData.satisfaction;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
+    }
+    return value;
+  };
 
-    let narrative = `1-year TKA / routine long term recheck TKA presents s/p ${kneeSide} ${surgeryType} TKA on ${surgeryDate} at ${surgeryLocation} performed by ${surgeon}. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient feels as if they ${fullRecovery} made a full recovery. They ${normalActivity} resumed normal activity and work. The patient has ${symptomRelief} relief of their pre-operative symptoms. The patient is ambulating ${ambulationStatus} assistive devices.`;
-    
-    if (ambulationStatus === 'with' && assistiveDevices) {
+  const formatKneeSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      default: return '[not specified]';
+    }
+  };
+
+  const buildNarrative = () => {
+    const kneeSide = formatKneeSide(formData.kneeSide);
+    const surgeryType = formatValue(formData.surgeryType);
+    const surgeryDate = formatValue(formData.surgeryDate);
+    const surgeryLocation = formatValue(formData.surgeryLocation);
+    const surgeon = formatValue(formData.surgeon);
+    const historyChanges = formatValue(formData.historyChanges);
+    const fullRecovery = formatValue(formData.fullRecovery);
+    const normalActivity = formatValue(formData.normalActivity);
+    const symptomRelief = formatValue(formData.symptomRelief);
+    const ambulationStatus = formatValue(formData.ambulationStatus);
+    const assistiveDevices = formatValue(formData.assistiveDevices);
+    const painMedication = formatValue(formData.painMedication);
+    const satisfaction = formatValue(formData.satisfaction);
+    const hasQuestions = formatValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents s/p ${kneeSide} ${surgeryType} TKA on ${surgeryDate} at ${surgeryLocation} performed by ${surgeon}. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient feels as if they ${fullRecovery} made a full recovery. They ${normalActivity} resumed normal activity and work. The patient has ${symptomRelief} relief of their pre-operative symptoms. The patient is ambulating ${ambulationStatus} assistive devices.`;
+
+    if (formData.ambulationStatus === 'with' && assistiveDevices && assistiveDevices !== '[not specified]') {
       narrative += ` ${assistiveDevices}.`;
     }
-    
+
     narrative += ` They are using ${painMedication} medication for discomfort. The patient ${satisfaction} satisfied with their result.`;
-    
-    if (hasQuestions === 'yes') {
+
+    if (formData.hasQuestions === 'yes') {
       narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
     } else {
       narrative += ` Questions/concerns? No`;

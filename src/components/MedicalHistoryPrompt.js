@@ -25,18 +25,34 @@ export default function MedicalHistoryPrompt() {
       </Typography>
 
       <FormControl fullWidth error={!!errors.includeMedicalHistory}>
-        <InputLabel id="medical-history-label" shrink notched>
-          Include Medical History
-        </InputLabel>
+        <InputLabel id="medical-history-label" shrink={true}>Include Medical History</InputLabel>
         <Select
-          labelId="medical-history-label"
-          id="includeMedicalHistory"
           {...register('includeMedicalHistory')}
+          labelId="medical-history-label"
+          label="Include Medical History"
           displayEmpty
-          renderValue={(value) => value || 'Select option'}
-          sx={{
+          notched
+          renderValue={(selected) => {
+            if (!selected) {
+              return <em style={{ color: '#666' }}>Select option</em>;
+            }
+            return selected.charAt(0).toUpperCase() + selected.slice(1);
+          }}
+          sx={{ 
             '& .MuiSelect-select': {
-              padding: '16.5px 14px',
+              padding: '16px 14px 8px 14px',
+              minHeight: 'auto',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1976d2',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1976d2',
+              borderWidth: 2,
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#1976d2',
+              borderWidth: 2,
             },
           }}
         >

@@ -10,25 +10,40 @@ export default function FollowupPainfulTKAReviewForm() {
   const { watch } = useFormContext();
   const formData = watch();
 
-  const buildNarrative = () => {
-    const kneeSide = formData.kneeSide;
-    const knownHistory = formData.knownHistory;
-    const treatmentPlan = formData.treatmentPlan;
-    const otherTreatment = formData.otherTreatment;
-    const historyChanges = formData.historyChanges;
-    const symptomsStatus = formData.symptomsStatus;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
+  const formatValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
+    }
+    return value;
+  };
 
-    let narrative = `Follow-up painful TKA presents for ${kneeSide} TKA follow-up. They are known to my clinic for history of ${knownHistory}. At last visit, the treatment plan consisted of ${treatmentPlan}`;
-    
-    if (treatmentPlan === 'other' && otherTreatment) {
+  const formatKneeSide = (side) => {
+    switch (side) {
+      case 'right': return 'right';
+      case 'left': return 'left';
+      default: return '[not specified]';
+    }
+  };
+
+  const buildNarrative = () => {
+    const kneeSide = formatKneeSide(formData.kneeSide);
+    const knownHistory = formatValue(formData.knownHistory);
+    const treatmentPlan = formatValue(formData.treatmentPlan);
+    const otherTreatment = formatValue(formData.otherTreatment);
+    const historyChanges = formatValue(formData.historyChanges);
+    const symptomsStatus = formatValue(formData.symptomsStatus);
+    const hasQuestions = formatValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents for ${kneeSide} TKA follow-up. They are known to my clinic for history of ${knownHistory}. At last visit, the treatment plan consisted of ${treatmentPlan}`;
+
+    if (formData.treatmentPlan === 'other' && otherTreatment && otherTreatment !== '[not specified]') {
       narrative += ` - ${otherTreatment}`;
     }
-    
+
     narrative += `. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The symptoms are ${symptomsStatus}.`;
-    
-    if (hasQuestions === 'yes') {
+
+    if (formData.hasQuestions === 'yes') {
       narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
     } else {
       narrative += ` Questions/concerns? No`;
