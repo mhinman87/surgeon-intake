@@ -17,6 +17,7 @@ import MedicalHistoryPrompt from './MedicalHistoryPrompt';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import UnplannedTHAReviewForm from './UnplannedTHAReviewForm';
 import { generateUnplannedTHAReportPDF } from '../utils/unplannedThaPdfGenerator';
+import { generatePatientReportText, copyToClipboard } from '../utils/textGenerator';
 
 const steps = ['Unplanned Visit Information', 'Medical History', 'Review & Submit'];
 
@@ -429,7 +430,43 @@ export default function UnplannedTHAIntakeForm() {
           
           <Box sx={{ display: 'flex', gap: 2 }}>
             {activeStep === steps.length - 1 ? (
-              <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+              <Button variant="contained" onClick={async () => {
+                console.log('=== GENERATE REPORT BUTTON CLICKED ===');
+                const formData = methods.getValues();
+                console.log('Current form data:', formData);
+                
+                try {
+                  // Generate and copy text to clipboard (bypass validation)
+                  const reportText = generatePatientReportText(formData, 'unplanned');
+                  console.log('Generated report text:', reportText);
+                  console.log('Report text length:', reportText.length);
+                  
+                  if (!reportText || reportText.length === 0) {
+                    alert('Error: No text was generated. Check console for details.');
+                    return;
+                  }
+                  
+                  const copySuccess = await copyToClipboard(reportText);
+                  console.log('Copy success:', copySuccess);
+                  
+                  if (copySuccess) {
+                    alert('Report text copied to clipboard! PDF is also being generated.');
+                  } else {
+                    alert('PDF is being generated, but failed to copy text to clipboard. Check console for details.');
+                    // Show the text in an alert as a fallback
+                    alert('Here is the report text (copy manually):\n\n' + reportText.substring(0, 500) + '...');
+                  }
+                  
+                  // Also generate PDF
+                  generateUnplannedTHAReportPDF(formData);
+                  console.log('PDF generation completed');
+                  
+                  setShowSuccess(true);
+                } catch (error) {
+                  console.error('Error generating report:', error);
+                  alert('Error generating report: ' + error.message);
+                }
+              }}>
                 Generate Report
               </Button>
             ) : (

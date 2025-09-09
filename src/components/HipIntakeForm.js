@@ -17,6 +17,7 @@ import MedicalHistoryPrompt from './MedicalHistoryPrompt';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import HipReviewForm from './HipReviewForm';
 import { generateHipReportPDF } from '../utils/hipPdfGenerator';
+import { generatePatientReportText, copyToClipboard } from '../utils/textGenerator';
 
 const steps = ['Hip Complaint', 'Medical History', 'Review & Submit'];
 
@@ -353,16 +354,25 @@ export default function HipIntakeForm() {
       return;
     }
     
-    console.log('About to generate PDF...');
-    alert('Hip intake form submitted! PDF is being generated. Check your downloads folder or look for a new tab/window.');
+    console.log('About to generate PDF and copy text...');
     
     try {
+      // Generate and copy text to clipboard
+      const reportText = generatePatientReportText(data, 'hip');
+      const copySuccess = await copyToClipboard(reportText);
+      
+      if (copySuccess) {
+        alert('Report text copied to clipboard! PDF is also being generated.');
+      } else {
+        alert('PDF is being generated, but failed to copy text to clipboard.');
+      }
+      
       // Generate and open PDF
       generateHipReportPDF(data);
       console.log('PDF generation completed');
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF: ' + error.message);
+      console.error('Error generating report:', error);
+      alert('Error generating report: ' + error.message);
     }
     
     setShowSuccess(true);

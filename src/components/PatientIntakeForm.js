@@ -17,6 +17,7 @@ import MedicalHistoryPrompt from './MedicalHistoryPrompt';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import ReviewForm from './ReviewForm';
 import { generatePatientReportPDF } from '../utils/pdfGenerator';
+import { generatePatientReportText, copyToClipboard } from '../utils/textGenerator';
 
 const steps = ['Chief Complaint', 'Medical History', 'Review & Submit'];
 
@@ -320,7 +321,9 @@ export default function PatientIntakeForm() {
   };
 
   const onSubmit = async (data) => {
+    console.log('=== FORM SUBMISSION STARTED ===');
     console.log('Form submitted:', data);
+    console.log('Form validation passed, proceeding with submission...');
     
     // Validate all required fields before generating PDF
     const allFields = [
@@ -352,16 +355,35 @@ export default function PatientIntakeForm() {
       return;
     }
     
-    console.log('About to generate PDF...');
-    alert('Form submitted! PDF is being generated. Check your downloads folder or look for a new tab/window.');
+    console.log('About to generate PDF and copy text...');
+    console.log('Form data:', data);
     
     try {
+      // Generate and copy text to clipboard
+      const reportText = generatePatientReportText(data, 'knee');
+      console.log('Generated report text:', reportText);
+      console.log('Report text length:', reportText.length);
+      
+      if (!reportText || reportText.length === 0) {
+        alert('Error: No text was generated. Check console for details.');
+        return;
+      }
+      
+      const copySuccess = await copyToClipboard(reportText);
+      console.log('Copy success:', copySuccess);
+      
+      if (copySuccess) {
+        alert('Report text copied to clipboard! PDF is also being generated.');
+      } else {
+        alert('PDF is being generated, but failed to copy text to clipboard. Check console for details.');
+      }
+      
       // Generate and open PDF
       generatePatientReportPDF(data);
       console.log('PDF generation completed');
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF: ' + error.message);
+      console.error('Error generating report:', error);
+      alert('Error generating report: ' + error.message);
     }
     
     setShowSuccess(true);
@@ -467,7 +489,51 @@ export default function PatientIntakeForm() {
           
           <Box sx={{ display: 'flex', gap: 2 }}>
             {activeStep === steps.length - 1 ? (
-              <Button variant="contained" onClick={handleSubmit(onSubmit)}>
+              <Button variant="contained" onClick={async () => {
+                console.log('=== GENERATE REPORT BUTTON CLICKED ===');
+                const formData = methods.getValues();
+                console.log('Current form data:', formData);
+                
+                try {
+                  // Generate and copy text to clipboard (bypass validation)
+                  const reportText = generatePatientReportText(formData, 'knee');
+                  console.log('Generated report text:', reportText);
+                  console.log('Report text length:', reportText.length);
+                  
+                  if (!reportText || reportText.length === 0) {
+                    alert('Error: No text was generated. Check console for details.');
+                    return;
+                  }
+                  
+                  const copySuccess = await copyToClipboard(reportText);
+                  console.log('Copy success:', copySuccess);
+                  
+                  if (copySuccess) {
+                    alert('Report text copied to clipboard! PDF is also being generated.');
+                  } else {
+                    alert('PDF is being generated, but failed to copy text to clipboard. Check console for details.');
+                    // Show the text in an alert as a fallback
+                    alert('Here is the report text (copy manually):\n\n' + reportText.substring(0, 500) + '...');
+                    
+                    // Also try a simple test
+                    try {
+                      const testSuccess = await copyToClipboard('TEST CLIPBOARD');
+                      alert('Simple clipboard test: ' + (testSuccess ? 'SUCCESS' : 'FAILED'));
+                    } catch (e) {
+                      alert('Simple clipboard test: ERROR - ' + e.message);
+                    }
+                  }
+                  
+                  // Also generate PDF
+                  generatePatientReportPDF(formData);
+                  console.log('PDF generation completed');
+                  
+                  setShowSuccess(true);
+                } catch (error) {
+                  console.error('Error generating report:', error);
+                  alert('Error generating report: ' + error.message);
+                }
+              }}>
                 Generate Report
               </Button>
             ) : (

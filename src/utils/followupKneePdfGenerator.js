@@ -1,4 +1,5 @@
 import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
 
 export const generateFollowupKneeReportPDF = (formData) => {
   console.log('Follow-up Knee PDF Generator called with data:', formData);
@@ -13,39 +14,22 @@ export const generateFollowupKneeReportPDF = (formData) => {
   doc.setLineWidth(0.5);
   doc.line(20, 35, 190, 35);
   
-  // Build the narrative
-  const buildNarrative = () => {
-    const kneeSide = formData.kneeSide;
-    const clinicHistory = formData.clinicHistory;
-    const treatmentPlan = formData.treatmentPlan;
-    const treatmentPlanOther = formData.treatmentPlanOther;
-    const symptomsStatus = formData.symptomsStatus;
-    const historyChanges = formData.historyChanges;
-    const treatmentConsideration = formData.treatmentConsideration;
-    const hasQuestions = formData.hasQuestions;
-    const questionsDetails = formData.questionsDetails;
-
-    let narrative = `Follow-up Native Knee presents for ${kneeSide} knee follow-up. They are known to my clinic for history of ${clinicHistory}. At last visit, the treatment plan consisted of ${treatmentPlan}`;
-    
-    if (treatmentPlan === 'other' && treatmentPlanOther) {
-      narrative += ` (${treatmentPlanOther})`;
-    }
-    
-    narrative += `. The symptoms are ${symptomsStatus}. Orthopedic/medical history changes since last being seen consist of ${historyChanges}. The patient is considering ${treatmentConsideration} their current treatment plan.`;
-    
-    if (hasQuestions === 'yes') {
-      narrative += ` Questions/concerns? Yes - ${questionsDetails}`;
-    } else {
-      narrative += ` Questions/concerns? No`;
-    }
-
-    return narrative;
-  };
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'followup');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
 
   // Add the narrative
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  const narrative = buildNarrative();
   const splitNarrative = doc.splitTextToSize(narrative, 170);
   doc.text(splitNarrative, 20, 50);
   

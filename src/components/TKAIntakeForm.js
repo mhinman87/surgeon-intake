@@ -17,6 +17,7 @@ import MedicalHistoryPrompt from './MedicalHistoryPrompt';
 import MedicalHistoryForm from './MedicalHistoryForm';
 import TKAReviewForm from './TKAReviewForm';
 import { generateTKAReportPDF } from '../utils/tkaPdfGenerator';
+import { generatePatientReportText, copyToClipboard } from '../utils/textGenerator';
 
 const steps = ['TKA Evaluation', 'Medical History', 'Review & Submit'];
 
@@ -373,16 +374,25 @@ export default function TKAIntakeForm() {
       return;
     }
     
-    console.log('About to generate PDF...');
-    alert('TKA evaluation form submitted! PDF is being generated. Check your downloads folder or look for a new tab/window.');
+    console.log('About to generate PDF and copy text...');
     
     try {
+      // Generate and copy text to clipboard
+      const reportText = generatePatientReportText(data, 'knee');
+      const copySuccess = await copyToClipboard(reportText);
+      
+      if (copySuccess) {
+        alert('Report text copied to clipboard! PDF is also being generated.');
+      } else {
+        alert('PDF is being generated, but failed to copy text to clipboard.');
+      }
+      
       // Generate and open PDF
       generateTKAReportPDF(data);
       console.log('PDF generation completed');
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF: ' + error.message);
+      console.error('Error generating report:', error);
+      alert('Error generating report: ' + error.message);
     }
     
     setShowSuccess(true);
