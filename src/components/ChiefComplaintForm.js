@@ -48,20 +48,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -147,20 +147,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -229,20 +229,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -282,20 +282,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -446,20 +446,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -500,20 +500,20 @@ export default function ChiefComplaintForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}

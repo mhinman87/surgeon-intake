@@ -97,14 +97,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -178,14 +178,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -277,14 +277,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -358,14 +358,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -439,14 +439,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -502,14 +502,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -583,14 +583,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -647,14 +647,14 @@ export default function MedicalHistoryForm() {
                     minHeight: 'auto',
                   },
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                     borderWidth: 2,
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                     borderWidth: 2,
                   },
                 }}
@@ -711,14 +711,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}
@@ -808,14 +808,14 @@ export default function MedicalHistoryForm() {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
               }}

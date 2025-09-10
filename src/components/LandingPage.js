@@ -30,34 +30,28 @@ const LandingPage = () => {
     {
       title: 'New Patient Evaluations',
       description: 'Initial evaluation forms for new patients',
-      icon: '🆕',
-      color: '#1976d2',
       options: [
         {
-          title: 'New Native Knee',
+          title: 'Native Knee',
           description: 'Total knee arthroplasty intake form for primary knee replacement surgery',
-          icon: '🦵',
           route: '/knee-intake',
           available: true,
         },
         {
-          title: 'New Native Hip',
+          title: 'Native Hip',
           description: 'Total hip arthroplasty intake form for primary hip replacement surgery',
-          icon: '🦴',
           route: '/hip-intake',
           available: true,
         },
         {
-          title: 'TKA Evaluation',
+          title: 'TKA',
           description: 'Evaluation intake form for painful total knee arthroplasty',
-          icon: '🔧',
           route: '/revision-knee-intake',
           available: true,
         },
         {
-          title: 'THA Evaluation',
+          title: 'THA',
           description: 'Evaluation intake form for painful total hip arthroplasty',
-          icon: '🔧',
           route: '/revision-hip-intake',
           available: true,
         },
@@ -66,34 +60,28 @@ const LandingPage = () => {
     {
       title: 'Follow-up Visits',
       description: 'Routine follow-up forms for existing patients',
-      icon: '🔄',
-      color: '#388e3c',
       options: [
         {
-          title: 'Follow-up Native Knee',
+          title: 'Native Knee',
           description: 'Follow-up intake form for native knee patients',
-          icon: '🦵',
           route: '/followup-knee-intake',
           available: true,
         },
         {
-          title: 'Follow-up Native Hip',
+          title: 'Native Hip',
           description: 'Follow-up intake form for native hip patients',
-          icon: '🦴',
           route: '/followup-hip-intake',
           available: true,
         },
         {
-          title: 'Follow-up Painful TKA',
+          title: 'Painful TKA',
           description: 'Follow-up intake form for painful TKA patients',
-          icon: '🔧',
           route: '/followup-painful-tka-intake',
           available: true,
         },
         {
-          title: 'Follow-up Painful THA',
+          title: 'Painful THA',
           description: 'Follow-up intake form for painful THA patients',
-          icon: '🔧',
           route: '/followup-painful-tha-intake',
           available: true,
         },
@@ -102,20 +90,16 @@ const LandingPage = () => {
     {
       title: 'Post-operative',
       description: 'Post-surgical follow-up forms',
-      icon: '📋',
-      color: '#f57c00',
       options: [
         {
           title: 'Post-op TKA',
           description: 'Post-operative follow-up form for TKA patients',
-          icon: '🦵',
           route: '/postop-tka-intake',
           available: true,
         },
         {
           title: 'Post-op THA',
           description: 'Post-operative follow-up form for THA patients',
-          icon: '🦴',
           route: '/postop-tha-intake',
           available: true,
         },
@@ -124,20 +108,16 @@ const LandingPage = () => {
     {
       title: 'Unplanned Visits',
       description: 'Early return forms for unexpected issues',
-      icon: '⚠️',
-      color: '#d32f2f',
       options: [
         {
-          title: 'Unplanned <1-year post-op THA',
+          title: '<1-year post-op THA',
           description: 'Unplanned early return form for THA patients',
-          icon: '🦴',
           route: '/unplanned-tha-intake',
           available: true,
         },
         {
-          title: 'Unplanned <1-year post-op TKA',
+          title: '<1-year post-op TKA',
           description: 'Unplanned early return form for TKA patients',
-          icon: '🦵',
           route: '/unplanned-tka-intake',
           available: true,
         },
@@ -146,20 +126,16 @@ const LandingPage = () => {
     {
       title: 'Annual Check-ups',
       description: 'Long-term follow-up and routine check-up forms',
-      icon: '📅',
-      color: '#7b1fa2',
       options: [
         {
           title: '1-year THA / routine long term recheck THA',
           description: '1-year follow-up form for THA patients',
-          icon: '🦴',
           route: '/one-year-tha-intake',
           available: true,
         },
         {
           title: '1-year TKA / routine long term recheck TKA',
           description: '1-year follow-up form for TKA patients',
-          icon: '🦵',
           route: '/one-year-tka-intake',
           available: true,
         },
@@ -177,76 +153,164 @@ const LandingPage = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%)',
-        py: 4,
+        background: '#0A0A0B', // Surface color from schema
+        py: 3, // Compact density
+        fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `
+            linear-gradient(30deg, transparent 48%, rgba(99, 102, 241, 0.15) 49%, rgba(99, 102, 241, 0.15) 51%, transparent 52%),
+            linear-gradient(-30deg, transparent 48%, rgba(139, 92, 246, 0.12) 49%, rgba(139, 92, 246, 0.12) 51%, transparent 52%),
+            linear-gradient(90deg, transparent 48%, rgba(99, 102, 241, 0.1) 49%, rgba(99, 102, 241, 0.1) 51%, transparent 52%)
+          `,
+          backgroundSize: '60px 52px, 60px 52px, 60px 52px',
+          backgroundPosition: '0 0, 30px 26px, 0 0',
+          opacity: 0.8,
+          zIndex: 0,
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `
+            linear-gradient(30deg, transparent 48%, rgba(139, 92, 246, 0.1) 49%, rgba(139, 92, 246, 0.1) 51%, transparent 52%),
+            linear-gradient(-30deg, transparent 48%, rgba(99, 102, 241, 0.08) 49%, rgba(99, 102, 241, 0.08) 51%, transparent 52%),
+            linear-gradient(90deg, transparent 48%, rgba(139, 92, 246, 0.06) 49%, rgba(139, 92, 246, 0.06) 51%, transparent 52%)
+          `,
+          backgroundSize: '60px 52px, 60px 52px, 60px 52px',
+          backgroundPosition: '30px 26px, 0 0, 30px 26px',
+          opacity: 0.6,
+          zIndex: 0,
+        },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}
-        <Paper
-          elevation={3}
+        <Box
           sx={{
-            p: 4,
-            mb: 4,
-            textAlign: 'center',
-            background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
-            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mb: 6, // Increased spacing for circular design
+            p: 4, // More padding for circular shape
+            background: 'rgba(0, 0, 0, 0.8)', // Dark background to match icon
+            borderRadius: '50%', // Perfect circle
+            backdropFilter: 'blur(20px)',
+            border: '2px solid rgba(6, 182, 212, 0.8)', // Thicker teal border
+            boxShadow: 'none', // Remove glow effect
+            position: 'relative',
+            width: '200px', // Smaller circle to better frame icon
+            height: '200px', // Smaller circle to better frame icon
+            margin: '0 auto 48px auto', // Center horizontally
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%)', // Dark gradient
+              pointerEvents: 'none',
+            },
           }}
         >
-          <Typography variant="h3" component="h1" gutterBottom sx={{ fontWeight: 600 }}>
-            Surgical Intake Portal
-          </Typography>
-          <Typography variant="h6" sx={{ opacity: 0.9 }}>
-            Select the appropriate intake form for your surgical procedure
-          </Typography>
-        </Paper>
+          <Box
+            component="img"
+            src={`/patient-intake-icon.png?v=${Date.now()}`}
+            alt="Patient Intake Portal"
+            onError={(e) => {
+              console.log('Image failed to load:', e.target.src);
+              e.target.style.display = 'none';
+            }}
+            onLoad={() => {
+              console.log('Image loaded successfully');
+            }}
+            sx={{
+              width: '180px',
+              height: '180px',
+              objectFit: 'contain',
+              opacity: 0.9,
+            }}
+          />
+        </Box>
 
         {/* Surgical Categories */}
         {surgicalCategories.map((category, categoryIndex) => (
           <Box key={categoryIndex} sx={{ mb: 6 }}>
             {/* Category Header */}
-            <Paper
-              elevation={2}
+            <Box
               sx={{
-                p: 3,
-                mb: 3,
-                background: `linear-gradient(135deg, ${category.color} 0%, ${category.color}dd 100%)`,
+                p: 2, // Compact padding
+                mb: 2, // 8-point scale spacing
+                maxWidth: '400px', // Shorter width
+                margin: '0 auto', // Center the shorter buttons
+                background: 'rgba(0, 0, 0, 0.8)', // Dark background to match icon
                 color: 'white',
-                borderRadius: 2,
+                borderRadius: '50px', // Very rounded corners
                 cursor: 'pointer',
-                transition: 'all 0.3s ease-in-out',
+                transition: 'all 0.2s ease-out',
+                backdropFilter: 'blur(20px)',
+                border: '2px solid rgba(6, 182, 212, 0.8)', // Thicker teal border
+                boxShadow: 'none', // Remove glow effect
+                position: 'relative',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  borderRadius: '50px',
+                  background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%)', // Dark gradient
+                  pointerEvents: 'none',
+                },
                 '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: 4,
+                  transform: 'translateY(-1px)',
+                  background: 'rgba(0, 0, 0, 0.9)',
+                  border: '2px solid rgba(6, 182, 212, 1)', // Solid teal border on hover
+                  boxShadow: 'none', // No glow effect
                 },
               }}
               onClick={() => handleCategoryToggle(categoryIndex)}
             >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                <Typography variant="h2" sx={{ fontSize: '2.5rem' }}>
-                  {category.icon}
-                </Typography>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Typography variant="h4" component="h2" sx={{ fontWeight: 600, mb: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: 1 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography 
+                    variant="h5" 
+                    component="h2" 
+                    sx={{ 
+                      fontWeight: 700, // Display weight
+                      mb: 0.5, // Compact spacing
+                      color: '#FFFFFF', // Text primary
+                      letterSpacing: '-0.01em',
+                      fontSize: '1.125rem',
+                    }}
+                  >
                     {category.title}
                   </Typography>
-                  <Typography variant="h6" sx={{ opacity: 0.9 }}>
+                  <Typography 
+                    variant="body1" 
+                    sx={{ 
+                      color: '#9CA3AF', // Text secondary
+                      fontWeight: 400, // Body weight
+                      fontSize: '0.875rem',
+                    }}
+                  >
                     {category.description}
                   </Typography>
                 </Box>
-                <IconButton
-                  sx={{ 
-                    color: 'white',
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    },
-                  }}
-                >
-                  {expandedCategories[categoryIndex] ? <ExpandLess /> : <ExpandMore />}
-                </IconButton>
               </Box>
-            </Paper>
+            </Box>
 
             {/* Category Options Grid */}
             <Collapse in={expandedCategories[categoryIndex]} timeout="auto" unmountOnExit>
@@ -254,30 +318,53 @@ const LandingPage = () => {
                 display: 'flex', 
                 flexWrap: 'wrap', 
                 gap: { xs: '0', sm: '2%' },
-                justifyContent: { xs: 'center', sm: 'flex-start' }
+                justifyContent: 'center',
+                mt: 4, // Increased top margin for more spacing
               }}>
                 {category.options.map((option, optionIndex) => (
                   <Box key={optionIndex} sx={{ 
-                    width: { xs: '100%', sm: '48%' }, 
-                    mb: 3,
-                    maxWidth: { xs: '400px', sm: 'none' }
+                    width: '160px', // Fixed width for circle
+                    height: '160px', // Fixed height for circle
+                    mb: 2,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}>
-                    <Card
-                      sx={{
-                        height: '300px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        transition: 'all 0.3s ease-in-out',
-                        border: `2px solid ${category.color}20`,
-                        '&:hover': {
-                          transform: option.available ? 'translateY(-4px)' : 'none',
-                          boxShadow: option.available ? 6 : 2,
-                          border: `2px solid ${category.color}`,
-                        },
-                        opacity: option.available ? 1 : 0.6,
-                        cursor: option.available ? 'pointer' : 'not-allowed',
-                      }}
-                    >
+                          <Card
+                            sx={{
+                              width: '160px', // Fixed width for circle
+                              height: '160px', // Fixed height for circle
+                              display: 'flex',
+                              flexDirection: 'column',
+                              transition: 'all 0.2s ease-out',
+                              background: 'rgba(0, 0, 0, 0.8)', // Dark background to match headers
+                              color: 'white',
+                              borderRadius: '12px', // Rounded corners
+                              border: '2px solid rgba(6, 182, 212, 0.8)', // Thicker teal border
+                              backdropFilter: 'blur(20px)',
+                              boxShadow: 'none', // Remove glow effect
+                              position: 'relative',
+                              '&::before': {
+                                content: '""',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                right: 0,
+                                bottom: 0,
+                                borderRadius: '12px',
+                                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%)', // Dark gradient
+                                pointerEvents: 'none',
+                              },
+                              '&:hover': {
+                                transform: option.available ? 'translateY(-2px)' : 'none',
+                                background: option.available ? 'rgba(0, 0, 0, 0.9)' : 'rgba(0, 0, 0, 0.8)',
+                                border: option.available ? '2px solid rgba(6, 182, 212, 1)' : '2px solid rgba(6, 182, 212, 0.8)', // Solid teal border
+                                boxShadow: 'none', // No glow effect
+                              },
+                              opacity: option.available ? 1 : 0.5,
+                              cursor: option.available ? 'pointer' : 'not-allowed',
+                            }}
+                          >
                       <CardActionArea
                         onClick={() => handleOptionClick(option)}
                         disabled={!option.available}
@@ -288,74 +375,178 @@ const LandingPage = () => {
                           alignItems: 'stretch',
                         }}
                       >
-                        <CardContent sx={{ 
-                          height: '100%',
-                          textAlign: 'center', 
-                          p: 3,
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'space-between',
-                        }}>
-                          <Box>
-                            {/* Icon */}
-                            <Typography
-                              variant="h2"
-                              sx={{
-                                mb: 2,
-                                fontSize: '2.5rem',
-                                opacity: option.available ? 1 : 0.5,
-                              }}
-                            >
-                              {option.icon}
-                            </Typography>
+                              <CardContent sx={{ 
+                                height: '100%',
+                                textAlign: 'center', 
+                                p: 1.5, // Compact padding
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                position: 'relative',
+                                zIndex: 1,
+                              }}>
+                                {/* Icon for Native Knee */}
+                                {option.title === 'Native Knee' && (
+                                  <Box sx={{ position: 'relative' }}>
+                                    <Box
+                                      component="img"
+                                      src={`/knee-icon.png?v=${Date.now()}`}
+                                      alt="Knee Icon"
+                                      onError={(e) => {
+                                        console.log('Knee icon failed to load:', e.target.src);
+                                      }}
+                                      onLoad={() => {
+                                        console.log('Knee icon loaded successfully');
+                                      }}
+                                      sx={{
+                                        width: '140px',
+                                        height: '120px',
+                                        objectFit: 'contain',
+                                        opacity: 0.9,
+                                        mb: 1,
+                                      }}
+                                    />
+                                    {/* Title at bottom */}
+                                    <Typography
+                                      variant="h6"
+                                      component="h3"
+                                      sx={{
+                                        position: 'absolute',
+                                        bottom: '2px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        fontWeight: 700,
+                                        color: '#FFFFFF',
+                                        fontSize: '0.875rem',
+                                        letterSpacing: '-0.01em',
+                                        textShadow: '0 0 4px rgba(0, 0, 0, 0.8)',
+                                        zIndex: 2,
+                                        width: '100%',
+                                        textAlign: 'center',
+                                      }}
+                                    >
+                                      {option.title}
+                                    </Typography>
+                                  </Box>
+                                )}
 
-                            {/* Title */}
-                            <Typography
-                              variant="h6"
-                              component="h3"
-                              gutterBottom
-                              sx={{
-                                fontWeight: 600,
-                                color: option.available ? 'primary.main' : 'text.secondary',
-                                mb: 2,
-                              }}
-                            >
-                              {option.title}
-                            </Typography>
+                                {/* Icon for Native Hip */}
+                                {option.title === 'Native Hip' && (
+                                  <Box sx={{ position: 'relative' }}>
+                                    <Box
+                                      component="img"
+                                      src={`/hip-icon.png?v=${Date.now()}`}
+                                      alt="Hip Icon"
+                                      onError={(e) => {
+                                        console.log('Hip icon failed to load:', e.target.src);
+                                      }}
+                                      onLoad={() => {
+                                        console.log('Hip icon loaded successfully');
+                                      }}
+                                      sx={{
+                                        width: '140px',
+                                        height: '120px',
+                                        objectFit: 'contain',
+                                        opacity: 0.9,
+                                        mb: 1,
+                                      }}
+                                    />
+                                    {/* Title at bottom */}
+                                    <Typography
+                                      variant="h6"
+                                      component="h3"
+                                      sx={{
+                                        position: 'absolute',
+                                        bottom: '2px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        fontWeight: 700,
+                                        color: '#FFFFFF',
+                                        fontSize: '0.875rem',
+                                        letterSpacing: '-0.01em',
+                                        textShadow: '0 0 4px rgba(0, 0, 0, 0.8)',
+                                        zIndex: 2,
+                                        width: '100%',
+                                        textAlign: 'center',
+                                      }}
+                                    >
+                                      {option.title}
+                                    </Typography>
+                                  </Box>
+                                )}
+                                
+                                {/* Icons for other cards */}
+                                {option.title !== 'Native Knee' && option.title !== 'Native Hip' && (
+                                  <Box sx={{ position: 'relative' }}>
+                                    {/* Hip-related cards */}
+                                    {(option.title.includes('Hip') || option.title.includes('THA')) && (
+                                      <Box
+                                        component="img"
+                                        src={`/hip-icon.png?v=${Date.now()}`}
+                                        alt="Hip Icon"
+                                        onError={(e) => {
+                                          console.log('Hip icon failed to load:', e.target.src);
+                                        }}
+                                        onLoad={() => {
+                                          console.log('Hip icon loaded successfully');
+                                        }}
+                                        sx={{
+                                          width: '140px',
+                                          height: '120px',
+                                          objectFit: 'contain',
+                                          opacity: 0.9,
+                                          mb: 1,
+                                        }}
+                                      />
+                                    )}
+                                    
+                                    {/* Knee-related cards */}
+                                    {(option.title.includes('Knee') || option.title.includes('TKA')) && (
+                                      <Box
+                                        component="img"
+                                        src={`/knee-icon.png?v=${Date.now()}`}
+                                        alt="Knee Icon"
+                                        onError={(e) => {
+                                          console.log('Knee icon failed to load:', e.target.src);
+                                        }}
+                                        onLoad={() => {
+                                          console.log('Knee icon loaded successfully');
+                                        }}
+                                        sx={{
+                                          width: '140px',
+                                          height: '120px',
+                                          objectFit: 'contain',
+                                          opacity: 0.9,
+                                          mb: 1,
+                                        }}
+                                      />
+                                    )}
+                                    
+                                    {/* Title at bottom */}
+                                    <Typography
+                                      variant="h6"
+                                      component="h3"
+                                      sx={{
+                                        position: 'absolute',
+                                        bottom: '2px',
+                                        left: '50%',
+                                        transform: 'translateX(-50%)',
+                                        fontWeight: 700,
+                                        color: '#FFFFFF',
+                                        fontSize: '0.875rem',
+                                        letterSpacing: '-0.01em',
+                                        textShadow: '0 0 4px rgba(0, 0, 0, 0.8)',
+                                        zIndex: 2,
+                                        width: '100%',
+                                        textAlign: 'center',
+                                      }}
+                                    >
+                                      {option.title}
+                                    </Typography>
+                                  </Box>
+                                )}
 
-                            {/* Description */}
-                            <Typography
-                              variant="body2"
-                              color="text.secondary"
-                              sx={{
-                                lineHeight: 1.5,
-                              }}
-                            >
-                              {option.description}
-                            </Typography>
-                          </Box>
-
-                          {/* Status Button */}
-                          <Button
-                            variant={option.available ? 'contained' : 'outlined'}
-                            color={option.available ? 'primary' : 'inherit'}
-                            size="medium"
-                            disabled={!option.available}
-                            sx={{
-                              width: '100%',
-                              py: 1,
-                              fontSize: '1rem',
-                              fontWeight: 600,
-                              mt: 2,
-                              backgroundColor: option.available ? category.color : 'transparent',
-                              '&:hover': {
-                                backgroundColor: option.available ? category.color : 'transparent',
-                                opacity: 0.9,
-                              },
-                            }}
-                          >
-                            {option.available ? 'Start Form' : 'Coming Soon'}
-                          </Button>
                         </CardContent>
                       </CardActionArea>
                     </Card>

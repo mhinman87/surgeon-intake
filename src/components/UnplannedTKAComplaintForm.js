@@ -43,10 +43,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -83,10 +83,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -173,10 +173,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -251,10 +251,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -344,10 +344,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -385,10 +385,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -443,10 +443,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',
@@ -483,10 +483,10 @@ export default function UnplannedTKAComplaintForm() {
                   borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '& .MuiSelect-select': {
                   padding: '16.5px 14px',

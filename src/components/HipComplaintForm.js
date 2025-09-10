@@ -19,8 +19,25 @@ const HipComplaintForm = () => {
   const lumbarSpineHistory = watch('lumbarSpineHistory');
 
   return (
-    <Box>
-      <Typography variant="h6" gutterBottom color="primary" sx={{ mb: 3 }}>
+    <Box sx={{
+      background: 'rgba(255, 255, 255, 0.02)', // Glass tint
+      borderRadius: '12px', // Corner radius
+      border: '1px solid rgba(255, 255, 255, 0.06)', // Hairline
+      backdropFilter: 'blur(20px)',
+      p: 3, // Compact padding
+      boxShadow: '0 2px 16px rgba(0, 0, 0, 0.2)', // Shadow soft
+    }}>
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        sx={{ 
+          mb: 3,
+          color: '#06B6D4', // Accent primary
+          fontWeight: 700, // Display weight
+          fontSize: '1.125rem',
+          letterSpacing: '-0.01em',
+        }}
+      >
         Hip Complaint Assessment
       </Typography>
 
@@ -28,7 +45,20 @@ const HipComplaintForm = () => {
         {/* Hip Side */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hipSide}>
-            <InputLabel id="hip-side-label" shrink>Hip Side</InputLabel>
+            <InputLabel 
+              id="hip-side-label" 
+              shrink
+              sx={{
+                color: '#9CA3AF', // Text secondary
+                fontWeight: 500, // Body weight
+                fontSize: '0.875rem',
+                '&.Mui-focused': {
+                  color: '#06B6D4', // Accent primary
+                },
+              }}
+            >
+              Hip Side
+            </InputLabel>
             <Select
               {...register('hipSide')}
               labelId="hip-side-label"
@@ -37,7 +67,7 @@ const HipComplaintForm = () => {
               notched
               renderValue={(selected) => {
                 if (!selected) {
-                  return <em style={{ color: '#666' }}>Select hip side</em>;
+                  return <em style={{ color: '#6B7280' }}>Select hip side</em>;
                 }
                 return selected.charAt(0).toUpperCase() + selected.slice(1);
               }}
@@ -45,22 +75,27 @@ const HipComplaintForm = () => {
                 '& .MuiSelect-select': {
                   padding: '16px 14px 8px 14px',
                   minHeight: 'auto',
+                  color: '#FFFFFF', // Text primary
+                  backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: 'rgba(255, 255, 255, 0.1)', // Hairline
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
+                  borderColor: 'rgba(255, 255, 255, 0.15)',
+                  borderWidth: 1,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4', // Accent primary
                   borderWidth: 2,
+                },
+                '& .MuiSvgIcon-root': {
+                  color: '#9CA3AF', // Text secondary
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -71,7 +106,16 @@ const HipComplaintForm = () => {
             </Select>
           </FormControl>
           {errors.hipSide && (
-            <Typography variant="caption" color="error">
+            <Typography 
+              variant="caption" 
+              sx={{
+                color: '#EF4444', // Error color
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                mt: 0.5,
+                display: 'block',
+              }}
+            >
               {errors.hipSide.message}
             </Typography>
           )}
@@ -100,20 +144,20 @@ const HipComplaintForm = () => {
                     minHeight: 'auto',
                   },
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                   },
                   '&:hover .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                     borderWidth: 2,
                   },
                   '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                    borderColor: '#1976d2',
+                    borderColor: '#06B6D4',
                     borderWidth: 2,
                   },
                   '& .MuiInputLabel-root': {
                     transform: 'translate(14px, -9px) scale(0.75)',
                     '&.Mui-focused': {
-                      color: '#1976d2',
+                      color: '#06B6D4',
                     }
                   }
                 }}
@@ -146,7 +190,20 @@ const HipComplaintForm = () => {
         {/* Injury History */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.injuryHistory}>
-            <InputLabel id="injury-history-label" shrink>Injury History</InputLabel>
+            <InputLabel 
+              id="injury-history-label" 
+              shrink
+              sx={{
+                color: '#9CA3AF', // Text secondary
+                fontWeight: 500, // Body weight
+                fontSize: '0.875rem',
+                '&.Mui-focused': {
+                  color: '#06B6D4', // Accent primary
+                },
+              }}
+            >
+              Injury History
+            </InputLabel>
             <Select
               {...register('injuryHistory')}
               labelId="injury-history-label"
@@ -155,32 +212,9 @@ const HipComplaintForm = () => {
               notched
               renderValue={(selected) => {
                 if (!selected) {
-                  return <em style={{ color: '#666' }}>Select injury history</em>;
+                  return <em style={{ color: '#6B7280' }}>Select injury history</em>;
                 }
                 return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
-                '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
-                },
-                '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                },
-                '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
-                  borderWidth: 2,
-                },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#1976d2',
-                  }
-                }
               }}
             >
               <MenuItem value="negative">Negative</MenuItem>
@@ -188,7 +222,16 @@ const HipComplaintForm = () => {
             </Select>
           </FormControl>
           {errors.injuryHistory && (
-            <Typography variant="caption" color="error">
+            <Typography 
+              variant="caption" 
+              sx={{
+                color: '#EF4444', // Error color
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                mt: 0.5,
+                display: 'block',
+              }}
+            >
               {errors.injuryHistory.message}
             </Typography>
           )}
@@ -242,20 +285,20 @@ const HipComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -295,20 +338,20 @@ const HipComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -335,7 +378,7 @@ const HipComplaintForm = () => {
             step={1}
             marks
             valueLabelDisplay="auto"
-            sx={{ color: '#1976d2' }}
+            sx={{ color: '#06B6D4' }}
           />
           {errors.worstPainLevel && (
             <Typography variant="caption" color="error">
@@ -353,7 +396,7 @@ const HipComplaintForm = () => {
             step={1}
             marks
             valueLabelDisplay="auto"
-            sx={{ color: '#1976d2' }}
+            sx={{ color: '#06B6D4' }}
           />
           {errors.bestPainLevel && (
             <Typography variant="caption" color="error">
@@ -454,20 +497,20 @@ const HipComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -508,20 +551,20 @@ const HipComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -575,20 +618,20 @@ const HipComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}

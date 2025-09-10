@@ -442,17 +442,50 @@ export default function PatientIntakeForm() {
 
   return (
     <FormProvider {...methods}>
-      <Box sx={{ width: '100%' }}>
-        <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
+      <Box sx={{ 
+        width: '100%',
+      }}>
+        <Stepper 
+          activeStep={activeStep} 
+          sx={{ 
+            mb: 3, // 8-point scale spacing
+            '& .MuiStepLabel-root': {
+              '& .MuiStepLabel-label': {
+                color: '#9CA3AF', // Text secondary
+                fontWeight: 500, // Body weight
+                fontSize: '0.875rem',
+                '&.Mui-active': {
+                  color: '#06B6D4', // Accent primary
+                  fontWeight: 600,
+                },
+                '&.Mui-completed': {
+                  color: '#8B5CF6', // Accent secondary
+                },
+              },
+            },
+            '& .MuiStepConnector-line': {
+              borderColor: 'rgba(255, 255, 255, 0.1)', // Hairline
+            },
+            '& .MuiStepConnector-root.Mui-active .MuiStepConnector-line': {
+              borderColor: '#06B6D4', // Accent primary
+            },
+            '& .MuiStepConnector-root.Mui-completed .MuiStepConnector-line': {
+              borderColor: '#8B5CF6', // Accent secondary
+            },
+          }}
+        >
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel 
                 onClick={() => setActiveStep(index)}
                 sx={{ 
                   cursor: 'pointer',
+                  borderRadius: '8px', // Corner radius
+                  p: 1,
+                  transition: 'all 0.2s ease-out',
                   '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                    borderRadius: 1
+                    backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
+                    border: '1px solid rgba(255, 255, 255, 0.06)', // Hairline
                   }
                 }}
               >
@@ -467,7 +500,24 @@ export default function PatientIntakeForm() {
           <Button
             variant="outlined"
             onClick={() => navigate('/')}
-            sx={{ mb: 2 }}
+            sx={{ 
+              mb: 2,
+              borderRadius: '8px', // Corner radius
+              border: '1px solid rgba(255, 255, 255, 0.1)', // Hairline
+              color: '#FFFFFF', // Text primary
+              backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
+              backdropFilter: 'blur(20px)',
+              fontWeight: 500, // Body weight
+              fontSize: '0.875rem',
+              py: 1,
+              px: 2,
+              transition: 'all 0.2s ease-out',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                transform: 'translateY(-1px)',
+              },
+            }}
           >
             ← Back to Surgical Options
           </Button>
@@ -482,62 +532,122 @@ export default function PatientIntakeForm() {
             disabled={activeStep === 0}
             onClick={handleBack}
             variant="outlined"
-            sx={{ mr: 1 }}
+            sx={{ 
+              mr: 1,
+              borderRadius: '8px', // Corner radius
+              border: '1px solid rgba(255, 255, 255, 0.1)', // Hairline
+              color: '#FFFFFF', // Text primary
+              backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
+              backdropFilter: 'blur(20px)',
+              fontWeight: 500, // Body weight
+              fontSize: '0.875rem',
+              py: 1,
+              px: 2,
+              transition: 'all 0.2s ease-out',
+              '&:hover': {
+                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                transform: 'translateY(-1px)',
+              },
+              '&:disabled': {
+                color: '#6B7280',
+                borderColor: 'rgba(255, 255, 255, 0.06)',
+                backgroundColor: 'rgba(255, 255, 255, 0.01)',
+              },
+            }}
           >
             ← Previous
           </Button>
           
           <Box sx={{ display: 'flex', gap: 2 }}>
             {activeStep === steps.length - 1 ? (
-              <Button variant="contained" onClick={async () => {
-                console.log('=== GENERATE REPORT BUTTON CLICKED ===');
-                const formData = methods.getValues();
-                console.log('Current form data:', formData);
-                
-                try {
-                  // Generate and copy text to clipboard (bypass validation)
-                  const reportText = generatePatientReportText(formData, 'knee');
-                  console.log('Generated report text:', reportText);
-                  console.log('Report text length:', reportText.length);
+              <Button 
+                variant="contained" 
+                onClick={async () => {
+                  console.log('=== GENERATE REPORT BUTTON CLICKED ===');
+                  const formData = methods.getValues();
+                  console.log('Current form data:', formData);
                   
-                  if (!reportText || reportText.length === 0) {
-                    alert('Error: No text was generated. Check console for details.');
-                    return;
-                  }
-                  
-                  const copySuccess = await copyToClipboard(reportText);
-                  console.log('Copy success:', copySuccess);
-                  
-                  if (copySuccess) {
-                    alert('Report text copied to clipboard! PDF is also being generated.');
-                  } else {
-                    alert('PDF is being generated, but failed to copy text to clipboard. Check console for details.');
-                    // Show the text in an alert as a fallback
-                    alert('Here is the report text (copy manually):\n\n' + reportText.substring(0, 500) + '...');
+                  try {
+                    // Generate and copy text to clipboard (bypass validation)
+                    const reportText = generatePatientReportText(formData, 'knee');
+                    console.log('Generated report text:', reportText);
+                    console.log('Report text length:', reportText.length);
                     
-                    // Also try a simple test
-                    try {
-                      const testSuccess = await copyToClipboard('TEST CLIPBOARD');
-                      alert('Simple clipboard test: ' + (testSuccess ? 'SUCCESS' : 'FAILED'));
-                    } catch (e) {
-                      alert('Simple clipboard test: ERROR - ' + e.message);
+                    if (!reportText || reportText.length === 0) {
+                      alert('Error: No text was generated. Check console for details.');
+                      return;
                     }
+                    
+                    const copySuccess = await copyToClipboard(reportText);
+                    console.log('Copy success:', copySuccess);
+                    
+                    if (copySuccess) {
+                      alert('Report text copied to clipboard! PDF is also being generated.');
+                    } else {
+                      alert('PDF is being generated, but failed to copy text to clipboard. Check console for details.');
+                      // Show the text in an alert as a fallback
+                      alert('Here is the report text (copy manually):\n\n' + reportText.substring(0, 500) + '...');
+                      
+                      // Also try a simple test
+                      try {
+                        const testSuccess = await copyToClipboard('TEST CLIPBOARD');
+                        alert('Simple clipboard test: ' + (testSuccess ? 'SUCCESS' : 'FAILED'));
+                      } catch (e) {
+                        alert('Simple clipboard test: ERROR - ' + e.message);
+                      }
+                    }
+                    
+                    // Also generate PDF
+                    generatePatientReportPDF(formData);
+                    console.log('PDF generation completed');
+                    
+                    setShowSuccess(true);
+                  } catch (error) {
+                    console.error('Error generating report:', error);
+                    alert('Error generating report: ' + error.message);
                   }
-                  
-                  // Also generate PDF
-                  generatePatientReportPDF(formData);
-                  console.log('PDF generation completed');
-                  
-                  setShowSuccess(true);
-                } catch (error) {
-                  console.error('Error generating report:', error);
-                  alert('Error generating report: ' + error.message);
-                }
-              }}>
+                }}
+                sx={{
+                  borderRadius: '8px', // Corner radius
+                  background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', // Accent primary
+                  color: 'text.primary',
+                  fontWeight: 600,
+                  fontSize: '0.875rem',
+                  py: 1,
+                  px: 3,
+                  boxShadow: '0 0 12px rgba(99, 102, 241, 0.2)', // Accent glow
+                  transition: 'all 0.2s ease-out',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #5B5CF6 0%, #7C3AED 100%)',
+                    transform: 'translateY(-1px)',
+                    boxShadow: '0 0 16px rgba(99, 102, 241, 0.3)', // Accent glow intensity
+                  },
+                }}
+              >
                 Generate Report
               </Button>
             ) : (
-              <Button variant="contained" onClick={handleNext}>
+              <Button 
+                variant="contained" 
+                onClick={handleNext}
+                sx={{
+                  borderRadius: '8px', // Corner radius
+                  background: 'linear-gradient(135deg, #06B6D4 0%, #8B5CF6 100%)', // Accent primary
+                  color: 'text.primary',
+                  fontWeight: 600,
+                  fontSize: '0.875rem',
+                  py: 1,
+                  px: 3,
+                  boxShadow: '0 0 12px rgba(99, 102, 241, 0.2)', // Accent glow
+                  transition: 'all 0.2s ease-out',
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #5B5CF6 0%, #7C3AED 100%)',
+                    transform: 'translateY(-1px)',
+                    boxShadow: '0 0 16px rgba(99, 102, 241, 0.3)', // Accent glow intensity
+                  },
+                }}
+              >
                 Next →
               </Button>
             )}
@@ -546,7 +656,24 @@ export default function PatientIntakeForm() {
               variant="outlined" 
               color="error" 
               onClick={handleReset}
-              sx={{ ml: 'auto' }}
+              sx={{ 
+                ml: 'auto',
+                borderRadius: '8px', // Corner radius
+                border: '1px solid rgba(239, 68, 68, 0.3)', // Error hairline
+                color: '#EF4444', // Error color
+                backgroundColor: 'rgba(239, 68, 68, 0.05)', // Error glass tint
+                backdropFilter: 'blur(20px)',
+                fontWeight: 500, // Body weight
+                fontSize: '0.875rem',
+                py: 1,
+                px: 2,
+                transition: 'all 0.2s ease-out',
+                '&:hover': {
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  border: '1px solid rgba(239, 68, 68, 0.5)',
+                  transform: 'translateY(-1px)',
+                },
+              }}
             >
               Reset Form
             </Button>
@@ -557,8 +684,30 @@ export default function PatientIntakeForm() {
           open={showSuccess}
           autoHideDuration={6000}
           onClose={() => setShowSuccess(false)}
+          sx={{
+            '& .MuiSnackbarContent-root': {
+              backgroundColor: 'rgba(34, 197, 94, 0.1)', // Success glass tint
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(34, 197, 94, 0.2)', // Success hairline
+              borderRadius: '12px', // Corner radius
+              color: '#FFFFFF', // Text primary
+            },
+          }}
         >
-          <Alert onClose={() => setShowSuccess(false)} severity="success">
+          <Alert 
+            onClose={() => setShowSuccess(false)} 
+            severity="success"
+            sx={{
+              backgroundColor: 'transparent',
+              color: '#FFFFFF', // Text primary
+              '& .MuiAlert-icon': {
+                color: '#22C55E', // Success color
+              },
+              '& .MuiAlert-action': {
+                color: '#FFFFFF', // Text primary
+              },
+            }}
+          >
             Patient intake form submitted successfully! PDF report generated.
           </Alert>
         </Snackbar>

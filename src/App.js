@@ -23,24 +23,33 @@ import FollowupPainfulTHAIntakeForm from './components/FollowupPainfulTHAIntakeF
 
 const theme = createTheme({
   palette: {
+    mode: 'dark',
     primary: {
-      main: '#1976d2',
-      light: '#42a5f5',
-      dark: '#1565c0',
+      main: '#06B6D4', // Teal primary to match landing page
+      light: '#06B6D4', // Teal primary
+      dark: '#0891B2', // Darker teal
     },
     secondary: {
-      main: '#dc004e',
+      main: '#06B6D4', // Teal primary
     },
     background: {
-      default: '#f8f9fa',
+      default: '#0A0A0B', // Surface color from schema
+      paper: 'rgba(255, 255, 255, 0.02)', // Glass tint
+    },
+    text: {
+      primary: '#FFFFFF', // Text primary
+      secondary: '#9CA3AF', // Text secondary
     },
   },
   typography: {
+    fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
     h4: {
-      fontWeight: 600,
+      fontWeight: 700, // Display weight
+      letterSpacing: '-0.02em',
     },
     h6: {
-      fontWeight: 600,
+      fontWeight: 700, // Display weight
+      letterSpacing: '-0.01em',
     },
   },
   components: {
@@ -49,24 +58,30 @@ const theme = createTheme({
         select: {
           padding: '12px 14px',
           minHeight: 'auto',
+          color: '#FFFFFF', // Text primary
+          backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
           '&.MuiSelect-select': {
             display: 'flex',
             alignItems: 'center',
           },
         },
         icon: {
-          color: '#1976d2',
+          color: '#9CA3AF', // Text secondary
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
+          backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'rgba(255, 255, 255, 0.1)', // Hairline
+          },
           '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1976d2',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#1976d2',
+            borderColor: '#06B6D4', // Teal primary
             borderWidth: 2,
           },
         },
@@ -76,16 +91,30 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           padding: '12px 16px',
+          color: '#FFFFFF', // Text primary
+          backgroundColor: 'rgba(10, 10, 11, 0.95)', // Dark background with high opacity
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)', // Hairline
           '&:hover': {
-            backgroundColor: '#e3f2fd',
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
           },
-          '&.Mui-selected': {
-            backgroundColor: '#1976d2',
-            color: 'white',
-            '&:hover': {
-              backgroundColor: '#1565c0',
+            '&.Mui-selected': {
+              backgroundColor: 'rgba(6, 182, 212, 0.2)', // Teal primary tint
+              '&:hover': {
+                backgroundColor: 'rgba(6, 182, 212, 0.3)',
+              },
             },
-          },
+        },
+      },
+    },
+    MuiMenu: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: 'rgba(10, 10, 11, 0.95)', // Dark background with high opacity
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)', // Hairline
+          borderRadius: '12px', // Corner radius
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.4)', // Shadow strong
         },
       },
     },
@@ -93,13 +122,33 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
+            backgroundColor: 'rgba(255, 255, 255, 0.02)', // Glass tint
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'rgba(255, 255, 255, 0.1)', // Hairline
+            },
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#1976d2',
+              borderColor: 'rgba(255, 255, 255, 0.15)',
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#1976d2',
+              borderColor: '#06B6D4', // Teal primary
               borderWidth: 2,
             },
+          },
+          '& .MuiInputLabel-root': {
+            color: '#9CA3AF', // Text secondary
+            '&.Mui-focused': {
+              color: '#06B6D4', // Teal primary
+            },
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: '#9CA3AF', // Text secondary
+          '&.Mui-focused': {
+            color: '#06B6D4', // Teal primary
           },
         },
       },
@@ -115,185 +164,409 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/knee-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  New Native Knee - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <PatientIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                New Native Knee              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <PatientIntakeForm />
             </Container>
           } />
           <Route path="/hip-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  New Native Hip - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <HipIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                New Native Hip              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <HipIntakeForm />
             </Container>
           } />
           <Route path="/revision-knee-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  New Evaluate Painful TKA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <TKAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                New Evaluate Painful TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <TKAIntakeForm />
             </Container>
           } />
           <Route path="/revision-hip-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  New Evaluate Painful THA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <THAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                New Evaluate Painful THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <THAIntakeForm />
             </Container>
           } />
           <Route path="/followup-knee-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Follow-up Native Knee - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <FollowupKneeIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Follow-up Native Knee              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <FollowupKneeIntakeForm />
             </Container>
           } />
           <Route path="/followup-hip-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Follow-up Native Hip - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <FollowupHipIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Follow-up Native Hip              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <FollowupHipIntakeForm />
             </Container>
           } />
           <Route path="/followup-painful-tka-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Follow-up Painful TKA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <FollowupPainfulTKAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Follow-up Painful TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <FollowupPainfulTKAIntakeForm />
             </Container>
           } />
           <Route path="/followup-painful-tha-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Follow-up Painful THA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <FollowupPainfulTHAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Follow-up Painful THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <FollowupPainfulTHAIntakeForm />
             </Container>
           } />
           <Route path="/postop-tka-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Post-op TKA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <PostopTKAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Post-op TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <PostopTKAIntakeForm />
             </Container>
           } />
           <Route path="/postop-tha-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Post-op THA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <PostopTHAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Post-op THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <PostopTHAIntakeForm />
             </Container>
           } />
           <Route path="/unplanned-tha-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Unplanned &lt;1-year post-op THA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <UnplannedTHAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Unplanned &lt;1-year post-op THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <UnplannedTHAIntakeForm />
             </Container>
           } />
           <Route path="/unplanned-tka-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  Unplanned &lt;1-year post-op TKA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <UnplannedTKAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Unplanned &lt;1-year post-op TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <UnplannedTKAIntakeForm />
             </Container>
           } />
           <Route path="/one-year-tha-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  1-year THA / routine long term recheck THA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <OneYearTHAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                1-year THA / routine long term recheck THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <OneYearTHAIntakeForm />
             </Container>
           } />
           <Route path="/one-year-tka-intake" element={
-            <Container maxWidth="md" sx={{ py: 4 }}>
-              <Paper elevation={3} sx={{ p: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
-                  1-year TKA / routine long term recheck TKA - Patient Intake Form
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="text.secondary" sx={{ mb: 4 }}>
-                  Comprehensive Orthopedic Surgery Patient Assessment
-                </Typography>
-                <OneYearTKAIntakeForm />
-              </Paper>
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                1-year TKA / routine long term recheck TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <OneYearTKAIntakeForm />
             </Container>
           } />
         </Routes>

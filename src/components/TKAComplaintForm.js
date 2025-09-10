@@ -48,20 +48,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -135,20 +135,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -202,20 +202,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -269,20 +269,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -336,20 +336,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -387,20 +387,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -534,20 +534,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -587,20 +587,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -627,7 +627,7 @@ const TKAComplaintForm = () => {
             step={1}
             marks
             valueLabelDisplay="auto"
-            sx={{ color: '#1976d2' }}
+            sx={{ color: '#06B6D4' }}
           />
           {errors.worstSymptomLevel && (
             <Typography variant="caption" color="error">
@@ -645,7 +645,7 @@ const TKAComplaintForm = () => {
             step={1}
             marks
             valueLabelDisplay="auto"
-            sx={{ color: '#1976d2' }}
+            sx={{ color: '#06B6D4' }}
           />
           {errors.bestSymptomLevel && (
             <Typography variant="caption" color="error">
@@ -690,20 +690,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
@@ -744,20 +744,20 @@ const TKAComplaintForm = () => {
                   minHeight: 'auto',
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#1976d2',
+                  borderColor: '#06B6D4',
                   borderWidth: 2,
                 },
                 '& .MuiInputLabel-root': {
                   transform: 'translate(14px, -9px) scale(0.75)',
                   '&.Mui-focused': {
-                    color: '#1976d2',
+                    color: '#06B6D4',
                   }
                 }
               }}
