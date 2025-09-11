@@ -25,7 +25,7 @@ const TKAComplaintForm = () => {
         TKA Evaluation Assessment
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ '& .MuiGrid-item': { width: '100%', maxWidth: '100%' } }}>
         {/* Knee Side */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>

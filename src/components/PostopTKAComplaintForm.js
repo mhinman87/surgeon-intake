@@ -22,7 +22,7 @@ export default function PostopTKAComplaintForm() {
         Post-operative Information
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} sx={{ '& .MuiGrid-item': { width: '100%', maxWidth: '100%' } }}>
         {/* Knee Side */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>
@@ -542,7 +542,7 @@ export default function PostopTKAComplaintForm() {
         )}
 
         {/* Knee ROM Section */}
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <Typography variant="h6" sx={{ mt: 3, mb: 2, color: 'primary.main' }}>
             Knee ROM at Last Therapy Visit
           </Typography>
