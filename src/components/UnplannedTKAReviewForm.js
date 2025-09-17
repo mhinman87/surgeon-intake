@@ -218,6 +218,13 @@ export default function UnplannedTKAReviewForm() {
               </Typography>
             </Box>
 
+            {/* Preferred Name */}
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: 500 }}>
+                Preferred name: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.preferredName)}</span>
+              </Typography>
+            </Box>
+
             {/* Residence */}
             <Box>
               <Typography variant="body1" sx={{ fontWeight: 500 }}>

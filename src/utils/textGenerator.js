@@ -524,6 +524,7 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     medicalHistory += `Referred by: ${formatValue(formData.referredBy)}\n`;
     
     // Additional fields
+    medicalHistory += `Preferred name: ${formatValue(formData.preferredName)}\n`;
     medicalHistory += `Residence: ${formatValue(formData.residence)}\n`;
     medicalHistory += `Stairs: ${formData.hasStairs === 'yes' ? 'Yes' : formData.hasStairs === 'no' ? 'No' : '[not specified]'}`;
     if (formData.hasStairs === 'yes') {
@@ -532,6 +533,7 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     medicalHistory += '\n';
     medicalHistory += `Support: ${formatValue(formData.support)}\n`;
     medicalHistory += `Ambulatory capacity: ${formatValue(formData.ambulatoryCapacity)}\n`;
+    medicalHistory += `Occupation: ${formatValue(formData.occupation)}\n`;
     
     return medicalHistory;
   };
@@ -548,7 +550,7 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
   console.log('Medical history text length:', medicalHistoryText ? medicalHistoryText.length : 0);
   
   if (medicalHistoryText) {
-    fullText += `\n\nMEDICAL HISTORY:\n${medicalHistoryText}`;
+    fullText += medicalHistoryText;
   }
   
   console.log('Final full text length:', fullText.length);

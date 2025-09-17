@@ -244,6 +244,53 @@ const HipReviewForm = () => {
               Referred by: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.referredBy)}</span>
             </Typography>
           </Box>
+
+          {/* Preferred Name */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Preferred name: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.preferredName)}</span>
+            </Typography>
+          </Box>
+
+          {/* Residence */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Residence: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.residence)}</span>
+            </Typography>
+          </Box>
+
+          {/* Stairs */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Stairs: <span style={{ fontWeight: 'normal' }}>{formData.hasStairs === 'yes' ? 'Yes' : formData.hasStairs === 'no' ? 'No' : '[not specified]'}</span>
+              {formData.hasStairs === 'yes' && (
+                <span>
+                  , count - <span style={{ fontWeight: 'normal' }}>{formatValue(formData.stairCount)}</span>
+                </span>
+              )}
+            </Typography>
+          </Box>
+
+          {/* Support */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Support: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.support)}</span>
+            </Typography>
+          </Box>
+
+          {/* Ambulatory Capacity */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Ambulatory capacity: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.ambulatoryCapacity)}</span>
+            </Typography>
+          </Box>
+
+          {/* Occupation */}
+          <Box>
+            <Typography variant="body1" sx={{ fontWeight: 500 }}>
+              Occupation: <span style={{ fontWeight: 'normal' }}>{formatValue(formData.occupation)}</span>
+            </Typography>
+          </Box>
         </Box>
         </Paper>
       )}
