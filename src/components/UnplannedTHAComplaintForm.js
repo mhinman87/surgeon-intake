@@ -34,6 +34,7 @@ export default function UnplannedTHAComplaintForm() {
               labelId="hip-side-label"
               id="hipSide"
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               displayEmpty
               notched
               label="Hip Side"
@@ -74,6 +75,7 @@ export default function UnplannedTHAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -164,6 +166,7 @@ export default function UnplannedTHAComplaintForm() {
               labelId="injury-history-label"
               id="injuryHistory"
               {...register('injuryHistory')}
+              value={watch('injuryHistory') || ''}
               displayEmpty
               notched
               label="Injury History"
@@ -242,6 +245,7 @@ export default function UnplannedTHAComplaintForm() {
               labelId="relief-success-label"
               id="reliefSuccess"
               {...register('reliefSuccess')}
+              value={watch('reliefSuccess') || ''}
               displayEmpty
               notched
               label="Relief Success Level"

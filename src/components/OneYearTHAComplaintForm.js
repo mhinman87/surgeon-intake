@@ -33,6 +33,7 @@ export default function OneYearTHAComplaintForm() {
               labelId="hip-side-label"
               id="hipSide"
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               displayEmpty
               notched
               label="Hip Side"
@@ -73,6 +74,7 @@ export default function OneYearTHAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -179,6 +181,7 @@ export default function OneYearTHAComplaintForm() {
               labelId="full-recovery-label"
               id="fullRecovery"
               {...register('fullRecovery')}
+              value={watch('fullRecovery') || ''}
               displayEmpty
               notched
               label="Full Recovery Status"
@@ -440,6 +443,7 @@ export default function OneYearTHAComplaintForm() {
               labelId="has-questions-label"
               id="hasQuestions"
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               displayEmpty
               notched
               label="Questions/Concerns"

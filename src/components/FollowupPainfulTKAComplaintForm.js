@@ -29,6 +29,7 @@ export default function FollowupPainfulTKAComplaintForm() {
             <InputLabel id="knee-side-label" shrink={true}>Knee Side</InputLabel>
             <Select
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               labelId="knee-side-label"
               label="Knee Side"
               displayEmpty
@@ -98,6 +99,7 @@ export default function FollowupPainfulTKAComplaintForm() {
             <InputLabel id="treatment-plan-label" shrink={true}>Treatment Plan</InputLabel>
             <Select
               {...register('treatmentPlan')}
+              value={watch('treatmentPlan') || ''}
               labelId="treatment-plan-label"
               label="Treatment Plan"
               displayEmpty
@@ -189,6 +191,7 @@ export default function FollowupPainfulTKAComplaintForm() {
             <InputLabel id="symptoms-status-label" shrink={true}>Symptoms Status</InputLabel>
             <Select
               {...register('symptomsStatus')}
+              value={watch('symptomsStatus') || ''}
               labelId="symptoms-status-label"
               label="Symptoms Status"
               displayEmpty
@@ -241,6 +244,7 @@ export default function FollowupPainfulTKAComplaintForm() {
             <InputLabel id="has-questions-label" shrink={true}>Questions/Concerns</InputLabel>
             <Select
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               labelId="has-questions-label"
               label="Questions/Concerns Status"
               displayEmpty

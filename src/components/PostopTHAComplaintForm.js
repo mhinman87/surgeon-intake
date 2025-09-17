@@ -33,6 +33,7 @@ export default function PostopTHAComplaintForm() {
               labelId="hip-side-label"
               id="hipSide"
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               displayEmpty
               notched
               label="Hip Side"
@@ -73,6 +74,7 @@ export default function PostopTHAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -163,6 +165,7 @@ export default function PostopTHAComplaintForm() {
               labelId="progress-level-label"
               id="progressLevel"
               {...register('progressLevel')}
+              value={watch('progressLevel') || ''}
               displayEmpty
               notched
               label="Progress Level"
@@ -310,6 +313,7 @@ export default function PostopTHAComplaintForm() {
               labelId="ambulation-status-label"
               id="ambulationStatus"
               {...register('ambulationStatus')}
+              value={watch('ambulationStatus') || ''}
               displayEmpty
               notched
               label="Ambulation Status"

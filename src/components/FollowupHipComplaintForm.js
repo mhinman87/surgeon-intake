@@ -33,6 +33,7 @@ export default function FollowupHipComplaintForm() {
               labelId="hip-side-label"
               id="hipSide"
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               displayEmpty
               notched
               label="Hip Side"
@@ -92,6 +93,7 @@ export default function FollowupHipComplaintForm() {
               labelId="treatment-plan-label"
               id="treatmentPlan"
               {...register('treatmentPlan')}
+              value={watch('treatmentPlan') || ''}
               displayEmpty
               notched
               label="Treatment Plan"
@@ -154,6 +156,7 @@ export default function FollowupHipComplaintForm() {
               labelId="symptoms-status-label"
               id="symptomsStatus"
               {...register('symptomsStatus')}
+              value={watch('symptomsStatus') || ''}
               displayEmpty
               notched
               label="Symptoms Status"
@@ -253,6 +256,7 @@ export default function FollowupHipComplaintForm() {
               labelId="has-questions-label"
               id="hasQuestions"
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               displayEmpty
               notched
               label="Questions/Concerns"

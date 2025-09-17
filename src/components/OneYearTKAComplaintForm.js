@@ -33,6 +33,7 @@ export default function OneYearTKAComplaintForm() {
               labelId="knee-side-label"
               id="kneeSide"
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               displayEmpty
               notched
               label="Knee Side"
@@ -73,6 +74,7 @@ export default function OneYearTKAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -179,6 +181,7 @@ export default function OneYearTKAComplaintForm() {
               labelId="full-recovery-label"
               id="fullRecovery"
               {...register('fullRecovery')}
+              value={watch('fullRecovery') || ''}
               displayEmpty
               notched
               label="Full Recovery Status"
@@ -440,6 +443,7 @@ export default function OneYearTKAComplaintForm() {
               labelId="has-questions-label"
               id="hasQuestions"
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               displayEmpty
               notched
               label="Questions/Concerns"

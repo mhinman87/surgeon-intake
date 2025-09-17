@@ -33,6 +33,7 @@ export default function FollowupKneeComplaintForm() {
               labelId="knee-side-label"
               id="kneeSide"
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               displayEmpty
               notched
               label="Knee Side"
@@ -92,6 +93,7 @@ export default function FollowupKneeComplaintForm() {
               labelId="treatment-plan-label"
               id="treatmentPlan"
               {...register('treatmentPlan')}
+              value={watch('treatmentPlan') || ''}
               displayEmpty
               notched
               label="Treatment Plan"
@@ -154,6 +156,7 @@ export default function FollowupKneeComplaintForm() {
               labelId="symptoms-status-label"
               id="symptomsStatus"
               {...register('symptomsStatus')}
+              value={watch('symptomsStatus') || ''}
               displayEmpty
               notched
               label="Symptoms Status"
@@ -213,6 +216,7 @@ export default function FollowupKneeComplaintForm() {
               labelId="treatment-consideration-label"
               id="treatmentConsideration"
               {...register('treatmentConsideration')}
+              value={watch('treatmentConsideration') || ''}
               displayEmpty
               notched
               label="Treatment Consideration"
@@ -253,6 +257,7 @@ export default function FollowupKneeComplaintForm() {
               labelId="has-questions-label"
               id="hasQuestions"
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               displayEmpty
               notched
               label="Questions/Concerns"

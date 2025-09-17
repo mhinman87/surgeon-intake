@@ -20,6 +20,8 @@ import OneYearTHAIntakeForm from './components/OneYearTHAIntakeForm';
 import OneYearTKAIntakeForm from './components/OneYearTKAIntakeForm';
 import FollowupPainfulTKAIntakeForm from './components/FollowupPainfulTKAIntakeForm';
 import FollowupPainfulTHAIntakeForm from './components/FollowupPainfulTHAIntakeForm';
+import PreOpTKAIntakeForm from './components/PreOpTKAIntakeForm';
+import PreOpTHAIntakeForm from './components/PreOpTHAIntakeForm';
 
 const theme = createTheme({
   palette: {
@@ -567,6 +569,64 @@ function App() {
                 Comprehensive Orthopedic Surgery Patient Assessment
               </Typography>
               <OneYearTKAIntakeForm />
+            </Container>
+          } />
+          <Route path="/preop-tka-intake" element={
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Pre-Op TKA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <PreOpTKAIntakeForm />
+            </Container>
+          } />
+          <Route path="/preop-tha-intake" element={
+            <Container maxWidth="md" sx={{ py: 3 }}>
+              <Typography 
+                variant="h4" 
+                component="h1" 
+                gutterBottom 
+                align="center" 
+                sx={{ 
+                  color: '#06B6D4', // Teal primary
+                  fontWeight: 700, // Display weight
+                  letterSpacing: '-0.02em',
+                  mb: 1,
+                }}
+              >
+                Pre-Op THA              </Typography>
+              <Typography 
+                variant="subtitle1" 
+                align="center" 
+                sx={{ 
+                  color: '#9CA3AF', // Text secondary
+                  mb: 3,
+                  fontWeight: 400, // Body weight
+                }}
+              >
+                Comprehensive Orthopedic Surgery Patient Assessment
+              </Typography>
+              <PreOpTHAIntakeForm />
             </Container>
           } />
         </Routes>

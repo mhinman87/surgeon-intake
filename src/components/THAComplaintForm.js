@@ -33,6 +33,7 @@ const THAComplaintForm = () => {
             <InputLabel id="hip-side-label" shrink>Hip Side</InputLabel>
             <Select
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               labelId="hip-side-label"
               label="Hip Side"
               displayEmpty
@@ -120,6 +121,7 @@ const THAComplaintForm = () => {
             <InputLabel id="complications-history-label" shrink>Complications During Initial Surgery</InputLabel>
             <Select
               {...register('complicationsHistory')}
+              value={watch('complicationsHistory') || ''}
               labelId="complications-history-label"
               label="Complications During Initial Surgery"
               displayEmpty
@@ -187,6 +189,7 @@ const THAComplaintForm = () => {
             <InputLabel id="additional-surgery-history-label" shrink>Additional Surgery Following THA</InputLabel>
             <Select
               {...register('additionalSurgeryHistory')}
+              value={watch('additionalSurgeryHistory') || ''}
               labelId="additional-surgery-history-label"
               label="Additional Surgery Following THA"
               displayEmpty
@@ -254,6 +257,7 @@ const THAComplaintForm = () => {
             <InputLabel id="previous-surgery-history-label" shrink>Previous Surgery Prior to THA</InputLabel>
             <Select
               {...register('previousSurgeryHistory')}
+              value={watch('previousSurgeryHistory') || ''}
               labelId="previous-surgery-history-label"
               label="Previous Surgery Prior to THA"
               displayEmpty
@@ -321,6 +325,7 @@ const THAComplaintForm = () => {
             <InputLabel id="satisfaction-result-label" shrink>Satisfaction with Result</InputLabel>
             <Select
               {...register('satisfactionResult')}
+              value={watch('satisfactionResult') || ''}
               labelId="satisfaction-result-label"
               label="Satisfaction with Result"
               displayEmpty
@@ -372,6 +377,7 @@ const THAComplaintForm = () => {
             <InputLabel id="injury-since-tha-label" shrink>Injury History Since THA</InputLabel>
             <Select
               {...register('injurySinceTHA')}
+              value={watch('injurySinceTHA') || ''}
               labelId="injury-since-tha-label"
               label="Injury History Since THA"
               displayEmpty
@@ -519,6 +525,7 @@ const THAComplaintForm = () => {
             <InputLabel id="symptom-duration-label" shrink>Symptom Duration</InputLabel>
             <Select
               {...register('symptomDuration')}
+              value={watch('symptomDuration') || ''}
               labelId="symptom-duration-label"
               label="Symptom Duration"
               displayEmpty
@@ -572,6 +579,7 @@ const THAComplaintForm = () => {
             <InputLabel id="symptom-progression-label" shrink>Symptom Progression</InputLabel>
             <Select
               {...register('symptomProgression')}
+              value={watch('symptomProgression') || ''}
               labelId="symptom-progression-label"
               label="Symptom Progression"
               displayEmpty
@@ -675,6 +683,7 @@ const THAComplaintForm = () => {
             <InputLabel id="treatment-success-label" shrink>Treatment Success</InputLabel>
             <Select
               {...register('treatmentSuccess')}
+              value={watch('treatmentSuccess') || ''}
               labelId="treatment-success-label"
               label="Treatment Success"
               displayEmpty
@@ -729,6 +738,7 @@ const THAComplaintForm = () => {
             <InputLabel id="lumbar-spine-history-label" shrink>Lumbar Spine History</InputLabel>
             <Select
               {...register('lumbarSpineHistory')}
+              value={watch('lumbarSpineHistory') || ''}
               labelId="lumbar-spine-history-label"
               label="Lumbar Spine History"
               displayEmpty
@@ -796,6 +806,7 @@ const THAComplaintForm = () => {
             <InputLabel id="imaging-studies-label" shrink>Imaging Studies</InputLabel>
             <Select
               {...register('imagingStudies')}
+              value={watch('imagingStudies') || ''}
               labelId="imaging-studies-label"
               label="Imaging Studies"
               displayEmpty

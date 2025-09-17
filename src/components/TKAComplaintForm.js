@@ -32,6 +32,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="knee-side-label" shrink>Knee Side</InputLabel>
             <Select
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               labelId="knee-side-label"
               label="Knee Side"
               displayEmpty
@@ -119,6 +120,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="complications-history-label" shrink>Complications During Initial Surgery</InputLabel>
             <Select
               {...register('complicationsHistory')}
+              value={watch('complicationsHistory') || ''}
               labelId="complications-history-label"
               label="Complications During Initial Surgery"
               displayEmpty
@@ -186,6 +188,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="additional-surgery-history-label" shrink>Additional Surgery Following TKA</InputLabel>
             <Select
               {...register('additionalSurgeryHistory')}
+              value={watch('additionalSurgeryHistory') || ''}
               labelId="additional-surgery-history-label"
               label="Additional Surgery Following TKA"
               displayEmpty
@@ -253,6 +256,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="previous-surgery-history-label" shrink>Previous Surgery Prior to TKA</InputLabel>
             <Select
               {...register('previousSurgeryHistory')}
+              value={watch('previousSurgeryHistory') || ''}
               labelId="previous-surgery-history-label"
               label="Previous Surgery Prior to TKA"
               displayEmpty
@@ -320,6 +324,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="satisfaction-result-label" shrink>Satisfaction with Result</InputLabel>
             <Select
               {...register('satisfactionResult')}
+              value={watch('satisfactionResult') || ''}
               labelId="satisfaction-result-label"
               label="Satisfaction with Result"
               displayEmpty
@@ -371,6 +376,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="injury-since-tka-label" shrink>Injury History Since TKA</InputLabel>
             <Select
               {...register('injurySinceTKA')}
+              value={watch('injurySinceTKA') || ''}
               labelId="injury-since-tka-label"
               label="Injury History Since TKA"
               displayEmpty
@@ -518,6 +524,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="symptom-duration-label" shrink>Symptom Duration</InputLabel>
             <Select
               {...register('symptomDuration')}
+              value={watch('symptomDuration') || ''}
               labelId="symptom-duration-label"
               label="Symptom Duration"
               displayEmpty
@@ -571,6 +578,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="symptom-progression-label" shrink>Symptom Progression</InputLabel>
             <Select
               {...register('symptomProgression')}
+              value={watch('symptomProgression') || ''}
               labelId="symptom-progression-label"
               label="Symptom Progression"
               displayEmpty
@@ -674,6 +682,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="treatment-success-label" shrink>Treatment Success</InputLabel>
             <Select
               {...register('treatmentSuccess')}
+              value={watch('treatmentSuccess') || ''}
               labelId="treatment-success-label"
               label="Treatment Success"
               displayEmpty
@@ -728,6 +737,7 @@ const TKAComplaintForm = () => {
             <InputLabel id="imaging-studies-label" shrink>Imaging Studies</InputLabel>
             <Select
               {...register('imagingStudies')}
+              value={watch('imagingStudies') || ''}
               labelId="imaging-studies-label"
               label="Imaging Studies"
               displayEmpty

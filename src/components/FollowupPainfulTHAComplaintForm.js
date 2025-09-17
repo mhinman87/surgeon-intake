@@ -33,6 +33,7 @@ export default function FollowupPainfulTHAComplaintForm() {
               labelId="hip-side-label"
               id="hipSide"
               {...register('hipSide')}
+              value={watch('hipSide') || ''}
               displayEmpty
               notched
               label="Hip Side"
@@ -91,6 +92,7 @@ export default function FollowupPainfulTHAComplaintForm() {
               labelId="treatment-plan-label"
               id="treatmentPlan"
               {...register('treatmentPlan')}
+              value={watch('treatmentPlan') || ''}
               displayEmpty
               notched
               label="Treatment Plan"
@@ -171,6 +173,7 @@ export default function FollowupPainfulTHAComplaintForm() {
               labelId="symptoms-status-label"
               id="symptomsStatus"
               {...register('symptomsStatus')}
+              value={watch('symptomsStatus') || ''}
               displayEmpty
               notched
               label="Symptoms Status"
@@ -212,6 +215,7 @@ export default function FollowupPainfulTHAComplaintForm() {
               labelId="has-questions-label"
               id="hasQuestions"
               {...register('hasQuestions')}
+              value={watch('hasQuestions') || ''}
               displayEmpty
               notched
               label="Questions/Concerns"

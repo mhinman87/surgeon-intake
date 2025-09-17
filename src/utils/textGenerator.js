@@ -9,52 +9,34 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     return value;
   };
 
-  const formatKneeSide = (side) => {
-    switch (side) {
-      case 'right': return 'right';
-      case 'left': return 'left';
-      case 'bilateral': return 'bilateral';
-      default: return '[not specified]';
+  // Helper function to format dropdown values to lowercase when not at beginning of sentence
+  const formatDropdownValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return '[not specified]';
     }
+    // Convert to lowercase for dropdown values that are typically capitalized in UI
+    const lowercaseValue = value.toLowerCase();
+    return lowercaseValue;
+  };
+
+  const formatKneeSide = (side) => {
+    return formatDropdownValue(side);
   };
 
   const formatHipSide = (side) => {
-    switch (side) {
-      case 'right': return 'right';
-      case 'left': return 'left';
-      case 'bilateral': return 'bilateral';
-      default: return '[not specified]';
-    }
+    return formatDropdownValue(side);
   };
 
   const formatInjuryHistory = (injury) => {
-    switch (injury) {
-      case 'positive': return 'positive';
-      case 'negative': return 'negative';
-      default: return '[not specified]';
-    }
+    return formatDropdownValue(injury);
   };
 
   const formatImaging = (imaging) => {
-    switch (imaging) {
-      case 'none': return 'none';
-      case 'xray': return 'X-ray';
-      case 'mri': return 'MRI';
-      case 'ct': return 'CT';
-      case 'other': return 'other';
-      default: return '[not specified]';
-    }
+    return formatDropdownValue(imaging);
   };
 
   const formatSuccess = (success) => {
-    switch (success) {
-      case 'excellent': return 'excellent';
-      case 'good': return 'good';
-      case 'fair': return 'fair';
-      case 'poor': return 'poor';
-      case 'none': return 'no';
-      default: return '[not specified]';
-    }
+    return formatDropdownValue(success);
   };
 
   // Build the narrative paragraph based on form type
@@ -67,6 +49,10 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     if (formData.treatmentPlan) detectedFormType = 'followup';
     if (formData.fullRecoveryStatus) detectedFormType = 'oneyear';
     if (formData.injuryHistory && formData.reliefSuccessLevel) detectedFormType = 'unplanned';
+    if (formData.diagnosis && formData.conservativeTreatment) {
+      if (formData.kneeSide) detectedFormType = 'preop-tka';
+      if (formData.hipSide) detectedFormType = 'preop-tha';
+    }
 
     switch (detectedFormType) {
       case 'knee':
@@ -81,6 +67,10 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
         return buildOneYearNarrative();
       case 'unplanned':
         return buildUnplannedNarrative();
+      case 'preop-tka':
+        return buildPreOpTKANarrative();
+      case 'preop-tha':
+        return buildPreOpTHANarrative();
       default:
         return buildKneeNarrative();
     }
@@ -88,13 +78,13 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
 
   const buildKneeNarrative = () => {
     const kneeSide = formatKneeSide(formData.kneeSide);
-    const worseSide = formData.kneeSide === 'bilateral' ? formatValue(formData.worseSide) : '';
+    const worseSide = formData.kneeSide === 'bilateral' ? formatDropdownValue(formData.worseSide) : '';
     const painLocation = formatValue(formData.painLocation);
     const recentInjury = formatInjuryHistory(formData.recentInjury);
     const injuryDescription = formatValue(formData.injuryDescription);
     const previousSurgeries = formatValue(formData.previousSurgeries);
-    const painDuration = formatValue(formData.painDuration);
-    const painProgression = formatValue(formData.painProgression);
+    const painDuration = formatDropdownValue(formData.painDuration);
+    const painProgression = formatDropdownValue(formData.painProgression);
     const worstPain = formatValue(formData.worstPainLevel);
     const bestPain = formatValue(formData.bestPainLevel);
     const painDescription = formatValue(formData.painDescription);
@@ -139,14 +129,14 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
   };
 
   const buildHipNarrative = () => {
-    const hipSide = formatValue(formData.hipSide);
-    const worseSide = formData.hipSide === 'bilateral' ? formatValue(formData.worseSide) : '';
+    const hipSide = formatHipSide(formData.hipSide);
+    const worseSide = formData.hipSide === 'bilateral' ? formatDropdownValue(formData.worseSide) : '';
     const painLocation = formatValue(formData.painLocation);
     const injuryHistory = formatInjuryHistory(formData.injuryHistory);
     const injuryDescription = formatValue(formData.injuryDescription);
     const previousSurgeries = formatValue(formData.previousSurgeries);
-    const symptomDuration = formatValue(formData.symptomDuration);
-    const symptomProgression = formatValue(formData.symptomProgression);
+    const symptomDuration = formatDropdownValue(formData.symptomDuration);
+    const symptomProgression = formatDropdownValue(formData.symptomProgression);
     const worstPain = formatValue(formData.worstPainLevel);
     const bestPain = formatValue(formData.bestPainLevel);
     const painDescription = formatValue(formData.painDescription);
@@ -357,6 +347,45 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
       narrative += ` Questions/concerns: ${questionsDetails}.`;
     } else if (hasQuestions === 'no') {
       narrative += ` No questions or concerns.`;
+    }
+    
+    return narrative;
+  };
+
+  const buildPreOpTKANarrative = () => {
+    const kneeSide = formatKneeSide(formData.kneeSide);
+    const diagnosis = formatValue(formData.diagnosis);
+    const historyChanges = formatValue(formData.historyChanges);
+    const conservativeTreatment = formatValue(formData.conservativeTreatment);
+    const treatmentDuration = formatDropdownValue(formData.treatmentDuration);
+    const symptomImpact = formatValue(formData.symptomImpact);
+    const hasQuestions = formatDropdownValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents today for a follow up of their ${kneeSide} knee ${diagnosis}. Since last seen they have experienced exacerbation of their symptoms and further degradation of quality of life. Orthopedic/medical history changes since last seen consist of ${historyChanges}. At last visit, treatment options were discussed. The patient elected to consider arthroplasty. They were sent for further workup to assist in determining their medical fitness for joint replacement. The patient has otherwise attempted multiple forms of conservative treatment including ${conservativeTreatment} despite prolonged conservative treatment course of ${treatmentDuration}. The patient has failed to achieve long lasting relief. They consider their symptoms to be significant and degrading to their quality of life and ability to participate in employment and self-care. ${symptomImpact}`;
+    
+    if (hasQuestions === 'yes' && questionsDetails && questionsDetails !== '[not specified]') {
+      narrative += ` Questions/concerns: ${questionsDetails}.`;
+    } else if (hasQuestions === 'no') {
+      narrative += ` Questions/concerns: none.`;
+    }
+    
+    return narrative;
+  };
+
+  const buildPreOpTHANarrative = () => {
+    const hipSide = formatHipSide(formData.hipSide);
+    const diagnosis = formatValue(formData.diagnosis);
+    const historyChanges = formatValue(formData.historyChanges);
+    const hasQuestions = formatDropdownValue(formData.hasQuestions);
+    const questionsDetails = formatValue(formData.questionsDetails);
+
+    let narrative = `presents today for a follow up of their ${hipSide} hip ${diagnosis}. Since last seen they have experienced exacerbation of their symptoms and further degradation of quality of life. Orthopedic/medical history changes since last seen consist of ${historyChanges}. At last visit, treatment options were discussed. The patient elected to consider arthroplasty. They were sent for further workup to assist in determining their medical fitness for joint replacement. The patient has otherwise attempted multiple forms of conservative treatment including activity modification, home directed stretching and strengthening, physical therapy, scheduled NSAIDS, Tylenol, cold therapy, and weight loss despite prolonged conservative treatment course of greater than 3 months. The patient has failed to achieve long lasting relief. They consider their symptoms to be significant and degrading to their quality of life and ability to participate in employment and self-care.`;
+    
+    if (hasQuestions === 'yes' && questionsDetails && questionsDetails !== '[not specified]') {
+      narrative += ` Questions/concerns: ${questionsDetails}.`;
+    } else if (hasQuestions === 'no') {
+      narrative += ` Questions/concerns: none.`;
     }
     
     return narrative;

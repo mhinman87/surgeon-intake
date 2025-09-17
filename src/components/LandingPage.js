@@ -88,6 +88,24 @@ const LandingPage = () => {
       ],
     },
     {
+      title: 'Pre-operative',
+      description: 'Pre-surgical evaluation forms',
+      options: [
+        {
+          title: 'Pre-Op TKA',
+          description: 'Pre-operative evaluation form for total knee arthroplasty',
+          route: '/preop-tka-intake',
+          available: true,
+        },
+        {
+          title: 'Pre-Op THA',
+          description: 'Pre-operative evaluation form for total hip arthroplasty',
+          route: '/preop-tha-intake',
+          available: true,
+        },
+      ],
+    },
+    {
       title: 'Post-operative',
       description: 'Post-surgical follow-up forms',
       options: [

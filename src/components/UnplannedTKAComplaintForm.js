@@ -34,6 +34,7 @@ export default function UnplannedTKAComplaintForm() {
               labelId="knee-side-label"
               id="kneeSide"
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               displayEmpty
               notched
               label="Knee Side"
@@ -74,6 +75,7 @@ export default function UnplannedTKAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -164,6 +166,7 @@ export default function UnplannedTKAComplaintForm() {
               labelId="injury-history-label"
               id="injuryHistory"
               {...register('injuryHistory')}
+              value={watch('injuryHistory') || ''}
               displayEmpty
               notched
               label="Injury History"
@@ -242,6 +245,7 @@ export default function UnplannedTKAComplaintForm() {
               labelId="relief-success-label"
               id="reliefSuccess"
               {...register('reliefSuccess')}
+              value={watch('reliefSuccess') || ''}
               displayEmpty
               notched
               label="Relief Success Level"

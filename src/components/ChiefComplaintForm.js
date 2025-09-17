@@ -32,6 +32,7 @@ export default function ChiefComplaintForm() {
             <InputLabel id="knee-side-label" shrink={true}>Knee Side</InputLabel>
             <Select
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               labelId="knee-side-label"
               label="Knee Side"
               displayEmpty
@@ -87,6 +88,7 @@ export default function ChiefComplaintForm() {
               <InputLabel id="worse-side-label">Which side is worse?</InputLabel>
               <Select
                 {...register('worseSide')}
+                value={watch('worseSide') || ''}
                 labelId="worse-side-label"
                 label="Which side is worse?"
                 displayEmpty
@@ -131,6 +133,7 @@ export default function ChiefComplaintForm() {
             <InputLabel id="recent-injury-label" shrink={true}>Recent Injury History</InputLabel>
             <Select
               {...register('recentInjury')}
+              value={watch('recentInjury') || ''}
               labelId="recent-injury-label"
               label="Recent Injury History"
               displayEmpty
@@ -213,6 +216,7 @@ export default function ChiefComplaintForm() {
             <InputLabel id="pain-duration-label" shrink={true}>Pain Duration</InputLabel>
             <Select
               {...register('painDuration')}
+              value={watch('painDuration') || ''}
               labelId="pain-duration-label"
               label="Pain Duration"
               displayEmpty
@@ -266,6 +270,7 @@ export default function ChiefComplaintForm() {
             <InputLabel id="pain-progression-label" shrink={true}>Pain Progression</InputLabel>
             <Select
               {...register('painProgression')}
+              value={watch('painProgression') || ''}
               labelId="pain-progression-label"
               label="Pain Progression"
               displayEmpty

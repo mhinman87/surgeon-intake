@@ -1,0 +1,145 @@
+import jsPDF from 'jspdf';
+import { generatePatientReportText } from './textGenerator';
+
+export const generatePreOpTHAReportPDF = (formData) => {
+  console.log('Pre-Op THA PDF Generator called with data:', formData);
+  const doc = new jsPDF();
+  
+  // Set up the document
+  doc.setFontSize(16);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Pre-Op THA - Patient Report', 20, 30);
+  
+  // Add a line under the title
+  doc.setLineWidth(0.5);
+  doc.line(20, 35, 190, 35);
+  
+  // Use centralized text generator
+  const fullReportText = generatePatientReportText(formData, 'preop-tha');
+  const lines = fullReportText.split('\n');
+  
+  // Extract just the narrative part (skip "PATIENT SUMMARY:" header)
+  const narrativeStartIndex = lines.findIndex(line => line.trim() === 'PATIENT SUMMARY:') + 2;
+  const narrativeEndIndex = lines.findIndex(line => line.trim() === 'MEDICAL HISTORY:');
+  const narrativeLines = narrativeEndIndex > -1 ? 
+    lines.slice(narrativeStartIndex, narrativeEndIndex) : 
+    lines.slice(narrativeStartIndex);
+  
+  const narrative = narrativeLines.join(' ').trim();
+
+  // Add the narrative
+  doc.setFontSize(12);
+  doc.setFont('helvetica', 'normal');
+  const splitNarrative = doc.splitTextToSize(narrative, 170);
+  doc.text(splitNarrative, 20, 50);
+  
+  // Calculate Y position after narrative
+  let yPosition = 50 + (splitNarrative.length * 6) + 20;
+  
+  // Add Pre-operative Information section
+  doc.setFontSize(14);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Pre-operative Information', 20, yPosition);
+  yPosition += 15;
+  
+  // Add individual fields
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  
+  const fields = [
+    { label: 'Hip Side:', value: formData.hipSide ? formData.hipSide.charAt(0).toUpperCase() + formData.hipSide.slice(1) : 'Not specified' },
+    { label: 'Diagnosis:', value: formData.diagnosis || 'Not specified' },
+    { label: 'History Changes:', value: formData.historyChanges || 'Not specified' },
+    { label: 'Questions/Concerns:', value: formData.hasQuestions ? formData.hasQuestions.charAt(0).toUpperCase() + formData.hasQuestions.slice(1) : 'Not specified' },
+  ];
+
+  if (formData.hasQuestions === 'yes' && formData.questionsDetails) {
+    fields.push({ label: 'Questions Details:', value: formData.questionsDetails });
+  }
+
+  fields.forEach(field => {
+    // Check if we need a new page
+    if (yPosition > 250) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    
+    doc.setFont('helvetica', 'bold');
+    doc.text(field.label, 20, yPosition);
+    
+    doc.setFont('helvetica', 'normal');
+    const splitValue = doc.splitTextToSize(field.value, 120);
+    doc.text(splitValue, 60, yPosition);
+    
+    yPosition += splitValue.length * 5 + 5;
+  });
+
+  // Add Medical History section if included
+  if (formData.includeMedicalHistory === 'yes') {
+    // Check if we need a new page
+    if (yPosition > 200) {
+      doc.addPage();
+      yPosition = 20;
+    }
+    
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Medical History', 20, yPosition);
+    yPosition += 15;
+    
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    
+    const medicalFields = [
+      { label: 'Preferred Name:', value: formData.preferredName || 'Not specified' },
+      { label: 'PCP:', value: formData.pcp || 'Not specified' },
+      { label: 'Referred By:', value: formData.referredBy || 'Not specified' },
+      { label: 'DM2:', value: formData.dm2 ? formData.dm2.charAt(0).toUpperCase() + formData.dm2.slice(1) : 'Not specified' },
+    ];
+
+    if (formData.dm2 === 'yes') {
+      medicalFields.push(
+        { label: 'DM2 A1c:', value: formData.dm2A1c || 'Not specified' },
+        { label: 'DM2 Medications:', value: formData.dm2Medications || 'Not specified' }
+      );
+    }
+
+    medicalFields.push(
+      { label: 'Cardiac History:', value: formData.cardiacHistory ? formData.cardiacHistory.charAt(0).toUpperCase() + formData.cardiacHistory.slice(1) : 'Not specified' },
+      { label: 'Tobacco Use:', value: formData.tobaccoUse ? formData.tobaccoUse.charAt(0).toUpperCase() + formData.tobaccoUse.slice(1) : 'Not specified' }
+    );
+
+    medicalFields.forEach(field => {
+      // Check if we need a new page
+      if (yPosition > 250) {
+        doc.addPage();
+        yPosition = 20;
+      }
+      
+      doc.setFont('helvetica', 'bold');
+      doc.text(field.label, 20, yPosition);
+      
+      doc.setFont('helvetica', 'normal');
+      const splitValue = doc.splitTextToSize(field.value, 120);
+      doc.text(splitValue, 60, yPosition);
+      
+      yPosition += splitValue.length * 5 + 5;
+    });
+  }
+
+  // Add footer
+  const pageCount = doc.internal.getNumberOfPages();
+  for (let i = 1; i <= pageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Page ${i} of ${pageCount}`, 20, 285);
+    doc.text('Generated by Surgeon Intake Tool', 150, 285);
+  }
+
+  // Save the PDF
+  const fileName = `PreOp_THA_Report_${new Date().toISOString().split('T')[0]}.pdf`;
+  doc.save(fileName);
+  
+  console.log('Pre-Op THA PDF generated successfully:', fileName);
+};

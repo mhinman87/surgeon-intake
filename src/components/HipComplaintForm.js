@@ -61,6 +61,7 @@ const HipComplaintForm = () => {
             </InputLabel>
             <Select
               {...register('hipSide')}
+              value={hipSide || ''}
               labelId="hip-side-label"
               label="Hip Side"
               displayEmpty
@@ -128,6 +129,7 @@ const HipComplaintForm = () => {
               <InputLabel id="worse-side-label" shrink>Which Side is Worse?</InputLabel>
               <Select
                 {...register('worseSide')}
+                value={watch('worseSide') || ''}
                 labelId="worse-side-label"
                 label="Which Side is Worse?"
                 displayEmpty
@@ -206,6 +208,7 @@ const HipComplaintForm = () => {
             </InputLabel>
             <Select
               {...register('injuryHistory')}
+              value={watch('injuryHistory') || ''}
               labelId="injury-history-label"
               label="Injury History"
               displayEmpty
@@ -269,6 +272,7 @@ const HipComplaintForm = () => {
             <InputLabel id="symptom-duration-label" shrink>Symptom Duration</InputLabel>
             <Select
               {...register('symptomDuration')}
+              value={watch('symptomDuration') || ''}
               labelId="symptom-duration-label"
               label="Symptom Duration"
               displayEmpty
@@ -322,6 +326,7 @@ const HipComplaintForm = () => {
             <InputLabel id="symptom-progression-label" shrink>Symptom Progression</InputLabel>
             <Select
               {...register('symptomProgression')}
+              value={watch('symptomProgression') || ''}
               labelId="symptom-progression-label"
               label="Symptom Progression"
               displayEmpty
@@ -481,6 +486,7 @@ const HipComplaintForm = () => {
             <InputLabel id="treatment-success-label" shrink>Treatment Success</InputLabel>
             <Select
               {...register('treatmentSuccess')}
+              value={watch('treatmentSuccess') || ''}
               labelId="treatment-success-label"
               label="Treatment Success"
               displayEmpty
@@ -535,6 +541,7 @@ const HipComplaintForm = () => {
             <InputLabel id="lumbar-spine-history-label" shrink>Lumbar Spine History</InputLabel>
             <Select
               {...register('lumbarSpineHistory')}
+              value={watch('lumbarSpineHistory') || ''}
               labelId="lumbar-spine-history-label"
               label="Lumbar Spine History"
               displayEmpty
@@ -602,6 +609,7 @@ const HipComplaintForm = () => {
             <InputLabel id="imaging-studies-label" shrink>Imaging Studies</InputLabel>
             <Select
               {...register('imagingStudies')}
+              value={watch('imagingStudies') || ''}
               labelId="imaging-studies-label"
               label="Imaging Studies"
               displayEmpty

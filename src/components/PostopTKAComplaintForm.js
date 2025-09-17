@@ -33,6 +33,7 @@ export default function PostopTKAComplaintForm() {
               labelId="knee-side-label"
               id="kneeSide"
               {...register('kneeSide')}
+              value={watch('kneeSide') || ''}
               displayEmpty
               notched
               label="Knee Side"
@@ -73,6 +74,7 @@ export default function PostopTKAComplaintForm() {
               labelId="surgery-type-label"
               id="surgeryType"
               {...register('surgeryType')}
+              value={watch('surgeryType') || ''}
               displayEmpty
               notched
               label="Surgery Type"
@@ -163,6 +165,7 @@ export default function PostopTKAComplaintForm() {
               labelId="progress-level-label"
               id="progressLevel"
               {...register('progressLevel')}
+              value={watch('progressLevel') || ''}
               displayEmpty
               notched
               label="Progress Level"
@@ -310,6 +313,7 @@ export default function PostopTKAComplaintForm() {
               labelId="ambulation-status-label"
               id="ambulationStatus"
               {...register('ambulationStatus')}
+              value={watch('ambulationStatus') || ''}
               displayEmpty
               notched
               label="Ambulation Status"
