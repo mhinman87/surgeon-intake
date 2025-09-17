@@ -51,7 +51,7 @@ export const generateFollowupPainfulTKAReportPDF = (formData) => {
     { label: 'Known History:', value: formData.knownHistory },
     { 
       label: 'Treatment Plan:', 
-      value: formData.treatmentPlan + (formData.treatmentPlan === 'other' && formData.otherTreatment ? ` - ${formData.otherTreatment}` : '')
+      value: formData.treatmentPlan === 'other' && formData.otherTreatment ? formData.otherTreatment : formData.treatmentPlan
     },
     { label: 'History Changes:', value: formData.historyChanges },
     { label: 'Symptoms Status:', value: formData.symptomsStatus },

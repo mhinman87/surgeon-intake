@@ -126,6 +126,28 @@ export const generateTHAReportPDF = (formData) => {
     
     narrative += ` Previous imaging studies consist of ${imagingStudies}.`;
 
+    // Add inflammatory markers information
+    const inflammatoryMarkers = formatValue(formData.inflammatoryMarkers);
+    if (inflammatoryMarkers === 'have') {
+      narrative += ` Inflammatory markers have been performed.`;
+      if (formData.inflammatoryMarkersDescription && formData.inflammatoryMarkersDescription !== 'not specified') {
+        narrative += ` Results: ${formatValue(formData.inflammatoryMarkersDescription)}.`;
+      }
+    } else {
+      narrative += ` Inflammatory markers have not been performed.`;
+    }
+
+    // Add aspiration information
+    const aspiration = formatValue(formData.aspiration);
+    if (aspiration === 'has') {
+      narrative += ` Aspiration has been performed.`;
+      if (formData.aspirationDescription && formData.aspirationDescription !== 'not specified') {
+        narrative += ` Results: ${formatValue(formData.aspirationDescription)}.`;
+      }
+    } else {
+      narrative += ` Aspiration has not been performed.`;
+    }
+
     return narrative;
   };
 

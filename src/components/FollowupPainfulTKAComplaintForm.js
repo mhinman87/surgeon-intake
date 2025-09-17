@@ -26,42 +26,31 @@ export default function FollowupPainfulTKAComplaintForm() {
         {/* Knee Side */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.kneeSide}>
-            <InputLabel id="knee-side-label" shrink={true}>Knee Side</InputLabel>
+            <InputLabel id="knee-side-label" shrink notched>
+              Knee Side
+            </InputLabel>
             <Select
+              labelId="knee-side-label"
+              id="kneeSide"
               {...register('kneeSide')}
               value={watch('kneeSide') || ''}
-              labelId="knee-side-label"
-              label="Knee Side"
               displayEmpty
               notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select knee side</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
-                '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
-                },
+              label="Knee Side"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select knee side</em>}
+              sx={{
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#06B6D4',
+                  borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#06B6D4',
-                  }
-                }
+                '& .MuiSelect-select': {
+                  padding: '16.5px 14px',
+                },
               }}
             >
               <MenuItem value="right">Right</MenuItem>
@@ -96,42 +85,31 @@ export default function FollowupPainfulTKAComplaintForm() {
         {/* Treatment Plan */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.treatmentPlan}>
-            <InputLabel id="treatment-plan-label" shrink={true}>Treatment Plan</InputLabel>
+            <InputLabel id="treatment-plan-label" shrink notched>
+              Treatment Plan
+            </InputLabel>
             <Select
+              labelId="treatment-plan-label"
+              id="treatmentPlan"
               {...register('treatmentPlan')}
               value={watch('treatmentPlan') || ''}
-              labelId="treatment-plan-label"
-              label="Treatment Plan"
               displayEmpty
               notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select treatment plan</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
-                '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
-                },
+              label="Treatment Plan"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select treatment plan</em>}
+              sx={{
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#06B6D4',
+                  borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#06B6D4',
-                  }
-                }
+                '& .MuiSelect-select': {
+                  padding: '16.5px 14px',
+                },
               }}
             >
               <MenuItem value="observation">Observation</MenuItem>
@@ -188,42 +166,31 @@ export default function FollowupPainfulTKAComplaintForm() {
         {/* Symptoms Status */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.symptomsStatus}>
-            <InputLabel id="symptoms-status-label" shrink={true}>Symptoms Status</InputLabel>
+            <InputLabel id="symptoms-status-label" shrink notched>
+              Symptoms Status
+            </InputLabel>
             <Select
+              labelId="symptoms-status-label"
+              id="symptomsStatus"
               {...register('symptomsStatus')}
               value={watch('symptomsStatus') || ''}
-              labelId="symptoms-status-label"
-              label="Symptoms Status"
               displayEmpty
               notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select symptoms status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
-                '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
-                },
+              label="Symptoms Status"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select symptoms status</em>}
+              sx={{
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#06B6D4',
+                  borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#06B6D4',
-                  }
-                }
+                '& .MuiSelect-select': {
+                  padding: '16.5px 14px',
+                },
               }}
             >
               <MenuItem value="unchanged">Unchanged</MenuItem>
@@ -241,42 +208,31 @@ export default function FollowupPainfulTKAComplaintForm() {
         {/* Questions/Concerns */}
         <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
           <FormControl fullWidth error={!!errors.hasQuestions}>
-            <InputLabel id="has-questions-label" shrink={true}>Questions/Concerns</InputLabel>
+            <InputLabel id="has-questions-label" shrink notched>
+              Questions/Concerns
+            </InputLabel>
             <Select
+              labelId="has-questions-label"
+              id="hasQuestions"
               {...register('hasQuestions')}
               value={watch('hasQuestions') || ''}
-              labelId="has-questions-label"
-              label="Questions/Concerns Status"
               displayEmpty
               notched
-              renderValue={(selected) => {
-                if (!selected) {
-                  return <em style={{ color: '#666' }}>Select questions/concerns status</em>;
-                }
-                return selected.charAt(0).toUpperCase() + selected.slice(1);
-              }}
-              sx={{ 
-                '& .MuiSelect-select': {
-                  padding: '16px 14px 8px 14px',
-                  minHeight: 'auto',
-                },
+              label="Questions/Concerns"
+              renderValue={(value) => value ? value : <em style={{ fontStyle: 'italic', color: '#666' }}>Select questions/concerns status</em>}
+              sx={{
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: '#06B6D4',
+                  borderColor: '#e0e0e0',
                 },
                 '&:hover .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
                 '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
                   borderColor: '#06B6D4',
-                  borderWidth: 2,
                 },
-                '& .MuiInputLabel-root': {
-                  transform: 'translate(14px, -9px) scale(0.75)',
-                  '&.Mui-focused': {
-                    color: '#06B6D4',
-                  }
-                }
+                '& .MuiSelect-select': {
+                  padding: '16.5px 14px',
+                },
               }}
             >
               <MenuItem value="yes">Yes</MenuItem>

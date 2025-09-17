@@ -125,6 +125,28 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     
     narrative += ` Imaging studies performed include: ${imagingStudies}.`;
     
+    // Add inflammatory markers information
+    const inflammatoryMarkers = formatDropdownValue(formData.inflammatoryMarkers);
+    if (inflammatoryMarkers === 'have') {
+      narrative += ` Inflammatory markers have been performed.`;
+      if (formData.inflammatoryMarkersDescription && formData.inflammatoryMarkersDescription !== '[not specified]') {
+        narrative += ` Results: ${formatValue(formData.inflammatoryMarkersDescription)}.`;
+      }
+    } else {
+      narrative += ` Inflammatory markers have not been performed.`;
+    }
+    
+    // Add aspiration information
+    const aspiration = formatDropdownValue(formData.aspiration);
+    if (aspiration === 'has') {
+      narrative += ` Aspiration has been performed.`;
+      if (formData.aspirationDescription && formData.aspirationDescription !== '[not specified]') {
+        narrative += ` Results: ${formatValue(formData.aspirationDescription)}.`;
+      }
+    } else {
+      narrative += ` Aspiration has not been performed.`;
+    }
+    
     return narrative;
   };
 
@@ -183,6 +205,28 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     
     narrative += ` Imaging studies performed include: ${imagingStudies}.`;
     
+    // Add inflammatory markers information
+    const inflammatoryMarkers = formatDropdownValue(formData.inflammatoryMarkers);
+    if (inflammatoryMarkers === 'have') {
+      narrative += ` Inflammatory markers have been performed.`;
+      if (formData.inflammatoryMarkersDescription && formData.inflammatoryMarkersDescription !== '[not specified]') {
+        narrative += ` Results: ${formatValue(formData.inflammatoryMarkersDescription)}.`;
+      }
+    } else {
+      narrative += ` Inflammatory markers have not been performed.`;
+    }
+    
+    // Add aspiration information
+    const aspiration = formatDropdownValue(formData.aspiration);
+    if (aspiration === 'has') {
+      narrative += ` Aspiration has been performed.`;
+      if (formData.aspirationDescription && formData.aspirationDescription !== '[not specified]') {
+        narrative += ` Results: ${formatValue(formData.aspirationDescription)}.`;
+      }
+    } else {
+      narrative += ` Aspiration has not been performed.`;
+    }
+    
     return narrative;
   };
 
@@ -212,7 +256,10 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     
     narrative += ` History changes: ${historyChanges}. Progress level: ${progressLevel}. Recovery percentage: ${recoveryPercentage}%.`;
     
-    narrative += ` Therapy: ${therapyWeeks} weeks at ${therapyLocation}, ${therapyVisitsPerWeek} visits per week. Therapy discharge status: ${therapyDischarged}.`;
+    // Only include therapy information for knee forms (TKA), not hip forms (THA)
+    if (formData.kneeSide) {
+      narrative += ` Therapy: ${therapyWeeks} weeks at ${therapyLocation}, ${therapyVisitsPerWeek} visits per week. Therapy discharge status: ${therapyDischarged}.`;
+    }
     
     narrative += ` Ambulation status: ${ambulationStatus}.`;
     
@@ -222,14 +269,14 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     
     narrative += ` Pain medication: ${painMedication}. Symptom relief level: ${symptomRelief}. Satisfaction status: ${satisfaction}.`;
     
-    if (formData.kneeSide && kneeExtension && kneeFlexion) {
-      narrative += ` ROM: Extension ${kneeExtension}°, Flexion ${kneeFlexion}°.`;
-    }
-    
     if (hasQuestions === 'yes' && questionsDetails && questionsDetails !== '[not specified]') {
       narrative += ` Questions/concerns: ${questionsDetails}.`;
     } else if (hasQuestions === 'no') {
       narrative += ` No questions or concerns.`;
+    }
+    
+    if (formData.kneeSide && kneeExtension && kneeFlexion) {
+      narrative += `\n\nKnee ROM: Extension ${kneeExtension}°, Flexion ${kneeFlexion}°.`;
     }
     
     return narrative;
@@ -240,6 +287,7 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
     const clinicHistory = formatValue(formData.clinicHistory);
     const treatmentPlan = formatValue(formData.treatmentPlan);
     const treatmentPlanOther = formatValue(formData.treatmentPlanOther);
+    const otherTreatment = formatValue(formData.otherTreatment);
     const symptomsStatus = formatValue(formData.symptomsStatus);
     const historyChanges = formatValue(formData.historyChanges);
     const treatmentConsideration = formatValue(formData.treatmentConsideration);
@@ -248,10 +296,19 @@ export const generatePatientReportText = (formData, formType = 'knee') => {
 
     let narrative = `presents for follow-up of ${side} ${formData.kneeSide ? 'knee' : 'hip'}.`;
     
-    narrative += ` Clinic history: ${clinicHistory}. Treatment plan: ${treatmentPlan}.`;
+    narrative += ` Clinic history: ${clinicHistory}.`;
     
-    if (treatmentPlan === 'other' && treatmentPlanOther && treatmentPlanOther !== '[not specified]') {
-      narrative += ` Other treatment plan details: ${treatmentPlanOther}.`;
+    // Handle treatment plan - if "other" is selected, show only the free text
+    // Check both field names for compatibility with different forms
+    if (treatmentPlan === 'other') {
+      const otherText = treatmentPlanOther || otherTreatment;
+      if (otherText && otherText !== '[not specified]') {
+        narrative += ` Treatment plan: ${otherText}.`;
+      } else {
+        narrative += ` Treatment plan: ${treatmentPlan}.`;
+      }
+    } else {
+      narrative += ` Treatment plan: ${treatmentPlan}.`;
     }
     
     narrative += ` Symptoms status: ${symptomsStatus}. History changes: ${historyChanges}.`;

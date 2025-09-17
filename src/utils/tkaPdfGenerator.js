@@ -118,6 +118,28 @@ export const generateTKAReportPDF = (formData) => {
     
     narrative += ` Their primary complaint is ${primaryComplaint}. The pain is located at the ${painLocation} aspect of the knee. The patient's pain is described as ${painDescription}. The symptoms are aggravated by ${aggravatingFactors} and alleviated by ${alleviatingFactors}. The patient has associated symptoms consisting of ${associatedSymptoms}. The symptoms have been present for ${symptomDuration}. The patient's symptoms have been ${symptomProgression}. At worst the severity of the symptoms is rated as a ${worstSymptomLevel} out of 10. At best, they are rated as a ${bestSymptomLevel} out of 10. Thus far, the patient has attempted ${attemptedTreatments} for relief with ${treatmentSuccess} success. Previous imaging studies consist of ${imagingStudies}.`;
 
+    // Add inflammatory markers information
+    const inflammatoryMarkers = formatValue(formData.inflammatoryMarkers);
+    if (inflammatoryMarkers === 'have') {
+      narrative += ` Inflammatory markers have been performed.`;
+      if (formData.inflammatoryMarkersDescription && formData.inflammatoryMarkersDescription !== 'not specified') {
+        narrative += ` Results: ${formatValue(formData.inflammatoryMarkersDescription)}.`;
+      }
+    } else {
+      narrative += ` Inflammatory markers have not been performed.`;
+    }
+
+    // Add aspiration information
+    const aspiration = formatValue(formData.aspiration);
+    if (aspiration === 'has') {
+      narrative += ` Aspiration has been performed.`;
+      if (formData.aspirationDescription && formData.aspirationDescription !== 'not specified') {
+        narrative += ` Results: ${formatValue(formData.aspirationDescription)}.`;
+      }
+    } else {
+      narrative += ` Aspiration has not been performed.`;
+    }
+
     return narrative;
   };
 

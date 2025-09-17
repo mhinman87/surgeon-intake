@@ -853,6 +853,140 @@ const THAComplaintForm = () => {
             </Typography>
           )}
         </Grid>
+
+        {/* Inflammatory Markers */}
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+          <FormControl fullWidth error={!!errors.inflammatoryMarkers}>
+            <InputLabel id="inflammatory-markers-label" shrink>Inflammatory Markers</InputLabel>
+            <Select
+              {...register('inflammatoryMarkers')}
+              value={watch('inflammatoryMarkers') || ''}
+              labelId="inflammatory-markers-label"
+              label="Inflammatory Markers"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select inflammatory markers status</em>;
+                }
+                return selected === 'have' ? 'Have been performed' : 'Have not been performed';
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#06B6D4',
+                  }
+                }
+              }}
+            >
+              <MenuItem value="have">Have been performed</MenuItem>
+              <MenuItem value="have not">Have not been performed</MenuItem>
+            </Select>
+          </FormControl>
+          {errors.inflammatoryMarkers && (
+            <Typography variant="caption" color="error">
+              {errors.inflammatoryMarkers.message}
+            </Typography>
+          )}
+        </Grid>
+
+        {/* Inflammatory Markers Description - only show if "have" is selected */}
+        {watch('inflammatoryMarkers') === 'have' && (
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+            <TextField
+              fullWidth
+              label="Inflammatory Markers Description"
+              {...register('inflammatoryMarkersDescription')}
+              error={!!errors.inflammatoryMarkersDescription}
+              helperText={errors.inflammatoryMarkersDescription?.message}
+              placeholder="Describe the inflammatory markers results"
+              sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
+            />
+          </Grid>
+        )}
+
+        {/* Aspiration */}
+        <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+          <FormControl fullWidth error={!!errors.aspiration}>
+            <InputLabel id="aspiration-label" shrink>Aspiration</InputLabel>
+            <Select
+              {...register('aspiration')}
+              value={watch('aspiration') || ''}
+              labelId="aspiration-label"
+              label="Aspiration"
+              displayEmpty
+              notched
+              renderValue={(selected) => {
+                if (!selected) {
+                  return <em style={{ color: '#666' }}>Select aspiration status</em>;
+                }
+                return selected === 'has' ? 'Has been performed' : 'Has not been performed';
+              }}
+              sx={{ 
+                '& .MuiSelect-select': {
+                  padding: '16px 14px 8px 14px',
+                  minHeight: 'auto',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                  borderWidth: 2,
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: '#06B6D4',
+                  borderWidth: 2,
+                },
+                '& .MuiInputLabel-root': {
+                  transform: 'translate(14px, -9px) scale(0.75)',
+                  '&.Mui-focused': {
+                    color: '#06B6D4',
+                  }
+                }
+              }}
+            >
+              <MenuItem value="has">Has been performed</MenuItem>
+              <MenuItem value="has not">Has not been performed</MenuItem>
+            </Select>
+          </FormControl>
+          {errors.aspiration && (
+            <Typography variant="caption" color="error">
+              {errors.aspiration.message}
+            </Typography>
+          )}
+        </Grid>
+
+        {/* Aspiration Description - only show if "has" is selected */}
+        {watch('aspiration') === 'has' && (
+          <Grid item xs={12} sx={{ width: '100%', maxWidth: '100%' }}>
+            <TextField
+              fullWidth
+              label="Aspiration Description"
+              {...register('aspirationDescription')}
+              error={!!errors.aspirationDescription}
+              helperText={errors.aspirationDescription?.message}
+              placeholder="Describe the aspiration results"
+              sx={{ textAlign: 'left', '& .MuiInputBase-input': { padding: '20px 14px' } }}
+            />
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

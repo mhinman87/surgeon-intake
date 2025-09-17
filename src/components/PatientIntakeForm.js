@@ -49,10 +49,6 @@ const schema = yup.object({
   attemptedTreatments: yup.string().required('Attempted treatments are required'),
   treatmentSuccess: yup.string().required('Treatment success level is required').notOneOf([''], 'Please select success level'),
   imagingStudies: yup.string().required('Imaging studies are required').notOneOf([''], 'Please select imaging studies'),
-  livingSituation: yup.string().required('Living situation is required'),
-  livingDetails: yup.string().required('Living details are required'),
-  ambulation: yup.string().required('Ambulation details are required'),
-  occupation: yup.string().required('Occupation is required'),
   
   // Medical History conditional
   includeMedicalHistory: yup.string().required('Please select whether to include medical history').notOneOf([''], 'Please select option'),
@@ -251,10 +247,6 @@ export default function PatientIntakeForm() {
       attemptedTreatments: '',
       treatmentSuccess: '',
       imagingStudies: '',
-      livingSituation: '',
-      livingDetails: '',
-      ambulation: '',
-      occupation: '',
       
       // Medical History conditional
       includeMedicalHistory: '',
@@ -331,7 +323,7 @@ export default function PatientIntakeForm() {
       'previousSurgeries', 'painDuration', 'painProgression', 'worstPainLevel', 
       'bestPainLevel', 'painDescription', 'aggravatingFactors', 'alleviatingFactors', 
       'associatedSymptoms', 'attemptedTreatments', 'treatmentSuccess', 'imagingStudies', 
-      'livingSituation', 'livingDetails', 'ambulation', 'occupation', 'includeMedicalHistory'
+      'includeMedicalHistory'
     ];
     
     // Add medical history fields if user chose to include them
@@ -397,8 +389,7 @@ export default function PatientIntakeForm() {
           'recentInjury', 'injuryDescription', 'previousSurgeries', 'painDuration', 'painProgression',
           'worstPainLevel', 'bestPainLevel', 'painDescription', 'aggravatingFactors',
           'alleviatingFactors', 'associatedSymptoms', 'attemptedTreatments',
-          'treatmentSuccess', 'imagingStudies', 'livingSituation', 'livingDetails',
-          'ambulation', 'occupation'
+          'treatmentSuccess', 'imagingStudies'
         ];
       case 1:
         // Validate includeMedicalHistory and all medical history fields if user chose yes

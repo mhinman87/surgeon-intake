@@ -51,7 +51,7 @@ export const generateFollowupHipReportPDF = (formData) => {
     { label: 'Clinic History:', value: formData.clinicHistory },
     { 
       label: 'Treatment Plan:', 
-      value: formData.treatmentPlan + (formData.treatmentPlan === 'other' && formData.treatmentPlanOther ? ` (${formData.treatmentPlanOther})` : '')
+      value: formData.treatmentPlan === 'other' && formData.treatmentPlanOther ? formData.treatmentPlanOther : formData.treatmentPlan
     },
     { label: 'Symptoms Status:', value: formData.symptomsStatus },
     { label: 'History Changes:', value: formData.historyChanges },

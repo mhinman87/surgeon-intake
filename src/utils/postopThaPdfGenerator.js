@@ -54,8 +54,6 @@ export const generatePostopTHAReportPDF = (formData) => {
     { label: 'History Changes:', value: formData.historyChanges },
     { label: 'Progress Level:', value: formData.progressLevel },
     { label: 'Recovery Percentage:', value: formData.recoveryPercentage },
-    { label: 'Therapy Details:', value: `${formData.therapyWeeks} weeks at ${formData.therapyLocation}, ${formData.therapyVisitsPerWeek} visits per week` },
-    { label: 'Therapy Discharge:', value: `${formData.therapyDischarged} been discharged` },
     { 
       label: 'Ambulation:', 
       value: `${formData.ambulationStatus} assistive devices` + (formData.ambulationStatus === 'with' && formData.assistiveDevices ? ` (${formData.assistiveDevices})` : '')

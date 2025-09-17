@@ -71,6 +71,18 @@ const schema = yup.object({
     otherwise: (schema) => schema.notRequired(),
   }),
   imagingStudies: yup.string().required('Please select imaging studies').notOneOf([''], 'Please select imaging studies'),
+  inflammatoryMarkers: yup.string().required('Please select inflammatory markers status').notOneOf([''], 'Please select inflammatory markers status'),
+  inflammatoryMarkersDescription: yup.string().when('inflammatoryMarkers', {
+    is: 'have',
+    then: (schema) => schema.required('Inflammatory markers description is required when markers have been performed'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  aspiration: yup.string().required('Please select aspiration status').notOneOf([''], 'Please select aspiration status'),
+  aspirationDescription: yup.string().when('aspiration', {
+    is: 'has',
+    then: (schema) => schema.required('Aspiration description is required when aspiration has been performed'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
   
   // Medical History conditional
   includeMedicalHistory: yup.string().required('Please select whether to include medical history').notOneOf([''], 'Please select option'),
@@ -285,6 +297,10 @@ export default function THAIntakeForm() {
       lumbarSpineHistory: '',
       lumbarSpineDescription: '',
       imagingStudies: '',
+      inflammatoryMarkers: '',
+      inflammatoryMarkersDescription: '',
+      aspiration: '',
+      aspirationDescription: '',
       
       // Medical History conditional
       includeMedicalHistory: '',
@@ -383,7 +399,8 @@ export default function THAIntakeForm() {
           'injuryDescription', 'primaryComplaint', 'painLocation', 'painDescription', 'aggravatingFactors',
           'alleviatingFactors', 'associatedSymptoms', 'symptomDuration', 'symptomProgression',
           'worstSymptomLevel', 'bestSymptomLevel', 'attemptedTreatments', 'treatmentSuccess',
-          'lumbarSpineHistory', 'lumbarSpineDescription', 'imagingStudies'
+          'lumbarSpineHistory', 'lumbarSpineDescription', 'imagingStudies',
+          'inflammatoryMarkers', 'inflammatoryMarkersDescription', 'aspiration', 'aspirationDescription'
         ];
       case 1:
         if (includeMedicalHistory === 'yes') {

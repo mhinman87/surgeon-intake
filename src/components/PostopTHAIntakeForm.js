@@ -30,10 +30,6 @@ const schema = yup.object().shape({
   historyChanges: yup.string().required('History changes are required'),
   progressLevel: yup.string().required('Progress level is required'),
   recoveryPercentage: yup.string().required('Recovery percentage is required'),
-  therapyWeeks: yup.string().required('Therapy weeks is required'),
-  therapyLocation: yup.string().required('Therapy location is required'),
-  therapyVisitsPerWeek: yup.string().required('Therapy visits per week is required'),
-  therapyDischarged: yup.string().required('Therapy discharge status is required'),
   ambulationStatus: yup.string().required('Ambulation status is required'),
   assistiveDevices: yup.string().when('ambulationStatus', {
     is: 'with',
@@ -241,10 +237,6 @@ export default function PostopTHAIntakeForm() {
       historyChanges: '',
       progressLevel: '',
       recoveryPercentage: '',
-      therapyWeeks: '',
-      therapyLocation: '',
-      therapyVisitsPerWeek: '',
-      therapyDischarged: '',
       ambulationStatus: '',
       assistiveDevices: '',
       painMedication: '',
@@ -302,8 +294,7 @@ export default function PostopTHAIntakeForm() {
       case 0:
         return [
           'hipSide', 'surgeryType', 'surgeryDate', 'surgeryLocation', 'historyChanges',
-          'progressLevel', 'recoveryPercentage', 'therapyWeeks', 'therapyLocation',
-          'therapyVisitsPerWeek', 'therapyDischarged', 'ambulationStatus', 'assistiveDevices',
+          'progressLevel', 'recoveryPercentage', 'ambulationStatus', 'assistiveDevices',
           'painMedication', 'symptomRelief', 'satisfaction', 'hasQuestions', 'questionsDetails'
         ];
       case 1:
